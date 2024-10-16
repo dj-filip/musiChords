@@ -58,7 +58,7 @@ let currentSongAudio;
 
 const URL = import.meta.env.VITE_BACKEND_URL;
 
-
+console.log("Backend Url: " + URL);
 
 const App = () => {
 
