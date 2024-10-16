@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+import { BACKEND_URL } from './config/serverConfig';
+
+
 function AddSong() {
   const [songInput, setSongInput] = useState(''); // User input (chords and lyrics)
   const [formattedChords, setFormattedChords] = useState(''); // Processed output
@@ -39,7 +42,7 @@ function AddSong() {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch('http://localhost:4001/songs/addSong', {
+      const response = await fetch(`${BACKEND_URL}/songs/addSong`, {
         method: 'POST',
         body: formData,
       });

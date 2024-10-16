@@ -7,7 +7,7 @@ import Layout from './components/layout/Layout';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 
-
+import { BACKEND_URL } from './config/serverConfig';
 
 let currentSongAudio;
 
@@ -56,9 +56,8 @@ let currentSongAudio;
 //   }
 // ]
 
-const URL = import.meta.env.VITE_BACKEND_URL;
 
-console.log("Backend Url: " + URL);
+
 
 const App = () => {
 
@@ -72,7 +71,7 @@ const App = () => {
   useEffect(() => {
 
     const fetchData = async () => {
-      const result = await fetch(`${URL}/songs/getSongs`);
+      const result = await fetch(`${BACKEND_URL}/songs/getSongs`);
       const data = await result.json();
       console.log(data)
 
