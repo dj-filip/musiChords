@@ -1,0 +1,56 @@
+[
+  {
+    "title": "31. Vek",
+    "artist": "Marko Bulat",
+    "cover": "./songs/cover-images/marko-bulat-cover.jpg",
+    "link": "./songs/audio/marko-bulat-31-vek.mp3",
+    "playlist": "balada",
+    "originalKey": "Cm",
+    "chords": "Intro: | {_Cm} | {_B} |\n\n{Eb}I da dođe {G}31.v{Cm}ek   {     }{Cm}{    }{B}\n    {Ab}Niko nikad {B}neće naći {Eb}lek{   }{G}\n    {Ab}Kad zbog žene {G}duša pati\n    {Cm}Svi će isto {C7}tugovati\n    {Fm}Biće svima {G}kao meni {Cm}sad\n\n    I da krenu dugi letovi\n    Da se nađu novi svetovi\n    Sve će opet isto biti\n    Svi će patiti i piti\n    Biće svima kao meni sad\n\n    REF.\n    {B}Heeej {Ab}ljuba{Cm}vi\n    {Ab}Sad znam staze {B}kojim hodaš {Cm}ti{      }{C}\n    {Fm}Iza tebe {G7}raste cveće\n    {Cm}I od tuge i{Ab} od sreće\n    {Fm}Ko ga bere {G7}zna ga pozna{Cm}ti"
+  },
+  {
+    "title": "Nikome ni reč",
+    "artist": "Dženan Lončarević",
+    "cover": "./songs/cover-images/dzenan-loncarevic-cover.jpg",
+    "link": "./songs/audio/dzenan-loncarevic-nikome-ni-rec.mp3",
+    "playlist": "balada",
+    "originalKey": "Am",
+    "chords": "Intro: | {_Am} | {_Dm} | {_G} | {_C} |\n| {_Am} | {_G} | {_Em} | {_Am} |\n\n{Am}Koliko zelim {G}te\n    {Em}toliko nemam {Am}te\n    {Am}i svaki korak {G}s' njom\n    {Em}ka tebi vrati {Am}me\n\n    Ref. 2x\n    {Am}Nikome ni {Dm}rec\n    kad {G}potonem u {C}bol\n    {Am}da voleo sam {G}te\n    {Em}a nisam bio {Am}tvoj"
+  },
+  {
+    "title": "Knockin' on Heaven's Door",
+    "artist": "Guns N'Roses",
+    "cover": "./songs/cover-images/guns-n-roses-cover.jpg",
+    "link": "./songs/audio/dzenan-loncarevic-nikome-ni-recc.mp3",
+    "playlist": "balada",
+    "originalKey": "G",
+    "chords": "Intro: | {_G} | {_D} | {_Am} | {_G} | {_D} | {_C} |\n\n{G}{ }Mama {D}take this badge from {Am}me \n{G}{ }I can't {D}use it anym{C}ore\n{G}{ }It's getting {D}dark too dark to {Am}see\n{G}{ }Feels like I'm {D}knockin' on Heaven's d{C}oor\n\n{G}Knock-knock-{D}knockin' on Heaven's {Am}door\n{G}Knock-knock-{D}knockin' on Heaven's {C}door\n{G}Knock-knock-{D}knockin' on Heaven's {Am}door\n{G}Knock-knock-{D}knockin' on Heaven's {C}door\n\nMama put my guns in the ground\nI can't shoot them anymore\nThat cold black cloud is comin' down\nFeels like I'm knockin' on Heaven's door\nKnock-knock-knockin' on Heaven's door\nKnock-knock-knockin' on Heaven's door\nKnock-knock-knockin' on Heaven's door\nKnock-knock-knockin' on Heaven's door"
+  },
+  {
+    "title": "Karma Chameleon",
+    "artist": "Culture Club",
+    "cover": "./songs/cover-images/culture-club-cover.jpg",
+    "link": "./songs/audio/dzenan-loncarevic-nikome-ni-reccc.mp3",
+    "playlist": "balada",
+    "originalKey": "B",
+    "chords": "Intro: | {_B} |\n\n{B}Desert loving in your  {F}eyes all the {B}way\n{B}If I listen to your {F}lies, would you {B}say\nI'm a {Eb}man without con{F}viction\nI'm a {Eb}man who doesn't {F}know\nHow to {Eb}sell a contra{F}diction\nYou come and {Eb}go, you come an{Gm}d go{F}\n\n{B}Karma, karma...{F}karma chamel{Gm}eon\nYou come and {Eb}go, you come and{B} go{F}\n{B}Loving would be easy if your {F}colors were like my {Gm}dreams\nRed, gold, and {Eb}green, red, gold, and {B}gree{F}n\n\nDidn't hear your wicked words every day\nAnd you used to be so sweet, I heard you say\nThat my love (my love) was an addiction\nWhen we cling (we cling), our love is strong\nWhen you go (you go), you're gone forever\nYou string along, you string along\n\nKarma, karma, karma, karma, karma chameleon\nYou come and go, you come and go\nLoving would be easy if your colors were like my dreams\nRed, gold, and green, red, gold, and green\n\n{Eb}Every day is like {Dm}survival \n{Cm}You're my lover , not my {Gm}rival\n{Eb}Every day is like {Dm}survival \n{Cm}You're my lover , not my {Gm}rival{F}\n\nI'm a man  without conviction\nI'm a man who doesn't know\nHow to sell a contradiction\nYou come and go, you come and go"
+  },
+  {
+    "title": "Za Kraj",
+    "artist": "Ceca",
+    "cover": "./songs/cover-images/ceca-cover.jpg",
+    "link": "./songs/audio/dzenan-loncarevic-nikome-ni-recccc.mp3",
+    "playlist": "balada",
+    "originalKey": "Dm",
+    "chords": "Intro: | {_Dm} |\n\n {Dm}Ja imala bih {Gm} šta da ti k{A}ažem za {Dm}kraj\n{Dm}Al' plašim se da imam{Gm} loš pr{A}edoseć{Dm}aj\nDa i {Gm}najlepše reči ove {B}noći bi pale u lud{Gm}o\nDa te {A}njima zadržim, krajnje je,\nkrajnje sulu{Dm}do\n\n{Dm}Ja imala bih {Gm} još toga, {A}znam, da ti {Dm}dam\n{Dm}Al' kasno je sad, {Gm}kasno je {A}da pokuš{Dm}am\nKad svih {Gm}godina ovih samo {B}sebe sam svesno laga{Gm}la\n{A}Lagala da ne mogu i ono što sam \nmogla i mor{Dm}ala{   }[F - E - D]\n\nSad da ti {Dm}pokažem ljubav\nTi bi se naglas smej{Gm}ao\nMisli{A}o da sam luda\nMislio da si sanj{Dm}ao{    }{A}\nSad da ti {Dm}pokažem ljubav\n{Dm}To vi[D - E - F]še ne bi {D}bilo to{Gm}\n[G - F - E - F - E - D - C# - D]Ma ni ti me takvu nikad{B}a{  }[B - A - G]\n{A}Više ne bi vole{Dm}o"
+  },
+  {
+    "title": "Đon",
+    "artist": "Miladin Šobić",
+    "cover": "./songs/cover-images/miladin-sobic-cover.jpg",
+    "link": "./songs/audio/dzenan-loncarevic-nikome-ni-reccccca.mp3",
+    "playlist": "balada",
+    "originalKey": "Dm",
+    "chords": "Intro: | {_Dm} | {_C} | {_B} | {_Dm} |\n\n {Dm}Život stalno {C}mijenja lak\n{B}Najgori sam njegov {Dm}đak\nMalo spavam, pjesme pišem\nCure ganjam jedva dišem\nKažu da sam čudan soj\nNevalja, Šobiću, bit' heroj\nTreba biti lukav, biti lijep\nKad je gadno podvit' {Dm}rep\n Podvit' {C}rep,\n Podvit' {B}rep\n\n{Dm}A zar {C}nije š{F}tos\n{C}Životu {G}razbit' {Dm}nos\n{Dm}Da os{C}jeti {F}on,\nTvoj {C}đon tvoj {G}đon, tvoj {Dm}đon\n"
+  }
+]
