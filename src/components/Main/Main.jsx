@@ -69,8 +69,8 @@ const Main = () => {
   useEffect(() => {
 
     // Function to update original song key based on transpose step
-    const updateSongKey = (songKey, direction) => {
-      const songKey = songKey; // Defaults to 'C'
+    const updateSongKey = (currentSongKey, direction) => {
+      const songKey = currentSongKey; // Defaults to 'C'
       const originalIndex = chords.indexOf(songKey);
       console.log("Selected Song Original Key LIVE : " + songKey);
 
