@@ -72,7 +72,7 @@ const Main = () => {
       setChords(selectedSong.originalKey.endsWith('m') ? minorChords : majorChords);
 
 
-      const originalSongKey = selectedSong.selectedSong || 'C'; // Defaults to 'C'
+      const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
 
 
       // Handle space chords like `{ }`
