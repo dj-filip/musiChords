@@ -31,14 +31,14 @@ const Main = () => {
   const prefersSharps = (songKey) => sharpKeys.includes(songKey);
   const prefersFlats = (songKey) => flatKeys.includes(songKey);
 
-  const transposeChord = (chord, steps, originalSongKey = selectedSong.originalKey) => {
+  const transposeChord = (chord, steps, originalSongKey) => {
     console.log("SONG KEY: " + originalSongKey);
 
     const extractRoot = (_chord) => {
       return _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
     }
 
-    const originalSongKeyRoot = extractRoot(originalSongKey);
+    const originalSongKeyRoot = originalSongKey ? extractRoot(originalSongKey) : extractRoot(selectedSong.originalSongKey);
     const chordRoot = extractRoot(chord);
 
     const index = songChords.indexOf(chordRoot);
