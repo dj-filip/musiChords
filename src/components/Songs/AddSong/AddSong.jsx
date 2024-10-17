@@ -23,6 +23,17 @@ function AddSong() {
     processedChords = processedChords.replace(/\{([A-H][#b]?(m7|7|m?)?)\}/g, (_, chord) => {
       return `<span class='chord'>${chord}</span>`;
     });
+
+    // Process and transpose transitions `[Transition]]`
+    processedChords = processedChords.replace(/\[([^\]]+)\]/g, (_, transitionText) => {
+      // Find and transpose any tones inside the transition text
+      const transposedTransition = transitionText.replace(/([A-H][#b]?(m7|7|m?)?)/g, (tone) => {
+        return transposeChord(tone, transposeStep, originalSongKey);
+      });
+
+      return `<span class='transition'>${transposedTransition}</span>`;
+    });
+
     return processedChords;
   };
 
