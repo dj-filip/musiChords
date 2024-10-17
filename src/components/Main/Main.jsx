@@ -116,6 +116,7 @@ const Main = () => {
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
 
+      setSongKey(transposeChord(selectedSong.originalKey, transposeStep, songKey));
       setProcessedLyricsChords(processedLyricsChords);
       setProcessedIntro(processedIntro);
     } else {
