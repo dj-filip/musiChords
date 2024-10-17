@@ -42,6 +42,7 @@ const Main = () => {
     
     const index = songChords.indexOf(chordRoot);
 
+    console.log("ORIGINAL SONG KEY ROOT: " + originalSongKeyRoot);
     console.log("CHORD ROOT: " + chordRoot);
 
     if (index === -1) return chord; // If chord not found, return original
