@@ -76,7 +76,7 @@ const Main = () => {
       });
 
       // Process and transpose inline chords `{_Chord}`
-      processedChords = processedChords.replace(/\{_([A-H][#b]?m?)\}/g, (_, chord) => {
+      processedChords = processedChords.replace(/\{_([A-H][#b]?(m7|7|m?)?)\}/g, (_, chord) => {
         const transposedChord = transposeChord(chord, transposeStep, originalSongKey);
         return `<span class='chord-inline'>${transposedChord}</span>`;
       });
