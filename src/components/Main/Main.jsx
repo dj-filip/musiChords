@@ -8,7 +8,7 @@ const Main = () => {
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
   const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
-  const [songKey, setSongKey] = useState('C');
+  const [songKey, setSongKey] = useState('');
   const [scale, setScale] = useState('');
   const [chords, setChords] = useState([]);
   const ref = useRef();
@@ -108,9 +108,9 @@ const Main = () => {
 
 
     if (selectedSong.title) {
+      const updatedSongKey = transposeChord(selectedSong.originalKey, transposeStep, songKey);
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
-      const updatedSongKey = transposeChord(selectedSong.originalKey, transposeStep, songKey);
 
       setSongKey(updatedSongKey);
       setProcessedLyricsChords(processedLyricsChords);
@@ -118,7 +118,7 @@ const Main = () => {
     } else {
       setProcessedLyricsChords(null);
       setProcessedIntro(null);
-      setSongKey(null);
+      setSongKey('C');
     }
 
 
