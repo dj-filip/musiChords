@@ -68,8 +68,12 @@ const Main = () => {
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
 
-      setScale(selectedSong.originalKey.endsWith('m') ? 'minor' : 'major');
-      setChords(selectedSong.originalKey.endsWith('m') ? minorChords : majorChords);
+      const minorMajorKey = (originalSongKey) => {
+        return originalSongKey.endsWith('m') ? 'minor' : 'major';
+      }
+
+      setScale(minorMajorKey(selectedSong.originalKey));
+      setChords(scale ==='minor' ? minorChords : majorChords);
 
 
       const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
