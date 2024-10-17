@@ -7,8 +7,8 @@ const Main = () => {
   const { selectedSong, setSelectedSong, setSelectedSongTitle, isHiding, setIsHiding } = useContext(PlayingContext);
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
-  const [transposeStep, setTransposeStep] = useState('');
-  const [songKey, setSongKey] = useState(0); // Step for chord transposition
+  const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
+  const [songKey, setSongKey] = useState('');
   const [scale, setScale] = useState('');
   const [chords, setChords] = useState([]);
   const ref = useRef();
