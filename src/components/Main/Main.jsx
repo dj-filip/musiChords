@@ -71,6 +71,14 @@ const Main = () => {
 
     // Function to update original song key based on transpose step
     const updateSongKey = (currentSongKey, direction) => {
+
+      const minorMajorKey = (currentSongKey) => {
+        return currentSongKey.endsWith('m') ? 'minor' : 'major';
+      }
+
+      setScale(minorMajorKey(currentSongKey));
+      setChords(scale === 'minor' ? minorChords : majorChords);
+
       const songKey = currentSongKey; // Defaults to 'C'
       const originalIndex = chords.indexOf(songKey);
       console.log("Selected Song Original Key LIVE : " + songKey);
@@ -86,16 +94,7 @@ const Main = () => {
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
 
-      const minorMajorKey = (originalSongKey) => {
-        return originalSongKey.endsWith('m') ? 'minor' : 'major';
-      }
-
-      setScale(minorMajorKey(selectedSong.originalKey));
-      setChords(scale === 'minor' ? minorChords : majorChords);
-
-
-      const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
-
+      const originalSongKey = songKey || 'C'; // Defaults to 'C'
 
       // Handle space chords like `{ }`
       processedChords = processedChords.replace(/\{\s+\}/g, (x) => {
