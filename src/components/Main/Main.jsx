@@ -78,7 +78,7 @@ const Main = () => {
         const newIndex = (originalIndex + direction + chords.length) % chords.length;
         const newKey = chords[newIndex];
 
-        return newKey;
+        return newKey; 
       }
     };
 
