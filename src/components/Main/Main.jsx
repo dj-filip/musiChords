@@ -151,6 +151,7 @@ const Main = () => {
         ...prev,
         originalKey: newKey
       }));
+      console.log("Selected Song Original Key LIVE: " +selectedSong.originalKey);
     }
   };
 
