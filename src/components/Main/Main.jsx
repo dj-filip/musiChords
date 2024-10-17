@@ -32,7 +32,7 @@ const Main = () => {
     console.log(chord);
 
     const chordRoot = chord.endsWith('m') || chord.endsWith('7') ? chord.replace(/[^A-Hb#]/g, '') : chord; // Extract root chord
-    const index = songChords.indexOf(chordRoot);
+    const index = chordRoot === 'Ab' ? 8 : songChords.indexOf(chordRoot);
 
     console.log(chordRoot);
 
