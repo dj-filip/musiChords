@@ -9,7 +9,7 @@ const Main = () => {
   const [processedIntro, setProcessedIntro] = useState('');
   const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
   const [scale, setScale] = useState('');
-  const [chords, setChords] = useState(['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H']);
+  const [chords, setChords] = useState([]);
   const ref = useRef();
   let downY;
 
@@ -142,7 +142,7 @@ const Main = () => {
   const updateOriginalKey = (direction) => {
     const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
     const originalIndex = chords.indexOf(originalSongKey);
-    console.log("Selected Song Original Key LIVE : " + selectedSong.originalKey);
+    console.log("Selected Song Original Key LIVE : " + originalSongKey);
 
     if (originalIndex !== -1) {
       const newIndex = (originalIndex + direction + chords.length) % chords.length;
@@ -152,7 +152,6 @@ const Main = () => {
         ...prev,
         originalKey: newKey
       }));
-      console.log("Selected Song Original Key LIVE: " + selectedSong.originalKey);
     }
   };
 
