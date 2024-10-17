@@ -64,6 +64,23 @@ const Main = () => {
     return chord.replace(chord, transposedChord);
   };
 
+
+  const updateOriginalKey = (direction) => {
+    const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
+    const originalIndex = chords.indexOf(originalSongKey);
+    console.log("Selected Song Original Key LIVE : " + originalSongKey);
+
+    if (originalIndex !== -1) {
+      const newIndex = (originalIndex + direction + chords.length) % chords.length;
+      const newKey = chords[newIndex];
+
+      setSelectedSong((prev) => ({
+        ...prev,
+        originalKey: newKey
+      }));
+    }
+  };
+
   useEffect(() => {
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
@@ -139,21 +156,7 @@ const Main = () => {
   };
 
   // Function to update original song key based on transpose step
-  const updateOriginalKey = (direction) => {
-    const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
-    const originalIndex = chords.indexOf(originalSongKey);
-    console.log("Selected Song Original Key LIVE : " + originalSongKey);
 
-    if (originalIndex !== -1) {
-      const newIndex = (originalIndex + direction + chords.length) % chords.length;
-      const newKey = chords[newIndex];
-
-      setSelectedSong((prev) => ({
-        ...prev,
-        originalKey: newKey
-      }));
-    }
-  };
 
 
   const onPointerMove = (e) => {
