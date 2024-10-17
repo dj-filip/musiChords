@@ -69,21 +69,6 @@ const Main = () => {
 
   useEffect(() => {
 
-    // Function to update original song key based on transpose step
-    const updateSongKey = (currentSongKey, direction) => {
-
-      const songKey = currentSongKey; // Defaults to 'C'
-      const originalIndex = songChords.indexOf(songKey);
-      console.log("Selected Song Original Key LIVE : " + songKey);
-
-      if (originalIndex !== -1) {
-        const newIndex = (originalIndex + direction + songChords.length) % songChords.length;
-        const newKey = songChords[newIndex];
-
-        return newKey; 
-      }
-    };
-
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
 
@@ -127,7 +112,7 @@ const Main = () => {
     if (selectedSong.title) {
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
-      const updatedSongKey = updateSongKey(selectedSong.originalKey, transposeStep)
+      const updatedSongKey = transposeChord(selectedSong.originalKey, transposeStep, selectedSong.originalKey);
 
       setSongKey(updatedSongKey);
       setProcessedLyricsChords(processedLyricsChords);
