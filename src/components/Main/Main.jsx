@@ -14,7 +14,9 @@ const Main = () => {
   let downY;
 
 
-  const songChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'B', 'H'];
+  const songChords1 = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'B', 'H'];
+  const songChords2 = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
+
 
   const majorChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
   const minorChords = ['Am', 'Bm', 'Hm', 'Cm', 'C#m', 'Dm', 'Ebm', 'Em', 'Fm', 'F#m', 'Gm', 'G#m'];
@@ -29,12 +31,12 @@ const Main = () => {
   const prefersFlats = (songKey) => flatKeys.includes(songKey);
 
   const transposeChord = (chord, steps, originalSongKey) => {
-    console.log(chord);
+    console.log("CHORD: " + chord);
 
     const chordRoot = chord.endsWith('m') || chord.endsWith('7') ? chord.replace(/[^A-Hb#]/g, '') : chord; // Extract root chord
-    const index = songChords.indexOf(chordRoot);
+    const index = songChords2.indexOf(chordRoot);
 
-    console.log(chordRoot);
+    console.log("CHORD ROOT: " + chordRoot);
 
     if (index === -1) return chord; // If chord not found, return original
 
