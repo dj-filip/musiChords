@@ -32,7 +32,7 @@ const Main = () => {
   const prefersFlats = (songKey) => flatKeys.includes(songKey);
 
   const transposeChord = (chord, steps, originalSongKey) => {
-    console.log("CHORD: " + chord);
+    console.log("SONG KEY: " + originalSongKey);
 
     const extractRoot = (_chord) => {
       return _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
@@ -51,8 +51,10 @@ const Main = () => {
 
     // Use sharp or flat depending on the original song key
     if (prefersFlats(originalSongKeyRoot) && flatToSharpMap[transposedChord]) {
+      console.log("PREFERS FLATS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
       transposedChord = flatToSharpMap[transposedChord];
     } else if (prefersSharps(originalSongKeyRoot) && sharpToFlatMap[transposedChord]) {
+      console.log("PREFERS SHARPS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
       transposedChord = sharpToFlatMap[transposedChord];
     }
 
