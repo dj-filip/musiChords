@@ -36,9 +36,10 @@ const PlaylistSong = ({ song }) => {
         <h6>{song.artist}</h6>
       </div>
       <div className="song-key-wrap">
-        <div>
-           <h5>Am</h5> {/*Saved Key */}
-        </div>
+        {/* Saved Key */}
+        {/* <div>
+           <h5>Am</h5>
+        </div> */}
         <div>
           <h5>{song.originalKey}<sup>®</sup></h5>
         </div>
