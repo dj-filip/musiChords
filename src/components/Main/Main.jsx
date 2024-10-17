@@ -14,8 +14,8 @@ const Main = () => {
   let downY;
 
 
-  const songChords1 = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'B', 'H'];
-  const songChords2 = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
+  const songChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'B', 'H'];
+  // const songChords2 = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
 
 
   const majorChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
@@ -40,7 +40,7 @@ const Main = () => {
     const originalSongKeyRoot = extractRoot(originalSongKey);
     const chordRoot = extractRoot(chord);
     
-    const index = songChords2.indexOf(chordRoot);
+    const index = songChords.indexOf(chordRoot);
 
     console.log("CHORD ROOT: " + chordRoot);
 
