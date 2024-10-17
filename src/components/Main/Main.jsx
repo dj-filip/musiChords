@@ -51,11 +51,11 @@ const Main = () => {
 
     // Use sharp or flat depending on the original song key
     if (prefersFlats(originalSongKeyRoot) && flatToSharpMap[transposedChord]) {
-      console.log("PREFERS FLATS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
-      transposedChord = flatToSharpMap[transposedChord];
-    } else if (prefersSharps(originalSongKeyRoot) && sharpToFlatMap[transposedChord]) {
       console.log("PREFERS SHARPS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
       transposedChord = sharpToFlatMap[transposedChord];
+    } else if (prefersSharps(originalSongKeyRoot) && sharpToFlatMap[transposedChord]) {
+      console.log("PREFERS FLATS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
+      transposedChord = flatToSharpMap[transposedChord];
     }
 
     transposedChord += chord.endsWith('m') ? 'm' : '';
@@ -69,6 +69,11 @@ const Main = () => {
     setSongKey(selectedSong.originalKey);
     console.log("SELECTED SONG ORIGINAL KEY: " + songKey);
   }, [selectedSong])
+
+  useEffect(() => {
+    setSongKey(transposeChord(selectedSong.originalKey, transposeStep, songKey));
+  }, [transposeStep])
+  
 
   useEffect(() => {
 
@@ -116,7 +121,6 @@ const Main = () => {
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
 
-      setSongKey(transposeChord(selectedSong.originalKey, transposeStep, songKey));
       setProcessedLyricsChords(processedLyricsChords);
       setProcessedIntro(processedIntro);
     } else {
