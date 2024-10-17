@@ -80,7 +80,7 @@ const Main = () => {
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
 
-      const originalSongKey = songKey || 'C'; // Defaults to 'C'
+      const originalSongKey = songKey || selectedSong.originalKey; // Defaults to 'C'
 
       // Handle space chords like `{ }`
       processedChords = processedChords.replace(/\{\s+\}/g, (x) => {
