@@ -39,7 +39,7 @@ const Main = () => {
     if (index === -1) return chord; // If chord not found, return original
 
     const newIndex = (index + steps + songChords.length) % songChords.length; // Circular transpose
-    let transposedChord = songChords[newIndex];
+    let transposedChord = chordRoot === 'Ab' ? 'Ab' : songChords[newIndex];
 
     // Use sharp or flat depending on the original song key
     if (prefersSharps(originalSongKey) && flatToSharpMap[transposedChord]) {
