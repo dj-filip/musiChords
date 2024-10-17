@@ -31,7 +31,7 @@ const Main = () => {
   const prefersSharps = (songKey) => sharpKeys.includes(songKey);
   const prefersFlats = (songKey) => flatKeys.includes(songKey);
 
-  const transposeChord = (chord, steps, originalSongKey) => {
+  const transposeChord = (chord, steps, originalSongKey = selectedSong.originalKey) => {
     console.log("SONG KEY: " + originalSongKey);
 
     const extractRoot = (_chord) => {
