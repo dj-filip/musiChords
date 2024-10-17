@@ -8,7 +8,6 @@ const Main = () => {
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
   const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
-  const [songKey, setSongKey] = useState('');
   const [scale, setScale] = useState('');
   const [chords, setChords] = useState([]);
   const ref = useRef();
@@ -16,8 +15,6 @@ const Main = () => {
 
 
   const songChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'B', 'H'];
-  // const songChords2 = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
-
 
   const majorChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
   const minorChords = ['Am', 'Bm', 'Hm', 'Cm', 'C#m', 'Dm', 'Ebm', 'Em', 'Fm', 'F#m', 'Gm', 'G#m'];
@@ -32,18 +29,12 @@ const Main = () => {
   const prefersFlats = (songKey) => flatKeys.includes(songKey);
 
   const transposeChord = (chord, steps, originalSongKey) => {
-    console.log("SONG KEY: " + originalSongKey);
-    console.log("CHORD: " + originalSongKey);
+    console.log(chord);
 
-    const extractRoot = (_chord) => {
-      return _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
-    }
-
-    const originalSongKeyRoot = originalSongKey ? extractRoot(originalSongKey) : extractRoot(selectedSong.originalSongKey);
-    const chordRoot = extractRoot(chord);
-
+    const chordRoot = chord.endsWith('m') || chord.endsWith('7') ? chord.replace(/[^A-Hb#]/g, '') : chord; // Extract root chord
     const index = songChords.indexOf(chordRoot);
 
+    console.log(chordRoot);
 
     if (index === -1) return chord; // If chord not found, return original
 
@@ -51,12 +42,10 @@ const Main = () => {
     let transposedChord = songChords[newIndex];
 
     // Use sharp or flat depending on the original song key
-    if (prefersFlats(originalSongKeyRoot) && flatToSharpMap[transposedChord]) {
-      console.log("PREFERS SHARPS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
-      transposedChord = sharpToFlatMap[transposedChord];
-    } else if (prefersSharps(originalSongKeyRoot) && sharpToFlatMap[transposedChord]) {
-      console.log("PREFERS FLATS, song key: " + originalSongKey + "song key: "+ originalSongKeyRoot);
+    if (prefersFlats(originalSongKey) && flatToSharpMap[transposedChord]) {
       transposedChord = flatToSharpMap[transposedChord];
+    } else if (prefersSharps(originalSongKey) && sharpToFlatMap[transposedChord]) {
+      transposedChord = sharpToFlatMap[transposedChord];
     }
 
     transposedChord += chord.endsWith('m') ? 'm' : '';
@@ -67,21 +56,15 @@ const Main = () => {
   };
 
   useEffect(() => {
-    setSongKey(selectedSong.originalKey);
-    console.log("SELECTED SONG ORIGINAL KEY: " + songKey);
-  }, [selectedSong])
-
-  useEffect(() => {
-    setSongKey(transposeChord(selectedSong.originalKey, transposeStep, songKey));
-  }, [transposeStep])
-  
-
-  useEffect(() => {
-
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
 
-      const originalSongKey = songKey || selectedSong.originalKey ; // Defaults to 'C'
+      setScale(selectedSong.originalKey.endsWith('m') ? 'minor' : 'major');
+      setChords(selectedSong.originalKey.endsWith('m') ? minorChords : majorChords);
+
+
+      const originalSongKey = selectedSong.selectedSong || 'C'; // Defaults to 'C'
+
 
       // Handle space chords like `{ }`
       processedChords = processedChords.replace(/\{\s+\}/g, (x) => {
@@ -93,7 +76,7 @@ const Main = () => {
       });
 
       // Process and transpose inline chords `{_Chord}`
-      processedChords = processedChords.replace(/\{_([A-H][#b]?(m7|7|m?)?)\}/g, (_, chord) => {
+      processedChords = processedChords.replace(/\{_([A-H][#b]?m?)\}/g, (_, chord) => {
         const transposedChord = transposeChord(chord, transposeStep, originalSongKey);
         return `<span class='chord-inline'>${transposedChord}</span>`;
       });
@@ -117,7 +100,6 @@ const Main = () => {
       return processedChords;
     };
 
-
     if (selectedSong.title) {
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
@@ -135,10 +117,28 @@ const Main = () => {
   // Event handlers for transpose buttons
   const handleTransposeUp = () => {
     setTransposeStep(transposeStep + 1); // Increase transpose step
+    updateOriginalKey(1); // Update original key based on transposition
   };
 
   const handleTransposeDown = () => {
     setTransposeStep(transposeStep - 1); // Decrease transpose step
+    updateOriginalKey(-1); // Update original key based on transposition
+  };
+
+  // Function to update original song key based on transpose step
+  const updateOriginalKey = (direction) => {
+    const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
+    const originalIndex = chords.indexOf(originalSongKey);
+
+    if (originalIndex !== -1) {
+      const newIndex = (originalIndex + direction + chords.length) % chords.length;
+      const newKey = chords[newIndex];
+
+      setSelectedSong((prev) => ({
+        ...prev,
+        originalKey: newKey
+      }));
+    }
   };
 
 
@@ -181,7 +181,7 @@ const Main = () => {
           <button className="transpose-btns transpose-btn-right" onClick={handleTransposeUp}>#</button>
         </div>
         <h5 className="txt-center">{selectedSong.artist}</h5>
-        <h3 className="song-key txt-center">{songKey}</h3>
+        <h3 className="song-key txt-center">{selectedSong.originalKey}</h3>
         <div className="song">
           <div className="flex just-center">
             <p className="lyrics txt-center" dangerouslySetInnerHTML={{ __html: "Intro:   " + processedIntro }}></p>
