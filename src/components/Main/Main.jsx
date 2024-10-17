@@ -33,6 +33,7 @@ const Main = () => {
 
   const transposeChord = (chord, steps, originalSongKey) => {
     console.log("SONG KEY: " + originalSongKey);
+    console.log("CHORD: " + originalSongKey);
 
     const extractRoot = (_chord) => {
       return _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
@@ -80,7 +81,7 @@ const Main = () => {
     const processChords = (input, transposeStep = 0) => {
       let processedChords = input;
 
-      const originalSongKey = songKey || selectedSong.originalKey; // Defaults to 'C'
+      const originalSongKey = songKey || selectedSong.originalKey ; // Defaults to 'C'
 
       // Handle space chords like `{ }`
       processedChords = processedChords.replace(/\{\s+\}/g, (x) => {
