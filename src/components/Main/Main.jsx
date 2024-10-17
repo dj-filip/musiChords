@@ -8,7 +8,7 @@ const Main = () => {
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
   const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
-  const [songKey, setSongKey] = useState('');
+  const [songKey, setSongKey] = useState('C');
   const [scale, setScale] = useState('');
   const [chords, setChords] = useState([]);
   const ref = useRef();
@@ -43,8 +43,6 @@ const Main = () => {
 
     const index = songChords.indexOf(chordRoot);
 
-    console.log("ORIGINAL SONG KEY ROOT: " + originalSongKeyRoot);
-    console.log("CHORD ROOT: " + chordRoot);
 
     if (index === -1) return chord; // If chord not found, return original
 
@@ -112,7 +110,7 @@ const Main = () => {
     if (selectedSong.title) {
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
-      const updatedSongKey = transposeChord(selectedSong.originalKey, transposeStep, selectedSong.originalKey);
+      const updatedSongKey = transposeChord(selectedSong.originalKey, transposeStep, songKey);
 
       setSongKey(updatedSongKey);
       setProcessedLyricsChords(processedLyricsChords);
