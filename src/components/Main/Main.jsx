@@ -42,9 +42,9 @@ const Main = () => {
     let transposedChord = songChords[newIndex];
 
     // Use sharp or flat depending on the original song key
-    if (prefersFlats(originalSongKey) && flatToSharpMap[transposedChord]) {
+    if (prefersSharps(originalSongKey) && flatToSharpMap[transposedChord]) {
       transposedChord = flatToSharpMap[transposedChord];
-    } else if (prefersSharps(originalSongKey) && sharpToFlatMap[transposedChord]) {
+    } else if (prefersFlats(originalSongKey) && sharpToFlatMap[transposedChord]) {
       transposedChord = sharpToFlatMap[transposedChord];
     }
 
