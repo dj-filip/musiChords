@@ -19,7 +19,7 @@ const Main = () => {
   const majorChords = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B', 'H'];
   const minorChords = ['Am', 'Bm', 'Hm', 'Cm', 'C#m', 'Dm', 'Ebm', 'Em', 'Fm', 'F#m', 'Gm', 'G#m'];
 
-  const sharpKeys = ['G', 'D', 'A', 'E', 'H', 'F#', 'C#', 'Em', 'Hm', 'F#m', 'C#m'];
+  const sharpKeys = ['G', 'D', 'A', 'E', 'H', 'F#', 'C#', 'G#', 'Em', 'Hm', 'F#m', 'C#m', 'G#m'];
   const flatKeys = ['F', 'B', 'Eb', 'Ab', 'Db', 'Gb', 'Cm', 'Gm', 'Dm', 'Fm', 'Bm'];
 
   const sharpToFlatMap = { 'G#': 'Ab', 'D#': 'Eb', 'A#': 'B', 'E#': 'F', 'B#': 'C', 'Cb': 'H' };
