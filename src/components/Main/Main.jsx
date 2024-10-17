@@ -64,7 +64,7 @@ const Main = () => {
     return chord.replace(chord, transposedChord);
   };
 
-
+  // Function to update original song key based on transpose step
   const updateOriginalKey = (direction) => {
     const originalSongKey = selectedSong.originalKey || 'C'; // Defaults to 'C'
     const originalIndex = chords.indexOf(originalSongKey);
@@ -154,9 +154,6 @@ const Main = () => {
     setTransposeStep(transposeStep - 1); // Decrease transpose step
     updateOriginalKey(-1); // Update original key based on transposition
   };
-
-  // Function to update original song key based on transpose step
-
 
 
   const onPointerMove = (e) => {
