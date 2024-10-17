@@ -33,7 +33,13 @@ const Main = () => {
   const transposeChord = (chord, steps, originalSongKey) => {
     console.log("CHORD: " + chord);
 
-    const chordRoot = chord.endsWith('m') || chord.endsWith('7') ? chord.replace(/[^A-Hb#]/g, '') : chord; // Extract root chord
+    const extractRoot = (_chord) => {
+      _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
+    }
+
+    const originalSongKeyRoot = extractRoot(originalSongKey);
+    const chordRoot = extractRoot(chord);
+    
     const index = songChords2.indexOf(chordRoot);
 
     console.log("CHORD ROOT: " + chordRoot);
@@ -44,9 +50,9 @@ const Main = () => {
     let transposedChord = songChords[newIndex];
 
     // Use sharp or flat depending on the original song key
-    if (prefersFlats(originalSongKey) && flatToSharpMap[transposedChord]) {
+    if (prefersFlats(originalSongKeyRoot) && flatToSharpMap[transposedChord]) {
       transposedChord = flatToSharpMap[transposedChord];
-    } else if (prefersSharps(originalSongKey) && sharpToFlatMap[transposedChord]) {
+    } else if (prefersSharps(originalSongKeyRoot) && sharpToFlatMap[transposedChord]) {
       transposedChord = sharpToFlatMap[transposedChord];
     }
 
