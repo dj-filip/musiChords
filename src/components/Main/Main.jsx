@@ -34,7 +34,7 @@ const Main = () => {
     console.log("CHORD: " + chord);
 
     const extractRoot = (_chord) => {
-      _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
+      return _chord.endsWith('m') || _chord.endsWith('7') ? _chord.replace(/[^A-Hb#]/g, '') : _chord;
     }
 
     const originalSongKeyRoot = extractRoot(originalSongKey);
