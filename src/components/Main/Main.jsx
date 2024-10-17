@@ -8,7 +8,7 @@ const Main = () => {
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
   const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
-  const [songKey, setSongKey] = useState('C');
+  const [songKey, setSongKey] = useState('');
   const [scale, setScale] = useState('');
   const [chords, setChords] = useState([]);
   const ref = useRef();
@@ -65,7 +65,10 @@ const Main = () => {
     return chord.replace(chord, transposedChord);
   };
 
-
+  useEffect(() => {
+    setSongKey(selectedSong.originalKey);
+    console.log("SELECTED SONG ORIGINAL KEY: " + songKey);
+  }, [selectedSong])
 
   useEffect(() => {
 
@@ -110,11 +113,9 @@ const Main = () => {
 
 
     if (selectedSong.title) {
-      const updatedSongKey = transposeChord(selectedSong.originalKey, transposeStep, songKey);
       const processedLyricsChords = processChords(selectedSong.lyricsChords, transposeStep);
       const processedIntro = processChords(selectedSong.intro, transposeStep);
 
-      setSongKey(updatedSongKey);
       setProcessedLyricsChords(processedLyricsChords);
       setProcessedIntro(processedIntro);
     } else {
