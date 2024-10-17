@@ -7,7 +7,8 @@ const Main = () => {
   const { selectedSong, setSelectedSong, setSelectedSongTitle, isHiding, setIsHiding } = useContext(PlayingContext);
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
-  const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
+  const [transposeStep, setTransposeStep] = useState('');
+  const [songKey, setSongKey] = useState(0); // Step for chord transposition
   const [scale, setScale] = useState('');
   const [chords, setChords] = useState([]);
   const ref = useRef();
@@ -197,7 +198,7 @@ const Main = () => {
           <button className="transpose-btns transpose-btn-right" onClick={handleTransposeUp}>#</button>
         </div>
         <h5 className="txt-center">{selectedSong.artist}</h5>
-        <h3 className="song-key txt-center">{selectedSong.originalKey}</h3>
+        <h3 className="song-key txt-center">{songKey}</h3>
         <div className="song">
           <div className="flex just-center">
             <p className="lyrics txt-center" dangerouslySetInnerHTML={{ __html: "Intro:   " + processedIntro }}></p>
