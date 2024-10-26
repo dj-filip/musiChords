@@ -182,7 +182,7 @@ const Main = () => {
         </div>
         <h5 className="txt-center">{selectedSong.artist}</h5>
         <h3 className="song-key txt-center">{selectedSong.originalKey}</h3>
-        <div className="song">
+        <div className="song-lyrics-chords-wrap">
           <div className="flex just-center">
             <p className="lyrics txt-center" dangerouslySetInnerHTML={{ __html: "Intro:   " + processedIntro }}></p>
           </div>

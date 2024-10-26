@@ -2,7 +2,7 @@ import Main from "../../components/Main/Main";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 
-function HomePage() {
+function LibraryPage() {
   return (
     <>
       <Sidebar />
@@ -11,4 +11,4 @@ function HomePage() {
   )
 }
 
-export default HomePage;
+export default LibraryPage;

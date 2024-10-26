@@ -20,9 +20,7 @@ const Playlist = ({ currentPlaylist, onBack }) => {
       </div>
       {playlistSongs.map((song) => {
         return (
-          <PlaylistSong
-            song={song}
-          />
+          <PlaylistSong song={song} />
         )
       })}
     </>

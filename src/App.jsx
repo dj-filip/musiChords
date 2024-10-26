@@ -74,7 +74,6 @@ const App = () => {
     const fetchData = async () => {
       const result = await fetch(`${BACKEND_URL}/songs/getSongs`);
       const data = await result.json();
-      console.log(data)
 
       setSongs(data);
     }

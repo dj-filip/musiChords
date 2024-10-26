@@ -15,6 +15,10 @@ h3 {
   font-weight: 500;
 }
 
+h4 {
+  font-size: 18px;
+}
+
 h5 {
   font-size: 24px;
   font-weight: 300;
@@ -35,6 +39,16 @@ p {
 
 .light-txt {
   color: #f1f1f1;
+}
+
+a {
+  text-decoration: none;
+}
+
+a span {
+  font-size: 12px;
+  font-weight: 300;
+  color: #B5B5B5;
 }
 
 /* General */
@@ -78,6 +92,10 @@ ul {
   justify-content: center;
 }
 
+.align-center {
+  align-items: center;
+}
+
 .padding-wrap {
   width: 100%;
   padding: 10px;
@@ -93,15 +111,64 @@ ul {
 }
 
 
+/* IMG BOX */
+.img-boxes-container {
+  width: 100%;
+  display: flex;
+  background-color: #222222;
+}
 
+.img-boxes-wrap {
+  width: 1200px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #222222;
+  overflow-y: scroll;
+}
+
+.img-box {
+  position: relative;
+  flex-basis: 200px;
+}
+
+.img-box img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.img-box-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 101%;
+  height: 100%;
+  transform: translateX(-.5%);
+  border-radius: 5px;
+  padding: 10px 0 0 10px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+.ghost-div {
+  flex: 1;
+}
 
 /* TOPBAR */
 header {
-  height: 50px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
+
+.icon-wrap {
+  gap: 5px;
+}
+
+
 
 /* Music Bar, Music Player */
 .music-bar {
@@ -276,8 +343,7 @@ main {
   overflow: auto;
 }
 
-
-.song {
+.song-lyrics-chords-wrap {
   padding-top: 30px;
 }
 
@@ -289,7 +355,8 @@ main {
 }
 
 
-span.chord, span.transition {
+span.chord,
+span.transition {
   position: absolute;
   line-height: 0;
   font-weight: bold;
@@ -346,6 +413,38 @@ div.song div.transposition {
 }
 
 
+/* ARTIST */
+.artist-container {
+  width: 100%;
+}
+
+.artist-hero {
+  position: relative;
+  height: 300px;
+  padding: 20px;
+}
+
+.artist-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .5) 10%, rgba(0, 0, 0, 0) 60%);
+}
+
+.artist-hero h4 {
+  align-self: flex-end;
+  font-size: 40px;
+  z-index: 1;
+}
+
+
+/* PLAYLIST */
+.playlist-wrap {
+  padding: 30px 0;
+}
+
 
 
 /* ADD SONG */
@@ -380,6 +479,35 @@ input[type=submit] {
   margin-top: 20px;
   background-color: #21BE57;
   color: #f1f1f1;
+}
+
+
+
+/* FORM */
+.suggestions-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.suggestions-input-wrap input {
+  width: 100%;
+}
+
+.suggestions-menu {
+  position: absolute;
+  display: none;
+  width: 100%;
+  border: 0 0 5px 5px;
+  padding: 20px;
+  background-color: #1b1b1b;
+}
+
+.suggestions-menu-active {
+  display: block;
+}
+
+.suggestions-menu img {
+  width: 40px;
 }
 
 
@@ -438,5 +566,15 @@ input[type=submit] {
 
   .song {
     padding: 0;
+  }
+
+  .img-boxes-wrap {
+    padding: 30px 10px;
+    justify-content: center;
+  }
+
+  .img-box {
+    position: relative;
+    flex-basis: 140px;
   }
 }
