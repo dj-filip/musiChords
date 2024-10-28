@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 import { PlayingContext } from '../../../contexts/PlayingContext';
 
 
-const PlaylistSong = ({ song }) => {
+const PlaylistSong = ({ song, onClick }) => {
 
   const { setSelectedSongTitle, selectedSongTitle, isHiding, setIsHiding } = useContext(PlayingContext);
 
@@ -28,7 +28,7 @@ const PlaylistSong = ({ song }) => {
       ref={currentSong}
       className={`${selectedSongTitle == song.title && "active"}`}
       data-song-title={song.title}
-      onClick={handleOnSongChange}
+      onClick={onClick}
     >
       <img src={imageUrl} alt="cover-img" className="song-cover-img" />
       <div className="flex-1">

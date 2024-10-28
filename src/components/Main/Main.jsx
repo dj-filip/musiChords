@@ -190,7 +190,7 @@ const Main = () => {
         </div>
       </main >
     ) : <main ref={ref} onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
-    </main >
+    </main>
   );
 };
 
