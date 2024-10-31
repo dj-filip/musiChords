@@ -3,6 +3,7 @@
 
 body,
 button,
+a,
 input,
 select,
 textarea {
@@ -69,6 +70,11 @@ ul {
   padding: 0;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
 .arrow {
   width: 20px;
@@ -142,7 +148,23 @@ ul {
   margin: 0 auto;
   padding: 50px;
   background-color: #222222;
-  overflow-y: scroll;
+  overflow: hidden auto;
+}
+
+
+.img-boxes-wrap::-webkit-scrollbar {
+  width: 6px;
+}
+
+.img-boxes-wrap::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.img-boxes-wrap::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #3E3E3E;
 }
 
 .img-box {
@@ -181,6 +203,47 @@ header {
 
 .icon-wrap {
   gap: 5px;
+}
+
+.add-split-btn {
+  position: relative;
+}
+
+.add-btn-popup-menu {
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #333333;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+.add-btn-popup-menu::before {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  transform: translateX(-50%) rotate(45deg) ;
+  background-color: #333333;
+  border-top: 1px solid #333333;
+  border-left: 1px solid #333333;
+}
+
+.add-btn-popup-menu ul {
+  position: relative;
+  z-index: 2;
+}
+
+.add-btn-popup-menu li {
+  padding: 10px;
+}
+
+.add-btn-popup-menu a {
+  font-size: 16px;
+  white-space: nowrap;
 }
 
 
@@ -279,7 +342,7 @@ li {
 
 li.active,
 .back-btn-wrap:hover:not(:active) {
-  background-color: #333333;
+  background-color: #00000060;
 }
 
 li:hover:not(:active, li.active) {
@@ -300,6 +363,7 @@ li:active,
   display: flex;
   align-items: flex-end;
   gap: 10px;
+  padding-right: 10px;
 }
 
 .song-key-wrap>div {
@@ -434,10 +498,13 @@ div.song div.transposition {
 
 /* ARTIST */
 .artist-container {
-  width: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(33, 33, 33, .5) 80%, rgb(0, 0, 0, .7) 100%);
-  overflow-y: scroll;
+  overflow: hidden;
 }
+
 
 .hero {
   position: relative;
@@ -474,8 +541,24 @@ div.song div.transposition {
 /* PLAYLIST */
 .playlist-wrap {
   padding: 30px 0;
+  overflow: hidden scroll;
 }
 
+
+.playlist-wrap::-webkit-scrollbar {
+  width: 6px;
+}
+
+.playlist-wrap::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.playlist-wrap::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #3E3E3E;
+}
 
 
 /* ADD SONG */
@@ -607,8 +690,13 @@ input[type=submit] {
     justify-content: center;
   }
 
+
   .img-box {
     position: relative;
     flex-basis: 140px;
+  }
+
+  .artist-container {
+    width: 100%;
   }
 }

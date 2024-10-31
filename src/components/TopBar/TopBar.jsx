@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import HomeIcon from "../icons/HomeIcon";
 import AddIcon from "../icons/AddIcon";
 import LibraryIcon from "../icons/LibraryIcon";
+import AddBtn from "./AddBtn/AddBtn";
 
 
 function TopBar() {
@@ -10,12 +11,7 @@ function TopBar() {
       <NavLink to="/">
         <HomeIcon />
       </NavLink>
-      <NavLink to="/add-song">
-        <AddIcon />
-      </NavLink>
-      <NavLink to="/add-artist">
-        <AddIcon />
-      </NavLink>
+      <AddBtn />
       <NavLink to="/library">
         <LibraryIcon />
       </NavLink>
