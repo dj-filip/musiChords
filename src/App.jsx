@@ -95,7 +95,7 @@ const App = () => {
         lyricsChords: filteredSong?.lyricsChords,
         coverImage: filteredSong?.coverImage,
       });
-      console.log("SELECTED SONG CHORDS: " + selectedSong.title)
+      ("SELECTED SONG CHORDS: " + selectedSong.title)
     }
 
   }, [selectedSongTitle]);
