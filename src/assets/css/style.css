@@ -556,6 +556,7 @@ div.song div.transposition {
 
 .transpose-btns {
   position: absolute;
+  top: 100px;
   width: 40px;
   height: 40px;
   border: none;
@@ -569,11 +570,11 @@ div.song div.transposition {
 }
 
 .transpose-btn-left {
-  left: 10px;
+  left: 100px;
 }
 
 .transpose-btn-right {
-  right: 10px;
+  right: 100px;
 }
 
 .song-key {
@@ -824,5 +825,13 @@ input[type=submit] {
 
   .artist-container {
     width: 100%;
+  }
+
+  .transpose-btn-left {
+    left: 10px;
+  }
+
+  .transpose-btn-right {
+    left: 10px;
   }
 }
