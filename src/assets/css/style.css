@@ -760,6 +760,7 @@ input[type=submit] {
     height: 100%;
     padding-bottom: 50px;
     border-radius: 15px;
+    z-index: 999;
     transform: translateY(1000px);
     transition: all 1s ease;
   }

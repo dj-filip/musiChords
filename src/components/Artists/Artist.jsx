@@ -19,7 +19,7 @@ function Artist({ artist, setSelectedSong }) {
             backgroundImage: `url(${imageUrl})`
           }}
         >
-          <NavLink to="/" className="back-btn-wrap">
+          <NavLink to="/" className="circle-btn-wrap">
             <BackIcon />
           </NavLink>
           <h4 className="light-txt">{artist.name}</h4>

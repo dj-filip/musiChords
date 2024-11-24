@@ -23,12 +23,18 @@ function Library({ songs, setSelectedSong }) {
 
   const [repertoireWithSongs, setRepertoireWithSongs] = useState();
 
-    const fetchRepertoireWithSongs = async () => {
-      const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`);
-      const data = await response.json();
+  const fetchRepertoireWithSongs = async () => {
+    const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`);
+    const data = await response.json();
 
-      setRepertoireWithSongs(data);
-    }
+    // Sorting the `songs` array within each repertoire by the `order` field
+    const sortedData = {
+      ...data,
+      songs: data.songs.sort((a, b) => a.order - b.order)
+    };
+
+    setRepertoireWithSongs(sortedData);
+  }
 
 
   const fetchRepertoires = async () => {
@@ -50,14 +56,14 @@ function Library({ songs, setSelectedSong }) {
 
   useEffect(() => {
     if (currentRepertoire)
-    fetchRepertoireWithSongs();
+      fetchRepertoireWithSongs();
   }, [currentRepertoire])
 
   if (!repertoires) {
     return;
   }
 
- console.log(repertoireWithSongs)
+  console.log(repertoireWithSongs)
 
   return (
     <>
@@ -94,37 +100,38 @@ function Library({ songs, setSelectedSong }) {
         </div>
 
         <div className="repertoire-wrap">
-          {currentRepertoire ? 
-          
-          (
-            repertoireWithSongs?.songs.map(({ song }) => {
-              return (
-              <PlaylistSong key={song.id} song={song} onClick={() => setSelectedSong(song)} />
-            )})
-          ) : (
-            <>
-              {repertoires.map((repertoire) => (
-                <Repertoire
-                  key={repertoire.id}
-                  repertoire={repertoire}
-                  onClick={handleSelectRepertoire}
-                />
-              ))}
+          {currentRepertoire ?
 
-              {songs.map((song) => (
-                <PlaylistSong
-                  key={song.id}
-                  song={song}
-                  onClick={(e) => {
-                    if (e.target.tagName === 'BUTTON') return;
-                    setSelectedSong(song);
-                  }}
-                  currentContextMenu={currentContextMenu}
-                  setCurrentContextMenu={setCurrentContextMenu}
-                />
-              ))}
-            </>
-          )}
+            (
+              repertoireWithSongs?.songs.map(({ song }) => {
+                return (
+                  <PlaylistSong key={song.id} song={song} onClick={() => setSelectedSong(song)} />
+                )
+              })
+            ) : (
+              <>
+                {repertoires.map((repertoire) => (
+                  <Repertoire
+                    key={repertoire.id}
+                    repertoire={repertoire}
+                    onClick={handleSelectRepertoire}
+                  />
+                ))}
+
+                {songs.map((song) => (
+                  <PlaylistSong
+                    key={song.id}
+                    song={song}
+                    onClick={(e) => {
+                      if (e.target.tagName === 'BUTTON') return;
+                      setSelectedSong(song);
+                    }}
+                    currentContextMenu={currentContextMenu}
+                    setCurrentContextMenu={setCurrentContextMenu}
+                  />
+                ))}
+              </>
+            )}
         </div>
       </div>
 
