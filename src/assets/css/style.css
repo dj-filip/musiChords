@@ -788,9 +788,13 @@ input[type=submit] {
     width: 60px;
   }
 
-  .repertoire-icon-wrap > svg {
+  .repertoire-icon-wrap {
     width: 44px;
     height: 40px;
+  }
+
+  .repertoire-icon-wrap > svg {
+    padding: 8px;
   }
 
   h3 {
