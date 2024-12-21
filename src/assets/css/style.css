@@ -788,6 +788,11 @@ input[type=submit] {
     width: 60px;
   }
 
+  .repertoire-icon-wrap > svg {
+    width: 44px;
+    height: 40px;
+  }
+
   h3 {
     font-size: 22px;
   }
