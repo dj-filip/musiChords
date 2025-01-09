@@ -31,7 +31,7 @@ exports.addSong = async (req, res) => {
     console.log(error);
   }
 }
-
+console.log('asdsa')
 
 exports.getSongs = async (req, res) => {
   try {
