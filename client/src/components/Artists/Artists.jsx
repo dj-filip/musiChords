@@ -35,28 +35,30 @@ function Artists() {
   }
 
   return (
-    <div className="img-boxes-container">
-      <div className="flex img-boxes-wrap">
-        {artists.map((artist) => (
-          <Link
-          className="img-box"
-            to={`/artist/${artist._id}`}
-            state={{ 
-              artistName: artist.name,
-              coverImage: artist.coverImage,
-            }}
-          >
-            <ArtistBox artist={artist} />
-          </Link>
-        ))}
-        {(() => {
-          const emptyDivs = 4 - artists.length % 4;
-          const ghostDivs = [];
-          for (let i = 0; i < emptyDivs; i++) {
-            ghostDivs.push(<div className="img-box"></div>);
-          }
-          return ghostDivs;
-        })()}
+    <div className="artists-container">
+      <div className="img-boxes-container">
+        <div className="flex img-boxes-wrap">
+          {artists.map((artist) => (
+            <Link
+              className="img-box"
+              to={`/artist/${artist._id}`}
+              state={{
+                artistName: artist.name,
+                coverImage: artist.coverImage,
+              }}
+            >
+              <ArtistBox artist={artist} />
+            </Link>
+          ))}
+          {(() => {
+            const emptyDivs = 4 - artists.length % 4;
+            const ghostDivs = [];
+            for (let i = 0; i < emptyDivs; i++) {
+              ghostDivs.push(<div className="img-box"></div>);
+            }
+            return ghostDivs;
+          })()}
+        </div>
       </div>
     </div>
   )

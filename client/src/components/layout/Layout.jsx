@@ -1,16 +1,18 @@
 import MusicPlayer from "../MusicBar/MusicPlayer/MusicPlayer";
 import MusicBar from "../MusicBar/MusicBar";
-import TopBar from "../TopBar/TopBar";
+import BottomBar from "../BottomBar/BottomBar";
+import TopBar from "../Topbar/TopBar";
 
 
 const Layout = ({ children }) => {
   return (
     <>
       <div className="layout">
+        <TopBar />
         <div className="main-wrap">
           {children}
         </div>
-        <TopBar />
+        <BottomBar />
         {/* <MusicBar>
           <MusicPlayer />
         </MusicBar> */}

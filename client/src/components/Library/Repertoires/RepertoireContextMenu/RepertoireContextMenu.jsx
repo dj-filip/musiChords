@@ -1,81 +1,72 @@
 
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BACKEND_URL } from "../../../../config/serverConfig";
+import RemoveIcon from "../../../icons/RemoveIcon";
 
 
-function RepertoireContextMenu({ song }) {
-
-  const [repertoires, setRepertoires] = useState();
-  const [selectedRepertoireId, setSelectedRepertoireId] = useState();
-  const [addToPlaylistPopup, setAddToPlaylistPopup] = useState(false);
-
-  const fetchRepertoires = async () => {
-    const response = await fetch(`${BACKEND_URL}/repertoires/getRepertoires`);
-    const data = await response.json();
-
-    setRepertoires(data);
-  };
-
-  useEffect(() => {
-    fetchRepertoires();
-  }, [])
-
-  
-
-  const handleAddToPlaylist = async (selectedRepertoireId) => {
-    // e.preventDefault();
-
-    const repertoireSongData = {
-      repertoireId: selectedRepertoireId,
-      songId: song._id
-    }
+function RepertoireContextMenu({
+  repertoire,
+  contextMenuRef,
+  contextMenu,
+  setContextMenu,
+  positionX,
+  positionY,
+  repertoires,
+  setRepertoires
+}) {
 
 
+  const handleRemoveRepertoire = async (e, id) => {
+    e.stopPropagation()
     try {
-      const response = await fetch(`${BACKEND_URL}/repertoires/addSongToRepertoire`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(repertoireSongData),
+      const response = await fetch(`${BACKEND_URL}/repertoires/${id}`, {
+        method: 'DELETE'
       });
 
       const result = await response.json();
-      console.log('Form submitted successfully:', result);
-      setAddToPlaylistPopup(false)
-      fetchRepertoires();
+
+      setRepertoires(prevRepertoires => prevRepertoires.filter(rep => rep._id !== id));
+      setContextMenu({
+        position: {
+          x: 0,
+          y: 0
+        },
+        toggled: false
+      })
+      console.log(repertoires);
+      console.log('Repertoire removed successfully:', result);
     } catch (err) {
-      console.error('Error submitting the form:', err);
+      console.error('Error removing repertoire', err);
     }
-  }
+
+  };
+
+
 
   return (
     <>
-      <menu className="repertoire-context-menu">
+      <menu
+        ref={contextMenuRef}
+        className={`repertoire-context-menu ${contextMenu.toggled && 'active-context-menu'}`}
+        style={{
+          top: positionY + 2 + 'px',
+          left: positionX + 2 + 'px'
+        }}
+      >
         <ul>
           <li>
-            <button onClick={() => setAddToPlaylistPopup(true)}>Add to Playlist</button>
+            <button 
+              className="light-txt"
+              onClick={(e) => handleRemoveRepertoire(e, repertoire._id)}>
+              <RemoveIcon 
+                className="gray-txt"
+                width={20}
+              />Remove {repertoire.name} Repertoire
+            </button>
           </li>
         </ul>
       </menu>
-
-      {addToPlaylistPopup && (
-        <div className="new-repertoire-popup-container">
-          <menu className="new-repertoire-popup">
-            <ul>
-              {repertoires.map((repertoire) => {
-                return (
-                  <li>
-                    <button onClick={() => handleAddToPlaylist(repertoire._id)}>{repertoire.name}</button>
-                  </li>
-                )
-              })}
-            </ul>
-          </menu>
-        </div>
-      )}
-
     </>
   )
 }

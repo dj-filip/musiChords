@@ -17,7 +17,7 @@ const HomeIcon = () => {
           fill="#B5B5B5"
         />
       </svg>
-      {/* <span>Home</span> */}
+      <span>Home</span>
     </div>
   )
 }

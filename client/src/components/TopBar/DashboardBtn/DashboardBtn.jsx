@@ -1,22 +1,22 @@
 import { NavLink } from "react-router-dom";
-import AddIcon from "../../icons/AddIcon";
 import { useState } from "react";
+import FolderIcon from "../../icons/FolderIcon";
 
 
-function AddBtn() {
+function DashboardBtn() {
 
   const [showPopupMenu, setShowPopupMenu] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <>
       <button
-        className="add-split-btn"
-        onClick={() => setShowPopupMenu((prev) => !prev)}
+        className={`dashboard-btn ${isActive ? '' : ''}`}
       >
-        <AddIcon />
+        <FolderIcon />  
 
         {showPopupMenu && (
-          < div className="add-btn-popup-menu">
+          <div className="add-btn-popup-menu">
             <ul>
               <li>
                 <NavLink to="/add-song">Add Song</NavLink>
@@ -33,4 +33,4 @@ function AddBtn() {
   )
 }
 
-export default AddBtn;
+export default DashboardBtn;

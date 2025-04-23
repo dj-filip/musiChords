@@ -6,7 +6,7 @@ import PlaylistSong from "../Sidebar/Playlist/PlaylistSong";
 import BackIcon from "../icons/BackIcon";
 
 
-function Artist({ artist, setSelectedSong }) {
+function Artist({ artist, selectedSong, setSelectedSong }) {
 
   const imageUrl = `${import.meta.env.VITE_IMAGES_URL}${artist.coverImage}`;
 
@@ -28,7 +28,7 @@ function Artist({ artist, setSelectedSong }) {
         <div className="playlist-wrap">
           {artist.songs.map((song) => {
             return (
-              <PlaylistSong song={song} onClick={() => setSelectedSong(song)} />
+              <PlaylistSong song={song} selectedSong={selectedSong} onClick={() => setSelectedSong(song)} />
             )
           })}
         </div>

@@ -1,21 +1,23 @@
 import { NavLink } from "react-router-dom";
-import HomeIcon from "../icons/HomeIcon";
-import AddIcon from "../icons/AddIcon";
-import LibraryIcon from "../icons/LibraryIcon";
-import AddBtn from "./AddBtn/AddBtn";
+import FolderIcon from "../icons/FolderIcon";
+import DashboardBtn from "./DashboardBtn/DashboardBtn";
+import ProfileIcon from "../icons/ProfileIcon";
 
 
 function TopBar() {
   return (
-    <header>
-      <NavLink to="/">
-        <HomeIcon />
+    <div className="top-bar">
+      <NavLink to="/dashboard">
+        <DashboardBtn />
       </NavLink>
-      <AddBtn />
-      <NavLink to="/library">
-        <LibraryIcon />
-      </NavLink>
-    </header>
+      <div className="flex align-center">
+        <ProfileIcon />
+        <NavLink to="/sign-up">
+          <button>Sign up</button>
+        </NavLink>
+        <button>Log in</button>
+      </div>
+    </div>
   )
 }
 
