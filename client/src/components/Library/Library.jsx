@@ -1,16 +1,18 @@
-import { NavLink } from "react-router-dom";
-import PlaylistSong from "../Sidebar/Playlist/PlaylistSong";
-import BackIcon from "../icons/BackIcon";
-import Repertoire from "./Repertoires/Repertoire";
 import { useEffect, useState } from "react";
-import CreateRepertoire from "./Repertoires/CreateRepertoire/CreateRepertoire";
-import CreateRepertoireBtn from "./Repertoires/CreateRepertoire/CreateRepertoireBtn/CreateRepertoireBtn";
+import { NavLink } from "react-router-dom";
 
+import Repertoire from "./Repertoires/Repertoire";
+import LibrarySong from "./LibrarySong/LibrarySong";
+
+import CreateRepertoire from "./Repertoires/CreateRepertoire/CreateRepertoire";
+
+import BackIcon from "../icons/BackIcon";
+import CreateRepertoireBtn from "./Repertoires/CreateRepertoire/CreateRepertoireBtn/CreateRepertoireBtn";
 
 import { BACKEND_URL } from '../../config/serverConfig';
 
 
-function Library({ songs, setSelectedSong }) {
+function Library({ songs, selectedSong, setSelectedSong }) {
 
   const [repertoires, setRepertoires] = useState();
   const [currentRepertoire, setCurrentRepertoire] = useState();
@@ -20,8 +22,17 @@ function Library({ songs, setSelectedSong }) {
 
   const imageUrl = `${import.meta.env.VITE_IMAGES_URL}\library-cover_rsaqgz`;
 
-
   const [repertoireWithSongs, setRepertoireWithSongs] = useState();
+
+
+
+  const fetchRepertoires = async () => {
+    const response = await fetch(`${BACKEND_URL}/repertoires`);
+    const data = await response.json();
+
+    setRepertoires(data);
+  };
+
 
   const fetchRepertoireWithSongs = async () => {
     const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`);
@@ -35,14 +46,6 @@ function Library({ songs, setSelectedSong }) {
 
     setRepertoireWithSongs(sortedData);
   }
-
-
-  const fetchRepertoires = async () => {
-    const response = await fetch(`${BACKEND_URL}/repertoires/getRepertoires`);
-    const data = await response.json();
-
-    setRepertoires(data);
-  };
 
 
   const handleSelectRepertoire = (selectedRepertoire) => {
@@ -63,7 +66,6 @@ function Library({ songs, setSelectedSong }) {
     return;
   }
 
-  console.log(repertoireWithSongs)
 
   return (
     <>
@@ -101,11 +103,22 @@ function Library({ songs, setSelectedSong }) {
 
         <div className="repertoire-wrap">
           {currentRepertoire ?
-
             (
               repertoireWithSongs?.songs.map(({ song }) => {
                 return (
-                  <PlaylistSong key={song.id} song={song} onClick={() => setSelectedSong(song)} />
+                  <LibrarySong
+                    onClick={(e) => {
+                      if (e.target.tagName === 'BUTTON') return;
+                      setSelectedSong(song);
+                    }}
+                    key={song.id}
+                    song={song}
+                    selectedSong={selectedSong}
+                    setCurrentContextMenu={setCurrentContextMenu}
+                    currentContextMenu={currentContextMenu}
+                    setCurrentRepertoire={setCurrentRepertoire}
+                    currentRepertoire={currentRepertoire}
+                  />
                 )
               })
             ) : (
@@ -115,19 +128,23 @@ function Library({ songs, setSelectedSong }) {
                     key={repertoire.id}
                     repertoire={repertoire}
                     onClick={handleSelectRepertoire}
+                    repertoires={repertoires}
+                    setRepertoires={setRepertoires}
                   />
                 ))}
 
                 {songs.map((song) => (
-                  <PlaylistSong
-                    key={song.id}
-                    song={song}
+                  <LibrarySong
                     onClick={(e) => {
                       if (e.target.tagName === 'BUTTON') return;
                       setSelectedSong(song);
                     }}
+                    key={song.id}
+                    song={song}
+                    selectedSong={selectedSong}
                     currentContextMenu={currentContextMenu}
                     setCurrentContextMenu={setCurrentContextMenu}
+                    repertoires={repertoires}
                   />
                 ))}
               </>
@@ -136,7 +153,10 @@ function Library({ songs, setSelectedSong }) {
       </div>
 
       {showPopupMenu && (
-        <CreateRepertoire setShowPopupMenu={setShowPopupMenu} />
+        <CreateRepertoire
+          setShowPopupMenu={setShowPopupMenu}
+          fetchRepertoires={fetchRepertoires}
+        />
       )}
     </>
   );

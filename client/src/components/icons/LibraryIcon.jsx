@@ -13,9 +13,9 @@ const LibraryIcon = () => {
           fill="#B5B5B5"
         />
       </svg>
-      {/* <span>
+      <span>
         Library
-      </span> */}
+      </span>
     </div>
   )
 }

@@ -26,7 +26,7 @@ function LibraryPage() {
 
   return (
     <>
-      <Library songs={songs} setSelectedSong={setSelectedSong}/>
+      <Library songs={songs} selectedSong={selectedSong} setSelectedSong={setSelectedSong}/>
       <Song selectedSong={selectedSong} setSelectedSong={setSelectedSong}/>
     </>
   )

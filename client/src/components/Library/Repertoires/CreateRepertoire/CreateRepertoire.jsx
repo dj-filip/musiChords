@@ -1,11 +1,9 @@
 import CloseIcon from "../../../icons/CloseIcon";
 
-
 import { BACKEND_URL } from "../../../../config/serverConfig";
 
 
 function CreateRepertoire({ setShowPopupMenu, fetchRepertoires }) {
-
 
   const formSubmitHandler = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -16,7 +14,7 @@ function CreateRepertoire({ setShowPopupMenu, fetchRepertoires }) {
 
 
     try {
-      const response = await fetch(`${BACKEND_URL}/repertoires/createRepertoire`, {
+      const response = await fetch(`${BACKEND_URL}/repertoires`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

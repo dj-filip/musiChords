@@ -97,7 +97,7 @@ function AddSong() {
       intro: e.target.intro.value, // Assuming you have an input with name="intro"
       lyricsChords: e.target.lyricsChords.value, // Assuming you have an input with name="lyricsChords"
       coverImage: selectedArtistCoverImage, // Assuming this is a string URL
-  };
+    };
 
     try {
       const response = await fetch(`${BACKEND_URL}/songs/addSong`, {
@@ -147,40 +147,44 @@ function AddSong() {
 
 
   return (
-    <form onSubmit={formSubmitHandler} className="flex flex-column add-song-form" autoComplete="off">
-      <input type="text" name="title" placeholder="Song Title" onChange={inputHandler} />
-      <div className="suggestions-input-wrap">
-        <input type="text" name="artist" placeholder="Song Artist" value={artistName} onChange={(e) => {
-          setArtistName(e.target.value);
-          setShowSuggestions(true);
-        }}></input>
-        {showSuggestions && (
-          <div className={`suggestions-menu ${filteredArtists.length ? 'suggestions-menu-active' : ''}`}>
-            <ul>
-              {filteredArtists?.map((artist) => {
-                const imageUrl = `${import.meta.env.VITE_IMAGES_URL}${artist.coverImage}`;
+    <>
+      <form onSubmit={formSubmitHandler} className="flex flex-column add-song-form" autoComplete="off">
+        <input type="text" name="title" placeholder="Song Title" onChange={inputHandler} />
+        <div className="suggestions-input-wrap">
+          <input type="text" name="artist" placeholder="Song Artist" value={artistName} onChange={(e) => {
+            setArtistName(e.target.value);
+            setShowSuggestions(true);
+          }}></input>
+          {showSuggestions && (
+            <div className={`suggestions-menu ${filteredArtists.length ? 'suggestions-menu-active' : ''}`}>
+              <ul>
+                {filteredArtists?.map((artist) => {
+                  const imageUrl = `${import.meta.env.VITE_IMAGES_URL}${artist.coverImage}`;
 
-                return (
-                  <li onClick={() => { handleSelectArtist(artist) }}>
-                    <img src={imageUrl} alt={artist.name} />{artist.name}</li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
+                  return (
+                    <li onClick={() => { handleSelectArtist(artist) }}>
+                      <img src={imageUrl} alt={artist.name} />{artist.name}</li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
 
+        </div>
+        <input type="text" name="originalKey" placeholder="Original Key" onChange={inputHandler} />
+        <textarea rows="2" name="intro" placeholder="Intro" onChange={inputHandler} />
+        <textarea rows="10" name="lyricsChords" placeholder="Lyrics / Chords"
+          onChange={handleInputChange} />
+        <input type="submit" value="Add Song" />
+      </form>
+      <div className="lyrics-preview-wrap">
+        <p
+          className="lyrics gray-txt"
+          dangerouslySetInnerHTML={{ __html: formattedChords }} // Render HTML
+          style={{ whiteSpace: 'pre-wrap' }} // Preserve line breaks and spacing
+        ></p>
       </div>
-      <input type="text" name="originalKey" placeholder="Original Key" onChange={inputHandler} />
-      <textarea rows="2" name="intro" placeholder="Intro" onChange={inputHandler} />
-      <textarea rows="10" name="lyricsChords" placeholder="Lyrics / Chords"
-        onChange={handleInputChange} />
-      <p
-        className="lyrics"
-        dangerouslySetInnerHTML={{ __html: formattedChords }} // Render HTML
-        style={{ whiteSpace: 'pre-wrap' }} // Preserve line breaks and spacing
-      ></p>
-      <input type="submit" value="Add Song" />
-    </form>
+    </>
   )
 }
 

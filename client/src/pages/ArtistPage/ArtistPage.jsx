@@ -42,7 +42,7 @@ function ArtistPage() {
 
   return (
     <>
-      <Artist artist={artistWithSongs} setSelectedSong={setSelectedSong} />
+      <Artist artist={artistWithSongs} selectedSong={selectedSong} setSelectedSong={setSelectedSong} />
 
       {
         selectedSong && (

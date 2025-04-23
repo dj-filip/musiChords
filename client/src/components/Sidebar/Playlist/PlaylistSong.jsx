@@ -3,12 +3,13 @@ import { PlayingContext } from '../../../contexts/PlayingContext';
 import RepertoireContextMenu from '../../Library/Repertoires/RepertoireContextMenu/RepertoireContextMenu';
 
 
-const PlaylistSong = ({ key, song, onClick, currentContextMenu, setCurrentContextMenu }) => {
+const PlaylistSong = ({ key, song, onClick, selectedSong, currentContextMenu, setCurrentContextMenu }) => {
 
   const { setSelectedSongTitle, selectedSongTitle, isHiding, setIsHiding } = useContext(PlayingContext);
 
   const [isContextMenu, setIsContextMenu] = useState(false);
   const [contextMenuSongId, setContextMenuSongId] = useState();
+  const [isActive, setIsActive] = useState(false);
 
 
   const currentSong = useRef();
@@ -37,12 +38,14 @@ const PlaylistSong = ({ key, song, onClick, currentContextMenu, setCurrentContex
   }
 
 
+
+
   return (
     <>
       <li
         ref={currentSong}
         // className={`${selectedSongTitle == song.title && "active"}`}
-        className="repertoire-song"
+        className={`repertoire-song ${selectedSong._id === song._id ? 'active' : ''}`}
         data-song-id={song._id}
         onClick={onClick}
         onContextMenu={(e) => handleContextMenu(e, song._id)}
@@ -63,7 +66,7 @@ const PlaylistSong = ({ key, song, onClick, currentContextMenu, setCurrentContex
         </div>
 
         {isContextMenu && currentContextMenu === song._id && (
-          <RepertoireContextMenu song={song} />
+          <RepertoireContextMenu song={song} isContextMenu={isContextMenu} setIsContextMenu={setIsContextMenu} />
         )}
       </li>
 
