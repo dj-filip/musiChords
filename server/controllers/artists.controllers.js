@@ -1,7 +1,7 @@
 const Artist = require('../models/artistModel');
 
 
-exports.addArtist = async (req, res) => {
+const addArtist = async (req, res) => {
   try {
     const { name } = req.body;
     const coverImage = req.file ? req.file.filename : '';
@@ -13,49 +13,50 @@ exports.addArtist = async (req, res) => {
 
     const songs = [];
 
-    const newArtist = new Artist({
+    const newArtist = await Artist.create({
       name,
       coverImage,
       songs
     });
 
-    await newArtist.save();
 
     res.status(201).json({ message: 'Artist added successfully', newArtist });
   } catch (error) {
-    res.status(500).json({ message: 'Error adding artist', error });
-    console.log(error);
+    console.log('Error adding artist', error);
+    res.status(500).json({ message: 'Error adding artist' });
   }
 }
 
 
-exports.getArtists = async (req, res) => {
+const getArtists = async (req, res) => {
   try {
     data = await Artist.find();
     res.send(data);
   } catch (error) {
-    console.log('Error fetching artists from database', error);
+    console.log('Error fetching artists', error);
+    res.status(500).json({ message: 'Error fetching artists' });
   }
 }
 
 
-exports.getArtist = async (req, res) => {
-  const name = req.query.name;
+const getArtist = async (req, res) => {
   try {
-    data = await Artist.find({ name: { $regex: `(^|\\s)${name}`, $options: 'i' } });
+    const { id: artistId } = req.params;
+    const artist = await Artist.findById(artistId);
 
-    if (data.length === 0) {
-      return;
+    if (!artist) {
+      return res.status(404).json({ message: 'Artist not found' });
     }
     
-    res.send(data);
+    res.status(200).json(artist);
   } catch (error) {
     console.log('Error fetching artists from database', error);
+    res.status(500).json({ message: 'Error fetching artist' });
   }
 }
 
 
-exports.getArtistWithSongs = async (req,res) => {
+const getArtistWithSongs = async (req,res) => {
   try {
     const artistId = req.params.artistId;
 
@@ -67,4 +68,12 @@ exports.getArtistWithSongs = async (req,res) => {
   } catch (error) {
     res.status(500).json({ message: 'Error fetching artist with songs', error});
   }
+}
+
+
+module.exports = {
+  addArtist,
+  getArtists,
+  getArtist,
+  getArtistWithSongs
 }

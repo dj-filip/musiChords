@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 
-export default function useContextMenu() {
+function useContextMenu() {
 
   const [contextMenu, setContextMenu] = useState({
     position: {
@@ -73,3 +73,6 @@ export default function useContextMenu() {
 
   return [contextMenu, setContextMenu, contextMenuRef, handleContextMenu]
 }
+
+
+export default useContextMenu;

@@ -6,20 +6,26 @@ import AddArtistPage from "../pages/AddArtistPage/AddArtistPage";
 import ArtistPage from "../pages/ArtistPage/ArtistPage";
 import DashboardPage from "../pages/AddArtistPage/DashboardPage/Dashboard";
 import SignUpPage from "../pages/AuthenticationPages/SignUpPage/SignUpPage";
+import SignupPage from "../pages/AuthenticationPages/SignUpPage/SignUpPage";
+import LoginPage from "../pages/AuthenticationPages/LogInPage.jsx/LogInPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/">
-        <Route index element={<ArtistsPage />} /> 
-        <Route path="/artist/:artistId" element={<ArtistPage />} />
+      <Route path="/sign-up" element={<SignupPage />} />
+      <Route path="/log-in" element={<LoginPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/">
+          <Route index element={<ArtistsPage />} />
+          <Route path="/artist/:artistId" element={<ArtistPage />} />
+        </Route>
+        <Route path="/add-song" element={<AddSongPage />} />
+        <Route path="/add-artist" element={<AddArtistPage />} />
+        <Route path="/library" element={<LibraryPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Route>
-      <Route path="/add-song" element={<AddSongPage />} />
-      <Route path="/add-artist" element={<AddArtistPage />} />
-      <Route path="/library" element={<LibraryPage />} />
-      <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/sign-up" element={<SignUpPage />} />
     </Routes>
   )
 }

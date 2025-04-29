@@ -17,7 +17,7 @@ function AddArtist() {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch(`${BACKEND_URL}/artists/addArtist`, {
+      const response = await fetch(`${BACKEND_URL}/artists`, {
         method: 'POST',
         body: formData,
       });

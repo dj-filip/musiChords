@@ -3,11 +3,14 @@ const router = express.Router();
 
 const { artistUpload } = require('../middlewares/uploadMiddleware');
 const { addArtist, getArtists, getArtist, getArtistWithSongs } = require('../controllers/artists.controllers');
+const requireAuth = require('../middlewares/requireAuth');
 
 
-router.post('/addArtist', artistUpload.single('coverImage'), addArtist);
-router.get('/getArtists', getArtists);
-router.get('/getArtist', getArtist);
+router.use(requireAuth);
+
+router.get('/', getArtists);
+router.post('/', artistUpload.single('coverImage'), addArtist);
+router.get('/:id', getArtist);
 router.get('/:artistId/songs', getArtistWithSongs);
 
 

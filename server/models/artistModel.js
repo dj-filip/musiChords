@@ -19,7 +19,7 @@ const artistSchema = mongoose.Schema(
   {
     timestamps: true
   }
-)
+);
 
 const Artist = mongoose.model('Artist', artistSchema);
 

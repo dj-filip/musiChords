@@ -1,9 +1,12 @@
+import Signup from "../../../components/Users/Signup/Signup";
 
 
-function SignUpPage() {
+function SignupPage() {
   return (
-    <div>SIGN UP PAGE</div>
+    <div className="form-page-container">
+      <Signup />
+    </div>
   )
 }
 
-export default SignUpPage;
+export default SignupPage;

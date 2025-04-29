@@ -3,7 +3,7 @@ import AddSong from "../../components/Songs/AddSong/AddSong";
 
 function AddSongPage() {
   return (
-    <div className="add-page-container">
+    <div className="form-page-container">
       <AddSong />
     </div>
   )

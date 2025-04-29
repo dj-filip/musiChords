@@ -1,7 +1,7 @@
 const Repertoire = require("../models/repertoireModel");
 
 
-exports.getRepertoires = async (req, res) => {
+const getRepertoires = async (req, res) => {
   try {
     data = await Repertoire.find();
     res.send(data);
@@ -10,7 +10,7 @@ exports.getRepertoires = async (req, res) => {
   }
 }
 
-exports.getRepertoire = async (req, res) => {
+const getRepertoire = async (req, res) => {
   try {
     const { id: repertoireId } = req.params;
     const repertoire = await Repertoire.findById(repertoireId).populate('songs.song');
@@ -26,28 +26,31 @@ exports.getRepertoire = async (req, res) => {
 }
 
 
-exports.createRepertoire = async (req, res) => {
+const createRepertoire = async (req, res) => {
   try {
     const { name } = req.body;
 
-    const newRepertoire = new Repertoire({ name, songs: [] });
+    const newRepertoire = await Repertoire.create({
+      name,
+      songs: []
+    });
 
-    await newRepertoire.save();
-    res.status(201).json({ message: 'Repertoire added successfully', newRepertoire });
+    res.status(201).json({ 
+      message: 'Repertoire added successfully', newRepertoire });
   } catch (error) {
     res.status(500).json({ message: 'Error adding repertoire', error });
   }
 }
 
 
-exports.removeRepertoire = async (req, res) => {
+const removeRepertoire = async (req, res) => {
   try {
     const { id: repertoireId } = req.params;
 
     const removeRepertoire = await Repertoire.deleteOne({ _id: repertoireId });
 
     if (removeRepertoire.deletedCount === 0) {
-      return res.status(404).json({ message: 'Repertoire not found' }); 
+      return res.status(404).json({ message: 'Repertoire not found' });
     }
 
     res.status(200).json({ message: 'Repertoire removed successfully' });
@@ -57,11 +60,11 @@ exports.removeRepertoire = async (req, res) => {
 }
 
 
-exports.addSongToRepertoire = async (req, res) => {
+const addSongToRepertoire = async (req, res) => {
   try {
     const { id: repertoireId } = req.params;
     const { songId } = req.body;
-    
+
     const repertoire = await Repertoire.findById(repertoireId);
 
     const existingSong = repertoire.songs.find(
@@ -88,7 +91,7 @@ exports.addSongToRepertoire = async (req, res) => {
 }
 
 
-exports.removeSongFromRepertoire = async (req, res) => {
+const removeSongFromRepertoire = async (req, res) => {
 
   console.log("THIS IS REMOVE")
   try {
@@ -99,8 +102,8 @@ exports.removeSongFromRepertoire = async (req, res) => {
     const originalLength = repertoire.songs.length;
 
     repertoire.songs = repertoire.songs
-    .filter((s) => s.song.toString() !== songId)
-    .map((s, idx) => ({ ...s.toObject(), order: idx }));
+      .filter((s) => s.song.toString() !== songId)
+      .map((s, idx) => ({ ...s.toObject(), order: idx }));
 
     if (repertoire.songs.length === originalLength) {
       return res.status(404).json({ message: 'Song not found in repertoire' });
@@ -120,4 +123,15 @@ exports.removeSongFromRepertoire = async (req, res) => {
       error,
     })
   }
+}
+
+
+
+module.exports = {
+  getRepertoires,
+  getRepertoire,
+  createRepertoire,
+  removeRepertoire,
+  addSongToRepertoire,
+  removeSongFromRepertoire
 }

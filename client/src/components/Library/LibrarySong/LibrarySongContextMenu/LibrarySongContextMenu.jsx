@@ -117,7 +117,7 @@ function LibrarySongContextMenu({
                   <button
                     className="light-txt"
                     onClick={(e) => handleAddSongToRepertoire(e, repertoire._id, song)}>
-                    <PlusIcon /> {repertoire.name}
+                    <PlusIcon className="plus-icon-gray"/> {repertoire.name}
                   </button>
                 </li>
               )

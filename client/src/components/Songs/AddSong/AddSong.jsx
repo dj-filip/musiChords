@@ -19,7 +19,7 @@ function AddSong() {
 
   // Fetch artist function
   const fetchArtists = async (setArtists) => {
-    const result = await fetch(`${BACKEND_URL}/artists/getArtists`);
+    const result = await fetch(`${BACKEND_URL}/artists`);
     const data = await result.json();
 
     setArtists(data);
@@ -100,7 +100,7 @@ function AddSong() {
     };
 
     try {
-      const response = await fetch(`${BACKEND_URL}/songs/addSong`, {
+      const response = await fetch(`${BACKEND_URL}/songs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

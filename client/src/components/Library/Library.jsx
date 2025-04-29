@@ -10,6 +10,7 @@ import BackIcon from "../icons/BackIcon";
 import CreateRepertoireBtn from "./Repertoires/CreateRepertoire/CreateRepertoireBtn/CreateRepertoireBtn";
 
 import { BACKEND_URL } from '../../config/serverConfig';
+import useAuthContext from "../../hooks/useAuthContext";
 
 
 function Library({ songs, selectedSong, setSelectedSong }) {
@@ -24,7 +25,7 @@ function Library({ songs, selectedSong, setSelectedSong }) {
 
   const [repertoireWithSongs, setRepertoireWithSongs] = useState();
 
-
+  const { user } = useAuthContext();
 
   const fetchRepertoires = async () => {
     const response = await fetch(`${BACKEND_URL}/repertoires`);
@@ -53,14 +54,16 @@ function Library({ songs, selectedSong, setSelectedSong }) {
   }
 
   useEffect(() => {
-    fetchRepertoires();
-  }, [])
+    if (user) {
+      fetchRepertoires();
+    }
+  }, [user])
 
 
   useEffect(() => {
-    if (currentRepertoire)
+    if (user && currentRepertoire )
       fetchRepertoireWithSongs();
-  }, [currentRepertoire])
+  }, [user, currentRepertoire])
 
   if (!repertoires) {
     return;

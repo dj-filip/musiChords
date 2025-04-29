@@ -1,8 +1,8 @@
 
 
-function PlusIcon() {
+function PlusIcon({ className }) {
   return (
-    <span className="plus-icon"></span>
+    <span className={`plus-icon ${className}`}></span>
   )
 }
 

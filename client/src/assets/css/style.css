@@ -93,6 +93,11 @@ a span {
   z-index: 1;
 }
 
+.plus-icon-gray {
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b), transparent 90deg, #a3a3a3 0) calc(100% + var(--b)/2) calc(100% + var(--b)/2)/ calc(50% + var(--b)) calc(50% + var(--b));
+}
+
 
 .plus-icon-square {
   /* the thickness */
@@ -297,6 +302,14 @@ div.top-bar {
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
+}
+
+.top-bar__auth-wrap {
+  gap: 10px;
+}
+
+.top-bar__auth-wrap span {
+  margin-right: 10px;
 }
 
 .dashboard-btn {
@@ -853,7 +866,7 @@ div.song div.transposition {
 
 
 /* ADD SONG */
-.add-page-container {
+.form-page-container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -959,6 +972,12 @@ input[type=file] {
 
 .suggestions-menu img {
   width: 40px;
+}
+
+
+/* AUTH */
+a.active .auth-btn {
+  color: #1ea74e;
 }
 
 

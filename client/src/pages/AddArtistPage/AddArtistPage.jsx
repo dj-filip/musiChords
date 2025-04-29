@@ -3,7 +3,7 @@ import AddArtist from "../../components/Artists/AddArtist/AddArtist";
 
 function AddArtistPage() {
   return (
-    <div className="add-page-container">
+    <div className="form-page-container">
       <AddArtist />
     </div>
   )

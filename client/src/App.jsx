@@ -8,57 +8,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 
 import { BACKEND_URL } from './config/serverConfig';
+import { AuthContextProvider } from './contexts/AuthContext';
 
 
 let currentSongAudio;
-
-// const songs = [
-//   {
-//     title: "Nađi novu ljubav",
-//     artist: "Saša Matić",
-//     cover: "./songs/cover-images/nadji-novu-ljubav-cover.jpg",
-//     link: "./songs/audio/sasa-matic-nadji-novu-ljubav.mp3",
-//     playlist: "rock",
-//     originalKey: "G#m",
-//     chords: `Nudiš mi zvezde, nudiš mi snove
-//     Al' ja živim svoju bol
-//     Nudiš mi sve što ljubav se zove
-//     A znaš da neću biti tvoj
-
-//     Šta li si kod mene zavolela?
-//     Čemu li to nisi odolela?
-//     Sudbina je moja od tvoje sreće daleko
-
-//     Zlato moje
-
-//     Ref.
-//     Nađi novu ljubav, novo nebo
-//     i niko neće znati
-//     šta je s'nama bilo
-
-//     Zašto ti srce pati
-//     a ja ću da pijem
-//     ja ću da živim ovaj život svoj
-//     kako moram
-
-//     Nađi novu ljubav, novo nebo
-//     i niko neće znati
-//     šta je s'nama bilo
-
-//     Zašto ti srce pati
-//     a ja ću da pijem
-//     ja ću da živim kao pas bez nje
-//     ne da mi Bog drugačije
-
-//     Goni me vetar, nosi daleko
-//     bolje da ti ne pričam
-//     koja me tuga od tebe tera
-//     al' ništa i ne osećam`,
-//   }
-// ]
-
-
-
 
 const App = () => {
 
@@ -122,11 +75,13 @@ const App = () => {
 
   return (
     <Router>
-      <PlayingContext.Provider value={{ playing, setPlaying, handleOnPlay, selectedSongTitle, setSelectedSongTitle, songs, selectedSong, setSelectedSong, isHiding, setIsHiding }}>
-        <Layout>
-          <AppRoutes />
-        </Layout>
-      </PlayingContext.Provider>
+      <AuthContextProvider>
+        <PlayingContext.Provider value={{ playing, setPlaying, handleOnPlay, selectedSongTitle, setSelectedSongTitle, songs, selectedSong, setSelectedSong, isHiding, setIsHiding }}>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </PlayingContext.Provider>
+      </AuthContextProvider>
     </Router>
   )
 }
