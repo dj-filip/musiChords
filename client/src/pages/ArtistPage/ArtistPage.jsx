@@ -5,6 +5,7 @@ import Artist from "../../components/Artists/Artist";
 import Song from "../../components/Songs/Song/Song";
 
 import { BACKEND_URL } from '../../config/serverConfig';
+import useAuthContext from "../../hooks/useAuthContext";
 
 
 
@@ -20,9 +21,15 @@ function ArtistPage() {
   const [selectedSong, setSelectedSong] = useState({});
 
 
+  const { user } = useAuthContext();
+
   useEffect(() => {
     const fetchArtistWithSongs = async () => {
-      const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`);
+      const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const data = await response.json();
 
       console.log(data);
