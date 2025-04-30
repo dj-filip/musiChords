@@ -78,6 +78,7 @@ a span {
   border-right: 2px solid;
   border-bottom: 2px solid;
   border-color: #f1f1f1;
+  border-radius: 1px;
   transform: translateX(25%) rotate(135deg);
 }
 
@@ -137,6 +138,17 @@ a span {
 
 .close-icon:after {
   transform: rotate(-45deg);
+}
+
+
+/* BUTTONS */
+.circle-icon-btn {
+  cursor: default;
+}
+
+.circle-icon-btn svg {
+  cursor: pointer;
+  pointer-events: visiblePainted;
 }
 
 
@@ -385,6 +397,11 @@ div.bottom-bar {
   position: relative;
 }
 
+
+.add-split-btn:active svg {
+  transform: scale(.9);
+}
+
 .add-btn-popup-menu {
   position: absolute;
   bottom: 150%;
@@ -511,6 +528,21 @@ li {
 
 .circle-btn-wrap:hover:not(:active) {
   background-color: #00000060;
+  transform:  scale(1.1);
+}
+
+.circle-btn-wrap:hover:not(:active) i {
+  border-color: #fff;
+  transform: translateX(25%) rotate(135deg) scale(1.1);
+}
+
+.create-repertoire-active-btn {
+  background-color: #191919ca !important;
+}
+
+.create-repertoire-active-btn .plus-icon {
+  transform: rotate(45deg);
+  transition: transform .2s ease-in;
 }
 
 li:hover:not(:active, li.active) {
@@ -836,11 +868,16 @@ div.song div.transposition {
   z-index: 1;
 }
 
+.new-repertoire-btn .plus-icon {
+  transition: transform .2s ease-out;
+}
+
+.new-repertoire-btn:hover {
+  transform: none !important;
+}
+
 .new-repertoire-popup-container {
   position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -851,8 +888,33 @@ div.song div.transposition {
 .new-repertoire-popup {
   position: relative;
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px;
   background-color: #0F0F0F;
+}
+
+.new-repertoire-popup form {
+  display: flex;
+  gap: 20px;
+}
+
+.new-repertoire-popup input {
+  padding: 10px 15px;
+}
+
+.new-repertoire-popup input[type=submit] {
+  width: 10px;
+  height: auto;
+  margin: 0;
+  border-radius: 50%;
+}
+
+.new-repertoire-popup .circle-icon-btn svg:hover:not(:active) {
+  transform: scale(1.1);
+}
+
+
+.new-repertoire-popup .circle-icon-btn path {
+  fill: #1ea74e;
 }
 
 .close-btn {
