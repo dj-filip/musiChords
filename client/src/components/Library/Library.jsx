@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import Repertoire from "./Repertoires/Repertoire";
@@ -20,6 +20,13 @@ function Library({ songs, selectedSong, setSelectedSong }) {
   const [showPopupMenu, setShowPopupMenu] = useState(false);
 
   const [currentContextMenu, setCurrentContextMenu] = useState();
+
+  const [createRepertoireMenu, setCreateRepertoireMenu] = useState({
+    x: 0,
+    y: 0
+  });
+
+  const createRepertoireRef = useRef();
 
   const imageUrl = `${import.meta.env.VITE_IMAGES_URL}\library-cover_rsaqgz`;
 
@@ -61,7 +68,7 @@ function Library({ songs, selectedSong, setSelectedSong }) {
 
 
   useEffect(() => {
-    if (user && currentRepertoire )
+    if (user && currentRepertoire)
       fetchRepertoireWithSongs();
   }, [user, currentRepertoire])
 
@@ -97,7 +104,24 @@ function Library({ songs, selectedSong, setSelectedSong }) {
               </NavLink>
               <div className="library-heading-wrap flex just-between">
                 <h4 className="light-txt">Library</h4>
-                <CreateRepertoireBtn setShowPopupMenu={setShowPopupMenu} />
+                <CreateRepertoireBtn
+                  showPopupMenu={showPopupMenu}
+                  setShowPopupMenu={setShowPopupMenu}
+                  createRepertoireMenu={createRepertoireMenu}
+                  setCreateRepertoireMenu={setCreateRepertoireMenu}
+                  createRepertoireRef={createRepertoireRef}
+                // onClick={onClick}
+                />
+                {showPopupMenu && (
+                  <CreateRepertoire
+                    setShowPopupMenu={setShowPopupMenu}
+                    positionX={createRepertoireMenu.x}
+                    positionY={createRepertoireMenu.y}
+                    createRepertoireMenu={createRepertoireMenu}
+                    fetchRepertoires={fetchRepertoires}
+                    createRepertoireRef={createRepertoireRef}
+                  />
+                )}
               </div>
               <div className="artist-hero-overlay" />
             </>
@@ -155,12 +179,6 @@ function Library({ songs, selectedSong, setSelectedSong }) {
         </div>
       </div>
 
-      {showPopupMenu && (
-        <CreateRepertoire
-          setShowPopupMenu={setShowPopupMenu}
-          fetchRepertoires={fetchRepertoires}
-        />
-      )}
     </>
   );
 }

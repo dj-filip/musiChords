@@ -1,9 +1,11 @@
 import CloseIcon from "../../../icons/CloseIcon";
 
 import { BACKEND_URL } from "../../../../config/serverConfig";
+import AddIcon from "../../../icons/AddIcon";
 
 
-function CreateRepertoire({ setShowPopupMenu, fetchRepertoires }) {
+function CreateRepertoire({ setShowPopupMenu, fetchRepertoires, positionX, positionY, createRepertoireRef }) {
+
 
   const formSubmitHandler = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -31,22 +33,32 @@ function CreateRepertoire({ setShowPopupMenu, fetchRepertoires }) {
     }
   };
 
+  console.log(positionX);
+
+
   return (
-    <div className="new-repertoire-popup-container">
+    <div 
+      ref={createRepertoireRef}
+      className="new-repertoire-popup-container"
+      style={{
+        top: positionY + 50 + 'px',
+        left: positionX + 10 + 'px'
+      }}
+      >
       <div className="new-repertoire-popup flex flex-column">
-        <button
+        {/* <button
           className="close-btn"
           onClick={() => setShowPopupMenu(false)}
         >
           <CloseIcon />
-        </button>
+        </button> */}
         <form onSubmit={formSubmitHandler}>
           <input
             type="text"
             name="name"
             placeholder="New Repertoire"
           />
-          <input type="submit" value="Create" />
+          <button className="circle-icon-btn" type="submit"><AddIcon /></button>
         </form>
       </div>
     </div>
