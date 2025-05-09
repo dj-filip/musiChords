@@ -7,6 +7,8 @@ import RemoveIcon from "../../../icons/RemoveIcon";
 
 function RepertoireContextMenu({
   repertoire,
+  currentRepertoire,
+  setCurrentRepertoire,
   contextMenuRef,
   contextMenu,
   setContextMenu,
@@ -27,6 +29,7 @@ function RepertoireContextMenu({
       const result = await response.json();
 
       setRepertoires(prevRepertoires => prevRepertoires.filter(rep => rep._id !== id));
+      currentRepertoire?._id === id && setCurrentRepertoire(null);
       setContextMenu({
         position: {
           x: 0,
@@ -39,7 +42,6 @@ function RepertoireContextMenu({
     } catch (err) {
       console.error('Error removing repertoire', err);
     }
-
   };
 
 
@@ -56,10 +58,10 @@ function RepertoireContextMenu({
       >
         <ul>
           <li>
-            <button 
+            <button
               className="light-txt"
               onClick={(e) => handleRemoveRepertoire(e, repertoire._id)}>
-              <RemoveIcon 
+              <RemoveIcon
                 className="gray-txt"
                 width={20}
               />Remove {repertoire.name} Repertoire

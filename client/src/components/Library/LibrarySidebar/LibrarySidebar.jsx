@@ -11,6 +11,7 @@ import CreateRepertoireBtn from "../Repertoires/CreateRepertoire/CreateRepertoir
 
 import { BACKEND_URL } from '../../../config/serverConfig';
 import useAuthContext from "../../../hooks/useAuthContext";
+import RepertoireIcon from "../../icons/RepertoireIcon";
 
 
 function LibrarySidebar({
@@ -79,7 +80,19 @@ function LibrarySidebar({
           </div>
           <div className="artist-hero-overlay" />
         </div>
+
         <div className="repertoire-wrap">
+          <li
+            className={`library-item ${!currentRepertoire && "active"}`}
+            onClick={() => setCurrentRepertoire(null)}
+          >
+            <div className="repertoire-icon-wrap">
+              <RepertoireIcon />
+            </div>
+            <div className="flex-1">
+              <h5 className="light-txt">All Songs</h5>
+            </div>
+          </li>
           {repertoires.map((repertoire) => (
             <Repertoire
               key={repertoire.id}
@@ -87,6 +100,8 @@ function LibrarySidebar({
               onClick={handleSelectRepertoire}
               repertoires={repertoires}
               setRepertoires={setRepertoires}
+              currentRepertoire={currentRepertoire}
+              setCurrentRepertoire={setCurrentRepertoire}
             />
           ))}
         </div>

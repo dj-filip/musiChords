@@ -3,7 +3,14 @@ import RepertoireIcon from "../../icons/RepertoireIcon";
 import RepertoireContextMenu from "./RepertoireContextMenu/RepertoireContextMenu";
 
 
-const Repertoire = ({ repertoire, onClick, repertoires, setRepertoires }) => {
+const Repertoire = ({
+  repertoire,
+  onClick,
+  repertoires,
+  setRepertoires,
+  currentRepertoire,
+  setCurrentRepertoire
+}) => {
 
   const [contextMenu, setContextMenu, contextMenuRef, handleContextMenu] = useContextMenu();
 
@@ -17,7 +24,7 @@ const Repertoire = ({ repertoire, onClick, repertoires, setRepertoires }) => {
   return (
     <>
       <li
-        className="library-item"
+        className={`library-item ${currentRepertoire?._id === repertoire._id ? "active" : ""}`}
         onClick={() => onClick(repertoire)}
         onContextMenu={(e) => handleContextMenu(e, repertoire._id)}
       >
@@ -37,6 +44,8 @@ const Repertoire = ({ repertoire, onClick, repertoires, setRepertoires }) => {
           positionY={contextMenu.position.y}
           repertoires={repertoires}
           setRepertoires={setRepertoires}
+          currentRepertoire={currentRepertoire}
+          setCurrentRepertoire={setCurrentRepertoire}
         />
       </li>
     </>
