@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { BACKEND_URL } from "../../../config/serverConfig";
+import useAuthContext from "../../../hooks/useAuthContext";
 
 
 function AddSong() {
@@ -16,10 +17,16 @@ function AddSong() {
   const [showSuggestions, setShowSuggestions] = useState(true);
 
 
+  const { user } = useAuthContext();
+
 
   // Fetch artist function
   const fetchArtists = async (setArtists) => {
-    const result = await fetch(`${BACKEND_URL}/artists`);
+    const result = await fetch(`${BACKEND_URL}/artists`, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    });
     const data = await result.json();
 
     setArtists(data);
@@ -103,6 +110,7 @@ function AddSong() {
       const response = await fetch(`${BACKEND_URL}/songs`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(songData)

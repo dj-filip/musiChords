@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { BACKEND_URL } from "../../../config/serverConfig";
 import UploadBtn from "./UploadBtn";
+import useAuthContext from "../../../hooks/useAuthContext";
 
 
 function AddArtist() {
@@ -10,6 +11,8 @@ function AddArtist() {
   const inputFile = useRef()
 
   const [inputFileName, setInputFileName] = useState();
+
+  const { user } = useAuthContext();
 
   const formSubmitHandler = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -19,6 +22,9 @@ function AddArtist() {
     try {
       const response = await fetch(`${BACKEND_URL}/artists`, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        },
         body: formData,
       });
       const result = await response.json();

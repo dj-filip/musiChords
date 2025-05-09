@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import Main from './components/Main/Main';
-import Sidebar from './components/Sidebar/Sidebar';
+
 
 import { PlayingContext } from './contexts/PlayingContext';
 import Layout from './components/layout/Layout';
@@ -9,6 +8,7 @@ import AppRoutes from './routes/AppRoutes';
 
 import { BACKEND_URL } from './config/serverConfig';
 import { AuthContextProvider } from './contexts/AuthContext';
+import useAuthContext from './hooks/useAuthContext';
 
 
 let currentSongAudio;
@@ -22,65 +22,69 @@ const App = () => {
   const [isHiding, setIsHiding] = useState(false);
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const fetchData = async () => {
-      const result = await fetch(`${BACKEND_URL}/songs/getSongs`);
-      const data = await result.json();
+  //   const fetchData = async () => {
+  //     const result = await fetch(`${BACKEND_URL}/songs/getSongs`, {
+  //       headers: {
+  //         'Authorization': `Bearer ${user.token}`
+  //       }
+  //     });
+  //     const data = await result.json();
 
-      setSongs(data);
-    }
+  //     setSongs(data);
+  //   }
 
-    fetchData();
-
-
-    if (selectedSongTitle) {
-      currentSongAudio?.pause();
-      currentSongAudio = new Audio(selectedSongTitle);
-      // currentSongAudio.play();
-      setPlaying(false);
-      const filteredSong = songs.find(song => song.title === selectedSongTitle);
-      setSelectedSong({
-        title: filteredSong?.title,
-        artist: filteredSong?.artist,
-        originalKey: filteredSong?.originalKey,
-        intro: filteredSong?.intro,
-        lyricsChords: filteredSong?.lyricsChords,
-        coverImage: filteredSong?.coverImage,
-      });
-      ("SELECTED SONG CHORDS: " + selectedSong.title)
-    }
-
-  }, [selectedSongTitle]);
+  //   fetchData();
 
 
-  useEffect(() => {
-    if (selectedSong.title) {
-      console.log("SELECTED SONG TITLE: " + selectedSong.title);
-    }
-  }, [selectedSong]);
+  //   if (selectedSongTitle) {
+  //     currentSongAudio?.pause();
+  //     currentSongAudio = new Audio(selectedSongTitle);
+  //     // currentSongAudio.play();
+  //     setPlaying(false);
+  //     const filteredSong = songs.find(song => song.title === selectedSongTitle);
+  //     setSelectedSong({
+  //       title: filteredSong?.title,
+  //       artist: filteredSong?.artist,
+  //       originalKey: filteredSong?.originalKey,
+  //       intro: filteredSong?.intro,
+  //       lyricsChords: filteredSong?.lyricsChords,
+  //       coverImage: filteredSong?.coverImage,
+  //     });
+  //     ("SELECTED SONG CHORDS: " + selectedSong.title)
+  //   }
+
+  // }, [selectedSongTitle]);
+
+
+  // useEffect(() => {
+  //   if (selectedSong.title) {
+  //     console.log("SELECTED SONG TITLE: " + selectedSong.title);
+  //   }
+  // }, [selectedSong]);
 
 
 
-  const handleOnPlay = () => {
-    if (selectedSongTitle) {
-      setPlaying(playing => !playing);
-      if (!playing) {
-        currentSongAudio.play();
-      } else {
-        currentSongAudio.pause();
-      }
-    }
-  }
+  // const handleOnPlay = () => {
+  //   if (selectedSongTitle) {
+  //     setPlaying(playing => !playing);
+  //     if (!playing) {
+  //       currentSongAudio.play();
+  //     } else {
+  //       currentSongAudio.pause();
+  //     }
+  //   }
+  // }
 
   return (
     <Router>
       <AuthContextProvider>
-        <PlayingContext.Provider value={{ playing, setPlaying, handleOnPlay, selectedSongTitle, setSelectedSongTitle, songs, selectedSong, setSelectedSong, isHiding, setIsHiding }}>
+        {/* <PlayingContext.Provider value={{ playing, setPlaying, handleOnPlay, selectedSongTitle, setSelectedSongTitle, songs, selectedSong, setSelectedSong, isHiding, setIsHiding }}> */}
           <Layout>
             <AppRoutes />
           </Layout>
-        </PlayingContext.Provider>
+        {/* </PlayingContext.Provider> */}
       </AuthContextProvider>
     </Router>
   )

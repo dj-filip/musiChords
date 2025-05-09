@@ -1,41 +1,50 @@
-import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Song from "../../components/Songs/Song/Song";
+import LibrarySidebar from "../../components/Library/LibrarySidebar/LibrarySidebar";
 
-import Repertoire from "./Repertoires/Repertoire";
-import LibrarySong from "./LibrarySong/LibrarySong";
-
-import CreateRepertoire from "./Repertoires/CreateRepertoire/CreateRepertoire";
-
-import BackIcon from "../icons/BackIcon";
-import CreateRepertoireBtn from "./Repertoires/CreateRepertoire/CreateRepertoireBtn/CreateRepertoireBtn";
 
 import { BACKEND_URL } from '../../config/serverConfig';
 import useAuthContext from "../../hooks/useAuthContext";
+import LibraryMain from "./LibraryMain/LibraryMain";
 
 
-function Library({ songs, selectedSong, setSelectedSong }) {
+function Library() {
+
+  const [songs, setSongs] = useState([]);
+  const [selectedSong, setSelectedSong] = useState({});
+  const [isSongPanel, setIsSongPanel] = useState(false);
 
   const [repertoires, setRepertoires] = useState();
+  const [repertoireWithSongs, setRepertoireWithSongs] = useState();
   const [currentRepertoire, setCurrentRepertoire] = useState();
-  const [showPopupMenu, setShowPopupMenu] = useState(false);
 
   const [currentContextMenu, setCurrentContextMenu] = useState();
 
-  const [createRepertoireMenu, setCreateRepertoireMenu] = useState({
-    x: 0,
-    y: 0
-  });
 
-  const createRepertoireRef = useRef();
-
-  const imageUrl = `${import.meta.env.VITE_IMAGES_URL}\library-cover_rsaqgz`;
-
-  const [repertoireWithSongs, setRepertoireWithSongs] = useState();
 
   const { user } = useAuthContext();
 
+
+  const fetchSongs = async () => {
+    const response = await fetch(`${BACKEND_URL}/songs`, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    });
+    const data = await response.json();
+
+    console.log(data);
+    setSongs(data);
+  }
+
+
+
   const fetchRepertoires = async () => {
-    const response = await fetch(`${BACKEND_URL}/repertoires`);
+    const response = await fetch(`${BACKEND_URL}/repertoires`, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    });
     const data = await response.json();
 
     setRepertoires(data);
@@ -43,7 +52,11 @@ function Library({ songs, selectedSong, setSelectedSong }) {
 
 
   const fetchRepertoireWithSongs = async () => {
-    const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`);
+    const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    });
     const data = await response.json();
 
     // Sorting the `songs` array within each repertoire by the `order` field
@@ -62,6 +75,7 @@ function Library({ songs, selectedSong, setSelectedSong }) {
 
   useEffect(() => {
     if (user) {
+      fetchSongs();
       fetchRepertoires();
     }
   }, [user])
@@ -77,110 +91,53 @@ function Library({ songs, selectedSong, setSelectedSong }) {
   }
 
 
+
+  const handleSongPanel = ( open = false ) => {
+    setIsSongPanel((prev) => {
+      if (open && prev) return prev;
+      return open ? true : !prev
+    });
+    console.log(isSongPanel)
+    console.log(open)
+  }
+
   return (
     <>
-      <div className="artist-container">
-        <div
-          className="flex flex-column hero library-hero"
-          style={{
-            backgroundImage: `url(${imageUrl})`
-          }}
-        >
-          {currentRepertoire ? (
-            <>
-              <button className="circle-btn-wrap" onClick={() => setCurrentRepertoire(null)}>
-                <BackIcon />
-              </button>
-              <div className="library-heading-wrap flex just-between">
-                <h4 className="light-txt">{currentRepertoire.name}</h4>
-                {/* <CreateRepertoireBtn setShowPopupMenu={setShowPopupMenu} /> */}
-              </div>
-              <div className="artist-hero-overlay" />
-            </>
-          ) : (
-            <>
-              <NavLink to={-1} className="circle-btn-wrap">
-                <BackIcon />
-              </NavLink>
-              <div className="library-heading-wrap flex just-between">
-                <h4 className="light-txt">Library</h4>
-                <CreateRepertoireBtn
-                  showPopupMenu={showPopupMenu}
-                  setShowPopupMenu={setShowPopupMenu}
-                  createRepertoireMenu={createRepertoireMenu}
-                  setCreateRepertoireMenu={setCreateRepertoireMenu}
-                  createRepertoireRef={createRepertoireRef}
-                // onClick={onClick}
-                />
-                {showPopupMenu && (
-                  <CreateRepertoire
-                    setShowPopupMenu={setShowPopupMenu}
-                    positionX={createRepertoireMenu.x}
-                    positionY={createRepertoireMenu.y}
-                    createRepertoireMenu={createRepertoireMenu}
-                    fetchRepertoires={fetchRepertoires}
-                    createRepertoireRef={createRepertoireRef}
-                  />
-                )}
-              </div>
-              <div className="artist-hero-overlay" />
-            </>
-          )}
-        </div>
-
-        <div className="repertoire-wrap">
-          {currentRepertoire ?
-            (
-              repertoireWithSongs?.songs.map(({ song }) => {
-                return (
-                  <LibrarySong
-                    onClick={(e) => {
-                      if (e.target.tagName === 'BUTTON') return;
-                      setSelectedSong(song);
-                    }}
-                    key={song.id}
-                    song={song}
-                    selectedSong={selectedSong}
-                    setCurrentContextMenu={setCurrentContextMenu}
-                    currentContextMenu={currentContextMenu}
-                    setCurrentRepertoire={setCurrentRepertoire}
-                    currentRepertoire={currentRepertoire}
-                  />
-                )
-              })
-            ) : (
-              <>
-                {repertoires.map((repertoire) => (
-                  <Repertoire
-                    key={repertoire.id}
-                    repertoire={repertoire}
-                    onClick={handleSelectRepertoire}
-                    repertoires={repertoires}
-                    setRepertoires={setRepertoires}
-                  />
-                ))}
-
-                {songs.map((song) => (
-                  <LibrarySong
-                    onClick={(e) => {
-                      if (e.target.tagName === 'BUTTON') return;
-                      setSelectedSong(song);
-                    }}
-                    key={song.id}
-                    song={song}
-                    selectedSong={selectedSong}
-                    currentContextMenu={currentContextMenu}
-                    setCurrentContextMenu={setCurrentContextMenu}
-                    repertoires={repertoires}
-                  />
-                ))}
-              </>
-            )}
-        </div>
+      <div className="library-static-wrap">
+        <LibrarySidebar
+          songs={songs}
+          selectedSong={selectedSong}
+          setSelectedSong={setSelectedSong}
+          repertoires={repertoires}
+          setRepertoires={setRepertoires}
+          repertoireWithSongs={repertoireWithSongs}
+          setRepertoireWithSongs={setRepertoireWithSongs}
+          currentRepertoire={currentRepertoire}
+          setCurrentRepertoire={setCurrentRepertoire}
+          handleSelectRepertoire={handleSelectRepertoire}
+          fetchRepertoires={fetchRepertoires}
+        />
+        <LibraryMain
+          songs={songs}
+          selectedSong={selectedSong}
+          setSelectedSong={setSelectedSong}
+          repertoires={repertoires}
+          currentRepertoire={currentRepertoire}
+          repertoireWithSongs={repertoireWithSongs}
+          currentContextMenu={currentContextMenu}
+          setCurrentContextMenu={setCurrentContextMenu}
+          handleSongPanel={handleSongPanel}
+        />
       </div>
-
+      <Song
+        selectedSong={selectedSong}
+        setSelectedSong={setSelectedSong}
+        isSongPanel={isSongPanel}
+        handleSongPanel={handleSongPanel}
+      />
     </>
-  );
+  )
+
 }
 
 export default Library;

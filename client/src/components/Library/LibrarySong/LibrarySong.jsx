@@ -13,7 +13,8 @@ function LibrarySong({
   setCurrentContextMenu,
   currentRepertoire,
   setCurrentRepertoire,
-  repertoires
+  repertoires,
+  handleSongPanel
 }) {
 
   const [contextMenu, setContextMenu, contextMenuRef, handleContextMenu] = useContextMenu();
@@ -45,7 +46,10 @@ function LibrarySong({
         // className={`${selectedSongTitle == song.title && "active"}`}
         className={`library-item ${selectedSong._id === song._id ? 'active' : ''}`}
         data-song-id={song._id}
-        onClick={onClick}
+        onClick={(e) => {
+          onClick(e),
+          handleSongPanel(true)
+        }}
         onContextMenu={(e) => handleContextMenu(e, song._id)}
       >
         <img src={imageUrl} alt="cover-img" className="song-cover-img" />

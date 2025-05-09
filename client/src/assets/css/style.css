@@ -1,4 +1,6 @@
-/* Fonts */
+/* 
+MARK: FONTS  
+*/
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
@@ -59,7 +61,9 @@ a span {
   color: #B5B5B5;
 }
 
-/* ICONS */
+/* 
+MARK: ICONS 
+*/
 .play-icon {
   width: 0;
   height: 0;
@@ -80,6 +84,42 @@ a span {
   border-color: #f1f1f1;
   border-radius: 1px;
   transform: translateX(25%) rotate(135deg);
+}
+
+.arrow-right-icon {
+  height: 6px;
+  width: 6px;
+  background: none;
+  border-left: none;
+  border-top: none;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-color: #a3a3a3;
+  border-radius: 1px;
+  transform: rotate(-45deg);
+}
+
+.hide-panel-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #a3a3a3;
+  border-radius: 1px;
+}
+
+.hide-panel-icon > span:first-of-type {
+  width: 20%;
+  height: 100%;
+  border-right: 2px solid;
+  border-color: #a3a3a3;
+}
+
+.hide-panel-icon > span:last-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -141,7 +181,9 @@ a span {
 }
 
 
-/* BUTTONS */
+/* 
+MARK: BUTTONS 
+*/
 .circle-icon-btn {
   cursor: default;
 }
@@ -151,25 +193,40 @@ a span {
   pointer-events: visiblePainted;
 }
 
+.hide-panel-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 0;
+}
 
-/* SCROLLBAR */
-.song-wrap::-webkit-scrollbar, .img-boxes-wrap::-webkit-scrollbar, .add-page-container::-webkit-scrollbar {
+.hide-panel-btn:hover:not(:active) * {
+  border-color: #f1f1f1 !important;
+}
+
+
+/* 
+MARK: SCROLLBAR 
+*/
+.song-wrap::-webkit-scrollbar, .img-boxes-wrap::-webkit-scrollbar, .add-page-container::-webkit-scrollbar, .library-main-container::-webkit-scrollbar {
   width: 6px;
 }
 
-.song-wrap::-webkit-scrollbar-track, .img-boxes-wrap::-webkit-scrollbar-track, .add-page-container::-webkit-scrollbar-track {
+.song-wrap::-webkit-scrollbar-track, .img-boxes-wrap::-webkit-scrollbar-track, .add-page-container::-webkit-scrollbar-track, .library-main-container::-webkit-scrollbar-track {
   /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
   background-color: transparent;
   border-radius: 10px;
 }
 
-.song-wrap::-webkit-scrollbar-thumb, .img-boxes-wrap::-webkit-scrollbar-thumb, .add-page-container::-webkit-scrollbar-thumb {
+.song-wrap::-webkit-scrollbar-thumb, .img-boxes-wrap::-webkit-scrollbar-thumb, .add-page-container::-webkit-scrollbar-thumb, .library-main-container::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #3e3e3e89;
 }
 
 
-/* General */
+/* 
+MARK: GENERAL 
+*/
 * {
   margin: 0;
   box-sizing: border-box;
@@ -206,7 +263,9 @@ button {
   -webkit-transform: rotate(135deg);
 }
 
-/* LAYOUT */
+/* 
+MARK: LAYOUT 
+*/
 .layout {
   height: 100dvh;
   display: flex;
@@ -242,7 +301,9 @@ button {
 }
 
 
-/* MAIN */
+/* 
+MARK: MAIN 
+*/
 .main-wrap {
   height: 100%;
   display: flex;
@@ -251,7 +312,9 @@ button {
   overflow: hidden;
 }
 
-/* ARTISTS */
+/* 
+MARK: ARTISTS 
+*/
 .artists-container {
   width: 100%;
   display: flex;
@@ -307,7 +370,9 @@ button {
 }
 
 
-/* TOP BAR */
+/* 
+MARK: TOP BAR 
+*/
 div.top-bar {
   height: 70px;
   display: flex;
@@ -353,7 +418,9 @@ a.active .dashboard-btn svg path, .dashboard-btn.active svg path {
 }
 
 
-/* BOTTOM BAR */
+/* 
+MARK: BOTTOM BAR 
+*/
 div.bottom-bar {
   height: 80px;
   display: flex;
@@ -440,7 +507,9 @@ div.bottom-bar {
 }
 
 
-/* Music Bar, Music Player */
+/* 
+MARK: MUSIC BAR, MUSIC PLAYER 
+*/
 .music-bar {
   display: flex;
   align-items: center;
@@ -507,7 +576,9 @@ div.bottom-bar {
 }
 
 
-/* Sidebar */
+/* 
+MARK: SIDEBAR 
+*/
 .sidebar {
   width: 600px;
   height: 100%;
@@ -616,7 +687,9 @@ li:active,
 }
 
 
-/* Repertoire Context Menu */
+/* 
+MARK: REPERTOIRE CONTEXT MENU 
+*/
 .repertoire-context-menu {
   position: fixed;
   top: 90%;
@@ -664,9 +737,58 @@ li:active,
 } */
 
 
-/* Main  */
+/* 
+MARK: LIBRARY  
+*/
+.library-container {
+  display: flex;
+  width: 100%;
+}
+
+.library-main-container {
+  position: relative;
+  width: 100%;
+  padding: 20px 30px;
+  border-radius: 5px;
+  background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(33, 33, 33, .5) 80%, rgb(0, 0, 0, .7) 100%);
+  overflow: hidden scroll;
+}
+
+.library-static-wrap {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
 main,
 .song-container {
+  visibility: hidden;
+  position: static;
+  max-width: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+  border-radius: 5px;
+  background: linear-gradient(180deg,  rgba(0, 170, 255, 0.332),  #191919 180px);
+  background-attachment: local;
+  z-index: 999;
+  transform: translateX(100vw);
+  transition: all 1s ease;
+}
+
+main.song-selected,
+.song-container.song-selected {
+  visibility: visible;
+  position: static;
+  max-width: 100%;
+  width: 100%;
+  transform: translateX(10px);
+  transition: all 1s ease;
+}
+/* main,
+.song-container, .library-main-container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -674,7 +796,7 @@ main,
   background: linear-gradient(180deg,  rgba(0, 170, 255, 0.332),  #191919 180px);
   background-attachment: local;
   z-index: 2;
-}
+} */
 
 .song-wrap {
   width: 100%;
@@ -790,9 +912,11 @@ div.song div.transposition {
   transition: all .2s ease-in;
 }
 
-/* ARTIST */
+/* 
+MARK: artist 
+*/
 .artist-container {
-  width: 30%;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -839,7 +963,9 @@ div.song div.transposition {
   display: flex;
 }
 
-/* PLAYLIST */
+/* 
+MARK: repertoire
+*/
 .repertoire-wrap {
   height: 100%;
   padding: 30px 0;
@@ -927,7 +1053,9 @@ div.song div.transposition {
 }
 
 
-/* ADD SONG */
+/* 
+MARK: ADD SONG 
+*/
 .form-page-container {
   width: 100%;
   display: flex;
@@ -1007,9 +1135,9 @@ input[type=file] {
   width: 30%;
 }
 
-
-
-/* FORM */
+/* 
+MARK: FORM 
+*/
 .suggestions-input-wrap {
   position: relative;
   width: 100%;
@@ -1037,14 +1165,18 @@ input[type=file] {
 }
 
 
-/* AUTH */
+/* 
+MARK: AUTH 
+*/
 a.active .auth-btn {
   color: #1ea74e;
 }
 
 
 
-/* RESPONSIVE */
+/* 
+MARK: RESPONSIVE 
+*/
 @media screen and (max-width: 767px) {
 
   main,

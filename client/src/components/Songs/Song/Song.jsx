@@ -1,13 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { PlayingContext } from "../../../contexts/PlayingContext";
+import HidePanelIcon from "../../icons/HidePanelIcon";
 
 
-function Song({ selectedSong, setSelectedSong }) {
+function Song({ selectedSong, setSelectedSong, isSongPanel, handleSongPanel }) {
 
   const song = selectedSong;
 
 
-  const { isHiding, setIsHiding } = useContext(PlayingContext);
+  // const { isHiding, setIsHiding } = useContext(PlayingContext);
   const [processedLyricsChords, setProcessedLyricsChords] = useState('');
   const [processedIntro, setProcessedIntro] = useState('');
   const [transposeStep, setTransposeStep] = useState(0); // Step for chord transposition
@@ -170,11 +171,11 @@ function Song({ selectedSong, setSelectedSong }) {
 
   const onPointerDown = (e) => {
     downY = e.clientY;
-    ref.current.addEventListener('pointermove', onPointerMove);
+    // ref.current.addEventListener('pointermove', onPointerMove);
   }
 
   const onPointerUp = (e) => {
-    ref.current.removeEventListener('pointermove', onPointerMove);
+    // ref.current.removeEventListener('pointermove', onPointerMove);
   }
 
 
@@ -208,7 +209,18 @@ function Song({ selectedSong, setSelectedSong }) {
 
   return (
     processedLyricsChords ? (
-      <div className={`song-container ${isHiding === true ? "" : "song-selected"}`} ref={ref} onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+      <div
+        className={`song-container ${isSongPanel ? "song-selected" : "" }`}
+        ref={ref}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+      >
+        <button
+          className="hide-panel-btn"
+          onClick={() => handleSongPanel()}
+        >
+          <HidePanelIcon />
+        </button>
         <div className="song-wrap">
           <div className="song-selected-name">
             <h3 className="txt-center light-txt">{song.title}</h3>
