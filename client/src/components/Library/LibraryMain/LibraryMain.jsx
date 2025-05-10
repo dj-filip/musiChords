@@ -12,10 +12,17 @@ function LibraryMain({
   handleSongPanel,
   currentRepertoire,
   repertoireWithSongs,
-  artistWithSongs
+  artistWithSongs,
+  isLoading
 }) {
 
   console.log("LIBRARY ARTIST: ", artistWithSongs)
+
+  if (isLoading) {
+    return (
+      <div className="library-main-container"></div>
+    )
+  }
 
   return (
     <div className="library-main-container">

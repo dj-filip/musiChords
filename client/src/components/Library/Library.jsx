@@ -26,6 +26,9 @@ function Library() {
   
   const [currentContextMenu, setCurrentContextMenu] = useState();
 
+  const [isPageLoading, setIsPageLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const { user } = useAuthContext();
 
@@ -57,6 +60,7 @@ function Library() {
 
 
   const fetchRepertoireWithSongs = async () => {
+    setIsLoading(true);
     const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`, {
       headers: {
         'Authorization': `Bearer ${user.token}`
@@ -71,6 +75,7 @@ function Library() {
     };
 
     setRepertoireWithSongs(sortedData);
+    setIsLoading(false);
   }
 
 
@@ -81,6 +86,7 @@ function Library() {
 
 
     const fetchArtistWithSongs = async () => {
+      setIsPageLoading(true);
       const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
@@ -90,6 +96,8 @@ function Library() {
 
       console.log(data);
       setArtistWithSongs(data);
+      setIsPageLoading(false);
+
     }
 
 
@@ -127,7 +135,11 @@ function Library() {
     console.log(open)
   }
 
-  console.log(artistWithSongs);
+  if (isPageLoading) {
+    return (
+      <div></div>
+    )
+  }
 
   return (
     <>
@@ -158,6 +170,7 @@ function Library() {
           setCurrentContextMenu={setCurrentContextMenu}
           handleSongPanel={handleSongPanel}
           artistWithSongs={artistWithSongs}
+          isLoading={isLoading}
         />
       </div>
       <Song
