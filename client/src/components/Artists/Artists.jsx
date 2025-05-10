@@ -51,8 +51,9 @@ function Artists() {
           {artists.map((artist) => (
             <Link
               className="img-box"
-              to={`/artist/${artist._id}`}
+              to={`/library`}
               state={{
+                artistId: artist._id,
                 artistName: artist.name,
                 coverImage: artist.coverImage,
               }}

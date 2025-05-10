@@ -25,7 +25,9 @@ function LibrarySidebar({
   currentRepertoire,
   setCurrentRepertoire,
   handleSelectRepertoire,
-  fetchRepertoires
+  fetchRepertoires,
+  artistWithSongs,
+  setArtistWithSongs
 }) {
 
   const [showPopupMenu, setShowPopupMenu] = useState(false);
@@ -83,8 +85,11 @@ function LibrarySidebar({
 
         <div className="repertoire-wrap">
           <li
-            className={`library-item ${!currentRepertoire && "active"}`}
-            onClick={() => setCurrentRepertoire(null)}
+            className={`library-item ${!currentRepertoire && !artistWithSongs && "active"}`}
+            onClick={() => {
+              setCurrentRepertoire(null)
+              setArtistWithSongs(null)
+            }}
           >
             <div className="repertoire-icon-wrap">
               <RepertoireIcon />

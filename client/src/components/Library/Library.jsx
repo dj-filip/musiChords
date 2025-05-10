@@ -6,9 +6,12 @@ import LibrarySidebar from "../../components/Library/LibrarySidebar/LibrarySideb
 import { BACKEND_URL } from '../../config/serverConfig';
 import useAuthContext from "../../hooks/useAuthContext";
 import LibraryMain from "./LibraryMain/LibraryMain";
+import { useLocation } from "react-router-dom";
 
 
 function Library() {
+
+  const location = useLocation();
 
   const [songs, setSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState({});
@@ -18,8 +21,10 @@ function Library() {
   const [repertoireWithSongs, setRepertoireWithSongs] = useState();
   const [currentRepertoire, setCurrentRepertoire] = useState();
 
+  const [artistWithSongs, setArtistWithSongs] = useState();
+  const { artistId } = location.state || {};
+  
   const [currentContextMenu, setCurrentContextMenu] = useState();
-
 
 
   const { user } = useAuthContext();
@@ -71,7 +76,23 @@ function Library() {
 
   const handleSelectRepertoire = (selectedRepertoire) => {
     setCurrentRepertoire(selectedRepertoire);
+    setArtistWithSongs(null);
   }
+
+
+    const fetchArtistWithSongs = async () => {
+      const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      const data = await response.json();
+
+      console.log(data);
+      setArtistWithSongs(data);
+    }
+
+
 
   useEffect(() => {
     if (user) {
@@ -85,6 +106,11 @@ function Library() {
     if (user && currentRepertoire)
       fetchRepertoireWithSongs();
   }, [user, currentRepertoire])
+
+  useEffect(() => {
+    if (user && artistId)
+      fetchArtistWithSongs();
+  }, [user, artistId])
 
   if (!repertoires) {
     return;
@@ -101,6 +127,8 @@ function Library() {
     console.log(open)
   }
 
+  console.log(artistWithSongs);
+
   return (
     <>
       <div className="library-static-wrap">
@@ -116,6 +144,8 @@ function Library() {
           setCurrentRepertoire={setCurrentRepertoire}
           handleSelectRepertoire={handleSelectRepertoire}
           fetchRepertoires={fetchRepertoires}
+          artistWithSongs={artistWithSongs}
+          setArtistWithSongs={setArtistWithSongs}
         />
         <LibraryMain
           songs={songs}
@@ -127,6 +157,7 @@ function Library() {
           currentContextMenu={currentContextMenu}
           setCurrentContextMenu={setCurrentContextMenu}
           handleSongPanel={handleSongPanel}
+          artistWithSongs={artistWithSongs}
         />
       </div>
       <Song

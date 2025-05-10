@@ -754,6 +754,10 @@ MARK: LIBRARY
   overflow: hidden scroll;
 }
 
+.library-main-container h1 {
+  margin-bottom: 20px;
+}
+
 .library-static-wrap {
   width: 100%;
   display: flex;

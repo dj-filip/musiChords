@@ -11,7 +11,6 @@ import useAuthContext from "../../hooks/useAuthContext";
 
 function ArtistPage() {
 
-
   const { artistId } = useParams();
   const location = useLocation();
   const { artistName, coverImage } = location.state;
