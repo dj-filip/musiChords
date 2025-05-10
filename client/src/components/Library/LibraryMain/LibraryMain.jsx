@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import Song from "../../Songs/Song/Song";
 import LibrarySong from "../LibrarySong/LibrarySong";
 
@@ -16,7 +17,25 @@ function LibraryMain({
   isLoading
 }) {
 
-  console.log("LIBRARY ARTIST: ", artistWithSongs)
+  const libraryMainRef = useRef();
+
+  const [isScroled, setIsScroled] = useState(false);
+
+  useEffect(() => {
+    const libraryMain = libraryMainRef.current;
+
+    const handleScroll = () => {
+      setIsScroled(libraryMain.scrollTop > 1);
+      console.log(libraryMain.scrollTop)
+    }
+
+    libraryMain.addEventListener('scroll', handleScroll);
+
+    return () => {
+      libraryMain.removeEventListener('scroll', handleScroll);
+      console.log("UNMONUNTED")
+    }
+  }, []);
 
   if (isLoading) {
     return (
@@ -24,14 +43,19 @@ function LibraryMain({
     )
   }
 
+  console.log(isScroled);
+
   return (
-    <div className="library-main-container">
+    <div
+      ref={libraryMainRef}
+      className="library-main-container"
+    >
 
       {artistWithSongs ?
         (
           <>
-            <h1>{artistWithSongs.name}</h1>
-            {artistWithSongs?.songs.map(( song ) => (
+            <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>{artistWithSongs.name}</h1></div>
+            {artistWithSongs?.songs.map((song) => (
 
               <LibrarySong
                 onClick={(e) => {
@@ -52,7 +76,7 @@ function LibraryMain({
         ) : currentRepertoire ?
           (
             <>
-              <h1>{currentRepertoire.name}</h1>
+              <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>{currentRepertoire.name}</h1></div>
               {repertoireWithSongs?.songs.map(({ song }) => (
 
                 <LibrarySong
@@ -73,7 +97,7 @@ function LibraryMain({
             </>
           ) : (
             <>
-              <h1>All Songs</h1>
+              <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>All Songs</h1></div>
               {songs.map((song) => (
                 <LibrarySong
                   onClick={(e) => {

@@ -748,7 +748,7 @@ MARK: LIBRARY
 .library-main-container {
   position: relative;
   width: 100%;
-  padding: 20px 30px;
+  padding: 0 20px 30px;
   border-radius: 5px;
   background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(33, 33, 33, .5) 80%, rgb(0, 0, 0, .7) 100%);
   overflow: hidden scroll;
@@ -756,6 +756,20 @@ MARK: LIBRARY
 
 .library-main-container h1 {
   margin-bottom: 20px;
+}
+
+.library-main-header {
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+  z-index: 999;
+  background-color: transparent;
+  transition: background-color .3s ease-out;
+}
+
+.library-main-header-sticky {
+  background-color: #040404;
+  transition: none;
 }
 
 .library-static-wrap {
