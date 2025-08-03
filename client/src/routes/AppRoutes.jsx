@@ -5,7 +5,7 @@ import ArtistsPage from "../pages/ArtistsPage/ArtistsPage";
 import AddArtistPage from "../pages/AddArtistPage/AddArtistPage";
 import ArtistPage from "../pages/ArtistPage/ArtistPage";
 import DashboardPage from "../pages/AddArtistPage/DashboardPage/Dashboard";
-import SignupPage from "../pages/AuthenticationPages/SignUpPage/SignUpPage";
+import SignupPage from "../pages/AuthenticationPages/SignupPage/SignupPage";
 import LoginPage from "../pages/AuthenticationPages/LoginPage/LoginPage.jsx";
 import ProtectedRoute from "./ProtectedRoute";
 
