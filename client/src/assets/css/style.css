@@ -109,14 +109,14 @@ MARK: ICONS
   border-radius: 1px;
 }
 
-.hide-panel-icon > span:first-of-type {
+.hide-panel-icon>span:first-of-type {
   width: 20%;
   height: 100%;
   border-right: 2px solid;
   border-color: #a3a3a3;
 }
 
-.hide-panel-icon > span:last-of-type {
+.hide-panel-icon>span:last-of-type {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,20 +208,34 @@ MARK: BUTTONS
 /* 
 MARK: SCROLLBAR 
 */
-.song-wrap::-webkit-scrollbar, .img-boxes-wrap::-webkit-scrollbar, .add-page-container::-webkit-scrollbar, .library-main-container::-webkit-scrollbar {
+.song-wrap::-webkit-scrollbar,
+.img-boxes-wrap::-webkit-scrollbar,
+.add-page-container::-webkit-scrollbar,
+.library-main-container::-webkit-scrollbar {
   width: 6px;
 }
 
-.song-wrap::-webkit-scrollbar-track, .img-boxes-wrap::-webkit-scrollbar-track, .add-page-container::-webkit-scrollbar-track, .library-main-container::-webkit-scrollbar-track {
+.song-wrap::-webkit-scrollbar-track,
+.img-boxes-wrap::-webkit-scrollbar-track,
+.add-page-container::-webkit-scrollbar-track,
+.library-main-container::-webkit-scrollbar-track {
   /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
   background-color: transparent;
   border-radius: 10px;
 }
 
-.song-wrap::-webkit-scrollbar-thumb, .img-boxes-wrap::-webkit-scrollbar-thumb, .add-page-container::-webkit-scrollbar-thumb, .library-main-container::-webkit-scrollbar-thumb {
+/* .library-main-container::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(42, 123, 155, 1) 80px, rgba(223, 210, 96, 0) 80px)
+} */
+
+.song-wrap::-webkit-scrollbar-thumb,
+.img-boxes-wrap::-webkit-scrollbar-thumb,
+.add-page-container::-webkit-scrollbar-thumb,
+.library-main-container::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #3e3e3e89;
 }
+
 
 
 /* 
@@ -326,7 +340,7 @@ MARK: ARTISTS
   width: 1200px;
   display: flex;
   justify-content: center;
-  background: linear-gradient(180deg,  rgba(0, 170, 255, 0.332),  #191919 180px);
+  background: linear-gradient(180deg, rgba(0, 170, 255, 0.332), #191919 180px);
   border-radius: 5px;
   overflow: hidden;
 }
@@ -402,17 +416,21 @@ div.top-bar {
   transition: all .2s ease-in;
 }
 
-a.active .dashboard-btn:active, .dashboard-btn:active, .dashboard-btn.active:active {
+a.active .dashboard-btn:active,
+.dashboard-btn:active,
+.dashboard-btn.active:active {
   background-color: #000000;
   transition: all .2s ease-in;
 }
 
-a.active .dashboard-btn, .dashboard-btn.active {
+a.active .dashboard-btn,
+.dashboard-btn.active {
   background-color: #282828;
   transition: all .2s ease-in;
 }
 
-a.active .dashboard-btn svg path, .dashboard-btn.active svg path {
+a.active .dashboard-btn svg path,
+.dashboard-btn.active svg path {
   stroke: #21BE57;
   transition: all .2s ease-in;
 }
@@ -428,31 +446,32 @@ div.bottom-bar {
   justify-content: space-evenly;
 }
 
-.bottom-bar > * {
+.bottom-bar>* {
   padding: 5px 15px;
   border-radius: 5px;
   transition: all .2s ease-out;
 }
 
-.bottom-bar > *:hover {
+.bottom-bar>*:hover {
   background-color: #1b1b1b;
   transition: all .2s ease-in;
 }
 
-.bottom-bar > *:active, .bottom-bar > *.active:active {
+.bottom-bar>*:active,
+.bottom-bar>*.active:active {
   background-color: #131313;
   transition: all .2s ease-in;
 }
 
-.bottom-bar > *.active {
+.bottom-bar>*.active {
   background-color: #1b1b1b;
 }
 
-.bottom-bar > *.active span {
+.bottom-bar>*.active span {
   color: #21BE57;
 }
 
-.bottom-bar > *:not(button).active svg path {
+.bottom-bar>*:not(button).active svg path {
   fill: #21BE57;
 }
 
@@ -599,7 +618,7 @@ li {
 
 .circle-btn-wrap:hover:not(:active) {
   background-color: #00000060;
-  transform:  scale(1.1);
+  transform: scale(1.1);
 }
 
 .circle-btn-wrap:hover:not(:active) i {
@@ -748,7 +767,6 @@ MARK: LIBRARY
 .library-main-container {
   position: relative;
   width: 100%;
-  padding: 0 20px 30px;
   border-radius: 5px;
   background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(33, 33, 33, .5) 80%, rgb(0, 0, 0, .7) 100%);
   overflow: hidden scroll;
@@ -761,7 +779,7 @@ MARK: LIBRARY
 .library-main-header {
   position: sticky;
   top: 0;
-  padding: 10px 0;
+  padding: 10px 20px;
   z-index: 999;
   background-color: transparent;
   transition: background-color .3s ease-out;
@@ -778,6 +796,10 @@ MARK: LIBRARY
   gap: 10px;
 }
 
+.library-main__songs-wrap {
+  padding: 0 20px 30px;
+}
+
 main,
 .song-container {
   visibility: hidden;
@@ -789,7 +811,7 @@ main,
   justify-content: center;
   padding-bottom: 50px;
   border-radius: 5px;
-  background: linear-gradient(180deg,  rgba(0, 170, 255, 0.332),  #191919 180px);
+  background: linear-gradient(180deg, rgba(0, 170, 255, 0.332), #191919 180px);
   background-attachment: local;
   z-index: 999;
   transform: translateX(100vw);
@@ -805,6 +827,7 @@ main.song-selected,
   transform: translateX(10px);
   transition: all 1s ease;
 }
+
 /* main,
 .song-container, .library-main-container {
   width: 100%;
@@ -843,7 +866,7 @@ main.song-selected,
   margin-bottom: 15px;
 }
 
-p:not(.song-line) + .song-line {
+p:not(.song-line)+.song-line {
   margin-top: 15px;
 }
 
@@ -1130,7 +1153,7 @@ input[type=submit]:hover {
   transition: background-color .2s ease-in;
 }
 
-input[type=submit]:active{
+input[type=submit]:active {
   background-color: #1ea74e;
   transition: background-color .2s ease-in;
 }

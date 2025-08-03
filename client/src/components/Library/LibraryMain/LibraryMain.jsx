@@ -55,23 +55,25 @@ function LibraryMain({
         (
           <>
             <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>{artistWithSongs.name}</h1></div>
-            {artistWithSongs?.songs.map((song) => (
+            <div className="library-main__songs-wrap">
+              {artistWithSongs?.songs.map((song) => (
 
-              <LibrarySong
-                onClick={(e) => {
-                  if (e.target.tagName === 'BUTTON') return;
-                  setSelectedSong(song);
-                }}
-                key={song.id}
-                song={song}
-                selectedSong={selectedSong}
-                currentContextMenu={currentContextMenu}
-                setCurrentContextMenu={setCurrentContextMenu}
-                repertoires={repertoires}
-                handleSongPanel={handleSongPanel}
-              />
-            )
-            )}
+                <LibrarySong
+                  onClick={(e) => {
+                    if (e.target.tagName === 'BUTTON') return;
+                    setSelectedSong(song);
+                  }}
+                  key={song.id}
+                  song={song}
+                  selectedSong={selectedSong}
+                  currentContextMenu={currentContextMenu}
+                  setCurrentContextMenu={setCurrentContextMenu}
+                  repertoires={repertoires}
+                  handleSongPanel={handleSongPanel}
+                />
+              )
+              )}
+            </div>
           </>
         ) : currentRepertoire ?
           (
@@ -98,21 +100,23 @@ function LibraryMain({
           ) : (
             <>
               <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>All Songs</h1></div>
-              {songs.map((song) => (
-                <LibrarySong
-                  onClick={(e) => {
-                    if (e.target.tagName === 'BUTTON') return;
-                    setSelectedSong(song);
-                  }}
-                  key={song.id}
-                  song={song}
-                  selectedSong={selectedSong}
-                  currentContextMenu={currentContextMenu}
-                  setCurrentContextMenu={setCurrentContextMenu}
-                  repertoires={repertoires}
-                  handleSongPanel={handleSongPanel}
-                />
-              ))}
+              <div className="library-main__songs-wrap">
+                {songs.map((song) => (
+                  <LibrarySong
+                    onClick={(e) => {
+                      if (e.target.tagName === 'BUTTON') return;
+                      setSelectedSong(song);
+                    }}
+                    key={song.id}
+                    song={song}
+                    selectedSong={selectedSong}
+                    currentContextMenu={currentContextMenu}
+                    setCurrentContextMenu={setCurrentContextMenu}
+                    repertoires={repertoires}
+                    handleSongPanel={handleSongPanel}
+                  />
+                ))}
+              </div>
             </>
           )
       }
