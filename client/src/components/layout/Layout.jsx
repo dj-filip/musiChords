@@ -1,6 +1,6 @@
 import BottomBar from "../BottomBar/BottomBar";
 import useAuthContext from "../../hooks/useAuthContext";
-import BottomBar from "../Topbar/Topbar";
+import Topbar from "../Topbar/Topbar";
 
 
 const Layout = ({ children }) => {
