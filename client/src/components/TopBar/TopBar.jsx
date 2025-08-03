@@ -6,7 +6,7 @@ import useLogout from "../../hooks/useLogout";
 import useAuthContext from "../../hooks/useAuthContext";
 
 
-function TopBar() {
+function Topbar() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
@@ -44,4 +44,4 @@ function TopBar() {
   )
 }
 
-export default TopBar;
+export default Topbar;

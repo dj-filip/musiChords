@@ -1,8 +1,6 @@
-import MusicPlayer from "../MusicBar/MusicPlayer/MusicPlayer";
-import MusicBar from "../MusicBar/MusicBar";
 import BottomBar from "../BottomBar/BottomBar";
-import TopBar from "../Topbar/TopBar";
 import useAuthContext from "../../hooks/useAuthContext";
+import Topbar from "../Topbar/TopBar";
 
 
 const Layout = ({ children }) => {
@@ -13,7 +11,7 @@ const Layout = ({ children }) => {
     <>
       <div className="layout">
         {user && (
-          <TopBar />
+          <Topbar />
         )}
         <div className="main-wrap">
           {children}
