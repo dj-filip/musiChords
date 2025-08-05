@@ -10,8 +10,7 @@ function Artists() {
 
   const [artists, setArtists] = useState();
 
-  // const { user } = useAuthContext();
-  const { user } = 'asd';
+  const { user } = useAuthContext();
 
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function Artists() {
       setArtists(data);
     }
 
-    if(user) {
+    if(!user) {
       fetchArtists();
     }
 
