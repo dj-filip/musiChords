@@ -10,7 +10,9 @@ function Artists() {
 
   const [artists, setArtists] = useState();
 
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const { user } = 'asd';
+
 
   useEffect(() => {
     const fetchArtists = async () => {
