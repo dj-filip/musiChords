@@ -16,16 +16,16 @@ function Artists() {
   useEffect(() => {
     const fetchArtists = async () => {
       const result = await fetch(`${BACKEND_URL}/artists`, {
-        // headers: {
-        //   'Authorization': `Bearer ${user.token}`
-        // }
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
       });
       const data = await result.json();
 
       setArtists(data);
     }
 
-    if(!user) {
+    if(user) {
       fetchArtists();
     }
 

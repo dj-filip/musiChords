@@ -15,7 +15,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/sign-up" element={<SignupPage />} />
       <Route path="/log-in" element={<LoginPage />} />
-      {/* <Route element={<ProtectedRoute />}> */}
+      <Route element={<ProtectedRoute />}>
         <Route path="/">
           <Route index element={<ArtistsPage />} />
           <Route path="/artist/:artistId" element={<ArtistPage />} />
@@ -24,7 +24,7 @@ function AppRoutes() {
         <Route path="/add-artist" element={<AddArtistPage />} />
         <Route path="/library" element={<LibraryPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-      {/* </Route> */}
+      </Route>
     </Routes>
   )
 }
