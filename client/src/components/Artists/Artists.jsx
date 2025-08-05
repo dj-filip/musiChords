@@ -40,7 +40,7 @@ function Artists() {
 
   if (!artists) {
     return (
-      <div></div>
+      <div>NEMA AL RADI</div>
     )
   }
 
