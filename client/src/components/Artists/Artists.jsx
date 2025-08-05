@@ -10,14 +10,14 @@ function Artists() {
 
   const [artists, setArtists] = useState();
 
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchArtists = async () => {
       const result = await fetch(`${BACKEND_URL}/artists`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
+        // headers: {
+        //   'Authorization': `Bearer ${user.token}`
+        // }
       });
       const data = await result.json();
 
