@@ -48,9 +48,12 @@ function LibrarySong({
         data-song-id={song._id}
         onClick={(e) => {
           onClick(e),
-          handleSongPanel(true)
+            handleSongPanel(true)
         }}
-        onContextMenu={(e) => handleContextMenu(e, song._id)}
+        onContextMenu={(e) => {
+            e.preventDefault(),
+            handleContextMenu(e, song._id)
+        }}
       >
         <img src={imageUrl} alt="cover-img" className="song-cover-img" />
         <div className="flex-1">

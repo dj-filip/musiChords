@@ -15,19 +15,22 @@ function Artists() {
 
   useEffect(() => {
     const fetchArtists = async () => {
-      const result = await fetch(`${BACKEND_URL}/artists`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
+      // const result = await fetch(`${BACKEND_URL}/artists`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${user.token}`
+      //   }
+      // });
+      const result = await fetch(`${BACKEND_URL}/artists`);
       const data = await result.json();
 
       setArtists(data);
     }
 
-    if(user) {
-      fetchArtists();
-    }
+    // if (user) {
+    //   fetchArtists();
+    // }
+
+    fetchArtists();
 
 
     // const fetchArtist = async () => {
@@ -41,14 +44,14 @@ function Artists() {
 
   if (!artists) {
     return (
-      <div>NEMA AL RADI</div>
+      <div>Loading</div>
     )
   }
 
   return (
     <div className="artists-container">
       <div className="img-boxes-container">
-        <div className="flex img-boxes-wrap">
+        <div className="grid img-boxes-wrap">
           {artists.map((artist) => (
             <Link
               className="img-box"
@@ -63,7 +66,7 @@ function Artists() {
             </Link>
           ))}
           {(() => {
-            const emptyDivs = 4 - artists.length % 4;
+            const emptyDivs = 5 - artists.length % 5;
             const ghostDivs = [];
             for (let i = 0; i < emptyDivs; i++) {
               ghostDivs.push(<div className="img-box"></div>);

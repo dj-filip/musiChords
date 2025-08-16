@@ -23,7 +23,7 @@ function Library() {
 
   const [artistWithSongs, setArtistWithSongs] = useState();
   const { artistId } = location.state || {};
-  
+
   const [currentContextMenu, setCurrentContextMenu] = useState();
 
   const [isPageLoading, setIsPageLoading] = useState(false);
@@ -34,11 +34,12 @@ function Library() {
 
 
   const fetchSongs = async () => {
-    const response = await fetch(`${BACKEND_URL}/songs`, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
+    // const response = await fetch(`${BACKEND_URL}/songs`, {
+    //   headers: {
+    //     'Authorization': `Bearer ${user.token}`
+    //   }
+    // });
+    const response = await fetch(`${BACKEND_URL}/songs`);
     const data = await response.json();
 
     console.log(data);
@@ -48,11 +49,12 @@ function Library() {
 
 
   const fetchRepertoires = async () => {
-    const response = await fetch(`${BACKEND_URL}/repertoires`, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
+    // const response = await fetch(`${BACKEND_URL}/repertoires`, {
+    //   headers: {
+    //     'Authorization': `Bearer ${user.token}`
+    //   }
+    // });
+    const response = await fetch(`${BACKEND_URL}/repertoires`);
     const data = await response.json();
 
     setRepertoires(data);
@@ -61,11 +63,12 @@ function Library() {
 
   const fetchRepertoireWithSongs = async () => {
     setIsLoading(true);
-    const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
+    //   const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`, {
+    //     headers: {
+    //       'Authorization': `Bearer ${user.token}`
+    //     }
+    // });
+    const response = await fetch(`${BACKEND_URL}/repertoires/${currentRepertoire._id}/songs`);
     const data = await response.json();
 
     // Sorting the `songs` array within each repertoire by the `order` field
@@ -85,40 +88,59 @@ function Library() {
   }
 
 
-    const fetchArtistWithSongs = async () => {
-      setIsPageLoading(true);
-      const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
-      const data = await response.json();
+  const fetchArtistWithSongs = async () => {
+    setIsPageLoading(true);
+    // const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`, {
+    //   headers: {
+    //     'Authorization': `Bearer ${user.token}`
+    //   }
+    // });
+    const response = await fetch(`${BACKEND_URL}/artists/${artistId}/songs`);
+    const data = await response.json();
 
-      console.log(data);
-      setArtistWithSongs(data);
-      setIsPageLoading(false);
+    console.log(data);
+    setArtistWithSongs(data);
+    setIsPageLoading(false);
 
-    }
+  }
 
 
+
+  // useEffect(() => {
+  //   if (user) {
+  //     fetchSongs();
+  //     fetchRepertoires();
+  //   }
+  // }, [user])
 
   useEffect(() => {
-    if (user) {
-      fetchSongs();
-      fetchRepertoires();
-    }
-  }, [user])
+    fetchSongs();
+    fetchRepertoires();
+  }, []);
 
 
-  useEffect(() => {
-    if (user && currentRepertoire)
+
+
+  // useEffect(() => {
+  //   if (user && currentRepertoire)
+  //     fetchRepertoireWithSongs();
+  // }, [user, currentRepertoire])
+
+    useEffect(() => {
+    if (currentRepertoire)
       fetchRepertoireWithSongs();
-  }, [user, currentRepertoire])
+  }, [currentRepertoire])
 
-  useEffect(() => {
-    if (user && artistId)
+
+  // useEffect(() => {
+  //   if (user && artistId)
+  //     fetchArtistWithSongs();
+  // }, [user, artistId])
+
+   useEffect(() => {
+    if (artistId)
       fetchArtistWithSongs();
-  }, [user, artistId])
+  }, [artistId])
 
   if (!repertoires) {
     return;
@@ -126,7 +148,7 @@ function Library() {
 
 
 
-  const handleSongPanel = ( open = false ) => {
+  const handleSongPanel = (open = false) => {
     setIsSongPanel((prev) => {
       if (open && prev) return prev;
       return open ? true : !prev

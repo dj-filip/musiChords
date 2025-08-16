@@ -6,7 +6,7 @@ const { addArtist, getArtists, getArtist, getArtistWithSongs } = require('../con
 const requireAuth = require('../middlewares/requireAuth');
 
 
-router.use(requireAuth);
+// router.use(requireAuth);
 
 router.get('/', getArtists);
 router.post('/', artistUpload.single('coverImage'), addArtist);

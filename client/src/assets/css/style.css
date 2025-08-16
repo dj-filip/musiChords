@@ -315,6 +315,11 @@ MARK: LAYOUT
 }
 
 
+.grid {
+  display: grid;
+}
+
+
 /* 
 MARK: MAIN 
 */
@@ -345,11 +350,24 @@ MARK: ARTISTS
   overflow: hidden;
 }
 
-.img-boxes-wrap {
+/* .img-boxes-wrap {
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: flex-start;
   gap: 10px;
+  margin: 0 auto;
+  padding: 50px;
+  background-attachment: local;
+  overflow: hidden scroll;
+} */
+
+
+.img-boxes-wrap {
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* justify-content: space-between;
+  align-content: flex-start; */
+  gap: 20px;
   margin: 0 auto;
   padding: 50px;
   background-attachment: local;

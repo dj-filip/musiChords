@@ -10,15 +10,17 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className="layout">
-        {user && (
+        {/* {user && (
           <Topbar />
-        )}
+        )} */}
+        <Topbar />
         <div className="main-wrap">
           {children}
         </div>
-        {user && (
+        <BottomBar />
+        {/* {user && (
           <BottomBar />
-        )}
+        )} */}
         {/* <MusicBar>
           <MusicPlayer />
         </MusicBar> */}

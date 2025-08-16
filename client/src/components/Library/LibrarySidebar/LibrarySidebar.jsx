@@ -90,6 +90,7 @@ function LibrarySidebar({
               setCurrentRepertoire(null)
               setArtistWithSongs(null)
             }}
+            onContextMenu={(e) => e.preventDefault()}
           >
             <div className="repertoire-icon-wrap">
               <RepertoireIcon />
