@@ -1,4 +1,4 @@
-import Artists from "../../components/Artists/Artists";
+import Artists from "../../features/Artists/Artists";
 
 
 function ArtistsPage() {

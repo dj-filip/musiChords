@@ -1,4 +1,4 @@
-import UploadIcon from "../../icons/UploadIcon";
+import UploadIcon from "../../../components/icons/UploadIcon";
 
 
 function UploadBtn({ inputFile, inputFileName }) {

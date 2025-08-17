@@ -1,18 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import Repertoire from "../Repertoires/Repertoire";
-import LibrarySong from "../LibrarySong/LibrarySong";
 
 import CreateRepertoire from "../Repertoires/CreateRepertoire/CreateRepertoire";
-
-import BackIcon from "../../icons/BackIcon";
 import CreateRepertoireBtn from "../Repertoires/CreateRepertoire/CreateRepertoireBtn/CreateRepertoireBtn";
 
-import { BACKEND_URL } from '../../../config/serverConfig';
 import useAuthContext from "../../../hooks/useAuthContext";
-import RepertoireIcon from "../../icons/RepertoireIcon";
-
+import { useBreakpoints } from "../../../hooks/useBreakpoints";
+import BackIcon from "../../../components/icons/BackIcon";
+import RepertoireIcon from "../../../components/icons/RepertoireIcon";
 
 function LibrarySidebar({
   songs,
@@ -24,6 +21,7 @@ function LibrarySidebar({
   setRepertoireWithSongs,
   currentRepertoire,
   setCurrentRepertoire,
+  handleLibraryMainPanel,
   handleSelectRepertoire,
   fetchRepertoires,
   artistWithSongs,
@@ -44,6 +42,8 @@ function LibrarySidebar({
 
 
   const { user } = useAuthContext();
+
+  const { isMobile } = useBreakpoints();
 
 
 
@@ -83,33 +83,39 @@ function LibrarySidebar({
           <div className="artist-hero-overlay" />
         </div>
 
+
         <div className="repertoire-wrap">
-          <li
-            className={`library-item ${!currentRepertoire && !artistWithSongs && "active"}`}
-            onClick={() => {
-              setCurrentRepertoire(null)
-              setArtistWithSongs(null)
-            }}
-            onContextMenu={(e) => e.preventDefault()}
-          >
-            <div className="repertoire-icon-wrap">
-              <RepertoireIcon />
-            </div>
-            <div className="flex-1">
-              <h5 className="light-txt">All Songs</h5>
-            </div>
-          </li>
-          {repertoires.map((repertoire) => (
-            <Repertoire
-              key={repertoire.id}
-              repertoire={repertoire}
-              onClick={handleSelectRepertoire}
-              repertoires={repertoires}
-              setRepertoires={setRepertoires}
-              currentRepertoire={currentRepertoire}
-              setCurrentRepertoire={setCurrentRepertoire}
-            />
-          ))}
+          <ul>
+            <li
+              className={`library-item ${!currentRepertoire && !artistWithSongs && !isMobile && "active"}`}
+              onClick={() => {
+                setCurrentRepertoire(null)
+                setArtistWithSongs(null)
+                handleLibraryMainPanel(true)
+              }}
+              onContextMenu={(e) => e.preventDefault()}
+            >
+              <div className="repertoire-icon-wrap">
+                <RepertoireIcon />
+              </div>
+              <div className="flex-1">
+                <h5 className="light-txt">All Songs</h5>
+              </div>
+            </li>
+
+            {repertoires.map((repertoire) => (
+              <Repertoire
+                key={repertoire.id}
+                repertoire={repertoire}
+                onClick={handleSelectRepertoire}
+                repertoires={repertoires}
+                setRepertoires={setRepertoires}
+                currentRepertoire={currentRepertoire}
+                setCurrentRepertoire={setCurrentRepertoire}
+                handleLibraryMainPanel={handleLibraryMainPanel}
+              />
+            ))}
+          </ul>
         </div>
       </div>
 

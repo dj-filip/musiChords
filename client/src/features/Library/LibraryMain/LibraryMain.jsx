@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Song from "../../Songs/Song/Song";
 import LibrarySong from "../LibrarySong/LibrarySong";
 
 
@@ -12,6 +11,8 @@ function LibraryMain({
   setCurrentContextMenu,
   handleSongPanel,
   currentRepertoire,
+  setCurrentRepertoire,
+  handleLibraryMainPanel,
   repertoireWithSongs,
   artistWithSongs,
   isLoading
@@ -54,7 +55,9 @@ function LibraryMain({
       {artistWithSongs ?
         (
           <>
-            <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>{artistWithSongs.name}</h1></div>
+            <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}>
+              <h1>{artistWithSongs.name}</h1>
+            </div>
             <div className="library-main__songs-wrap">
               {artistWithSongs?.songs.map((song) => (
 
@@ -75,12 +78,20 @@ function LibraryMain({
               )}
             </div>
           </>
-        ) : currentRepertoire ?
-          (
-            <>
-              <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>{currentRepertoire.name}</h1></div>
+        ) : currentRepertoire ? (
+          <>
+            <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}>
+              <button className="back-btn-wrap" onClick={() => {
+                handleLibraryMainPanel(false),
+                  setCurrentRepertoire(null)
+              }
+              }>
+                <div className="arrow-left-icon" />
+              </button>
+              <h1>{currentRepertoire === "all" ? "All Songs" : currentRepertoire?.name}</h1>
+            </div>
+            <div className="library-main__songs-wrap">
               {repertoireWithSongs?.songs.map(({ song }) => (
-
                 <LibrarySong
                   onClick={(e) => {
                     if (e.target.tagName === 'BUTTON') return;
@@ -96,32 +107,40 @@ function LibraryMain({
                 />
               )
               )}
-            </>
-          ) : (
-            <>
-              <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}><h1>All Songs</h1></div>
-              <div className="library-main__songs-wrap">
-                {songs.map((song) => (
-                  <LibrarySong
-                    onClick={(e) => {
-                      if (e.target.tagName === 'BUTTON') return;
-                      setSelectedSong(song);
-                    }}
-                    key={song.id}
-                    song={song}
-                    selectedSong={selectedSong}
-                    currentContextMenu={currentContextMenu}
-                    setCurrentContextMenu={setCurrentContextMenu}
-                    repertoires={repertoires}
-                    handleSongPanel={handleSongPanel}
-                  />
-                ))}
-              </div>
-            </>
-          )
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}>
+              <button className="back-btn-wrap" onClick={() =>
+                handleLibraryMainPanel(false)
+              }>
+                <div className="arrow-left-icon" />
+              </button>
+              <h1>All Songs</h1>
+            </div>
+            <div className="library-main__songs-wrap">
+              {songs.map((song) => (
+                <LibrarySong
+                  onClick={(e) => {
+                    if (e.target.tagName === 'BUTTON') return;
+                    setSelectedSong(song);
+                  }}
+                  key={song.id}
+                  song={song}
+                  selectedSong={selectedSong}
+                  currentContextMenu={currentContextMenu}
+                  setCurrentContextMenu={setCurrentContextMenu}
+                  repertoires={repertoires}
+                  handleSongPanel={handleSongPanel}
+                />
+              ))}
+            </div>
+          </>
+        )
       }
 
-    </div>
+    </div >
   )
 }
 

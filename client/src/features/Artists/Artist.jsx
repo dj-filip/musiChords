@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
-
-
-import PlaylistSong from "../Sidebar/Playlist/PlaylistSong";
-import BackIcon from "../icons/BackIcon";
-
+import PlaylistSong from "../../components/Sidebar/Playlist/PlaylistSong";
+import BackIcon from "../../components/icons/BackIcon";
 
 function Artist({ artist, selectedSong, setSelectedSong }) {
 

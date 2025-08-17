@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
-import Song from "../../components/Songs/Song/Song";
-import LibrarySidebar from "../../components/Library/LibrarySidebar/LibrarySidebar";
-
 
 import { BACKEND_URL } from '../../config/serverConfig';
-import useAuthContext from "../../hooks/useAuthContext";
 import LibraryMain from "./LibraryMain/LibraryMain";
 import { useLocation } from "react-router-dom";
-
+import { useBreakpoints } from "../../hooks/useBreakpoints";
+import useAuthContext from "../../hooks/useAuthContext";
+import Song from "../Songs/Song/Song";
+import LibrarySidebar from "./LibrarySidebar/LibrarySidebar";
 
 function Library() {
 
   const location = useLocation();
+  const { isMobile } = useBreakpoints();
 
   const [songs, setSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState({});
   const [isSongPanel, setIsSongPanel] = useState(false);
+
+  const [isLibraryMainOpen, setIsLibraryMainOpen] = useState(false);
 
   const [repertoires, setRepertoires] = useState();
   const [repertoireWithSongs, setRepertoireWithSongs] = useState();
@@ -126,7 +128,7 @@ function Library() {
   //     fetchRepertoireWithSongs();
   // }, [user, currentRepertoire])
 
-    useEffect(() => {
+  useEffect(() => {
     if (currentRepertoire)
       fetchRepertoireWithSongs();
   }, [currentRepertoire])
@@ -137,7 +139,7 @@ function Library() {
   //     fetchArtistWithSongs();
   // }, [user, artistId])
 
-   useEffect(() => {
+  useEffect(() => {
     if (artistId)
       fetchArtistWithSongs();
   }, [artistId])
@@ -157,6 +159,11 @@ function Library() {
     console.log(open)
   }
 
+  const handleLibraryMainPanel = () => {
+    setIsLibraryMainOpen(prev => !prev);
+  }
+
+
   if (isPageLoading) {
     return (
       <div></div>
@@ -164,8 +171,9 @@ function Library() {
   }
 
   return (
+
     <>
-      <div className="library-static-wrap">
+      <div className={`library-static-wrap ${isLibraryMainOpen ? "repertoire-selected" : ""} `}>
         <LibrarySidebar
           songs={songs}
           selectedSong={selectedSong}
@@ -176,6 +184,7 @@ function Library() {
           setRepertoireWithSongs={setRepertoireWithSongs}
           currentRepertoire={currentRepertoire}
           setCurrentRepertoire={setCurrentRepertoire}
+          handleLibraryMainPanel={handleLibraryMainPanel}
           handleSelectRepertoire={handleSelectRepertoire}
           fetchRepertoires={fetchRepertoires}
           artistWithSongs={artistWithSongs}
@@ -187,6 +196,8 @@ function Library() {
           setSelectedSong={setSelectedSong}
           repertoires={repertoires}
           currentRepertoire={currentRepertoire}
+          setCurrentRepertoire={setCurrentRepertoire}
+          handleLibraryMainPanel={handleLibraryMainPanel}
           repertoireWithSongs={repertoireWithSongs}
           currentContextMenu={currentContextMenu}
           setCurrentContextMenu={setCurrentContextMenu}
@@ -203,7 +214,6 @@ function Library() {
       />
     </>
   )
-
 }
 
 export default Library;

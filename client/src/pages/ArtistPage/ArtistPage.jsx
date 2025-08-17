@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 
-import Artist from "../../components/Artists/Artist";
-import Song from "../../components/Songs/Song/Song";
-
 import { BACKEND_URL } from '../../config/serverConfig';
 import useAuthContext from "../../hooks/useAuthContext";
-
+import Artist from "../../features/Artists/Artist";
+import Song from "../../features/Songs/Song/Song";
 
 
 function ArtistPage() {

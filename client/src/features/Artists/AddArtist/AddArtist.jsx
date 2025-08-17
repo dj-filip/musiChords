@@ -5,7 +5,6 @@ import { BACKEND_URL } from "../../../config/serverConfig";
 import UploadBtn from "./UploadBtn";
 import useAuthContext from "../../../hooks/useAuthContext";
 
-
 function AddArtist() {
 
   const inputFile = useRef()

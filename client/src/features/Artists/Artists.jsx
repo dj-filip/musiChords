@@ -5,7 +5,6 @@ import { BACKEND_URL } from '../../config/serverConfig';
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 
-
 function Artists() {
 
   const [artists, setArtists] = useState();

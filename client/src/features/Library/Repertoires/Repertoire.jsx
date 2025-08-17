@@ -1,7 +1,6 @@
+import RepertoireIcon from "../../../components/icons/RepertoireIcon";
 import useContextMenu from "../../../hooks/useContextMenu";
-import RepertoireIcon from "../../icons/RepertoireIcon";
 import RepertoireContextMenu from "./RepertoireContextMenu/RepertoireContextMenu";
-
 
 const Repertoire = ({
   repertoire,
@@ -9,7 +8,8 @@ const Repertoire = ({
   repertoires,
   setRepertoires,
   currentRepertoire,
-  setCurrentRepertoire
+  setCurrentRepertoire,
+  handleLibraryMainPanel
 }) => {
 
   const [contextMenu, setContextMenu, contextMenuRef, handleContextMenu] = useContextMenu();
@@ -25,7 +25,10 @@ const Repertoire = ({
     <>
       <li
         className={`library-item ${currentRepertoire?._id === repertoire._id ? "active" : ""}`}
-        onClick={() => onClick(repertoire)}
+        onClick={() => {
+          onClick(repertoire),
+          handleLibraryMainPanel(true)
+        }}
         onContextMenu={(e) => handleContextMenu(e, repertoire._id)}
       >
         <div className="repertoire-icon-wrap">

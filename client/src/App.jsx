@@ -10,7 +10,6 @@ import { BACKEND_URL } from './config/serverConfig';
 import { AuthContextProvider } from './contexts/AuthContext';
 import useAuthContext from './hooks/useAuthContext';
 
-
 let currentSongAudio;
 
 const App = () => {

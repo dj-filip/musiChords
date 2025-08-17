@@ -1326,4 +1326,31 @@ MARK: RESPONSIVE
   .transpose-btn-right {
     right: 10px;
   }
+
+  .library-container {
+    position: relative;
+    overflow-y: scroll;
+  }
+
+  .library-main-container {
+    position: absolute;
+    height: 100%;
+    transform: translate(0, 1000px);
+    background-color: black;
+    z-index: 999;
+  }
+
+  .repertoire-selected .library-main-container {
+    transform: translateY(0);
+  }
+
+  .library-main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .library-main-header > h1 {
+    margin: 0 auto;
+  }
 }

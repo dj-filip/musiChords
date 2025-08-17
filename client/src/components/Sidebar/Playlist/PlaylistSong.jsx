@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { PlayingContext } from '../../../contexts/PlayingContext';
-import RepertoireContextMenu from '../../Library/Repertoires/RepertoireContextMenu/RepertoireContextMenu';
+import RepertoireContextMenu from '../../../features/Library/Repertoires/RepertoireContextMenu/RepertoireContextMenu';
 
 
 const PlaylistSong = ({ key, song, onClick, selectedSong, currentContextMenu, setCurrentContextMenu }) => {

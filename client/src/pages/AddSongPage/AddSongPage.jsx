@@ -1,5 +1,4 @@
-import AddSong from "../../components/Songs/AddSong/AddSong";
-
+import AddSong from "../../features/Songs/AddSong/AddSong";
 
 function AddSongPage() {
   return (

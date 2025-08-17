@@ -1,6 +1,4 @@
-import Library from "../../components/Library/Library";
-import Song from "../../components/Songs/Song/Song";
-
+import Library from "../../features/Library/Library";
 
 function LibraryPage() {
 

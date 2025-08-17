@@ -1,8 +1,6 @@
-import CloseIcon from "../../../icons/CloseIcon";
 
+import AddIcon from "../../../../components/icons/AddIcon";
 import { BACKEND_URL } from "../../../../config/serverConfig";
-import AddIcon from "../../../icons/AddIcon";
-
 
 function CreateRepertoire({ setShowPopupMenu, fetchRepertoires, positionX, positionY, createRepertoireRef }) {
 

@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { BACKEND_URL } from "../../../../config/serverConfig";
-import RemoveIcon from "../../../icons/RemoveIcon";
-
+import RemoveIcon from "../../../../components/icons/RemoveIcon";
 
 function RepertoireContextMenu({
   repertoire,
