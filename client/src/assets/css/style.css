@@ -13,7 +13,6 @@ select,
 textarea {
   font-family: 'Roboto', sans-serif;
   color: #a3a3a3;
-  -webkit-tap-highlight-color: transparent;
 }
 
 h3 {
@@ -654,19 +653,6 @@ li {
   transition: transform .2s ease-in;
 }
 
-li:hover:not(:active, li.active) {
-  background-color: #2b2b2b;
-  transition: all .2s ease-in;
-}
-
-li.active {
-  background-color: #3c3c3c;
-}
-
-li:active,
-.circle-btn-wrap:active {
-  background-color: #191919ca;
-}
 
 .song-cover-img {
   width: 70px;
@@ -1268,6 +1254,10 @@ MARK: RESPONSIVE
     background-color: transparent;
   }
 
+  li:active {
+    -webkit-tap-highlight-color: #262626ca;
+  }
+
   .song-cover-img {
     width: 60px;
   }
@@ -1351,7 +1341,25 @@ MARK: RESPONSIVE
     justify-content: space-between;
   }
 
-  .library-main-header > h1 {
+  .library-main-header>h1 {
     margin: 0 auto;
+  }
+}
+
+
+@media(hover: hover) and (pointer: fine) {
+
+  li:active,
+  .circle-btn-wrap:active {
+    background-color: #191919ca;
+  }
+
+  li:hover:not(:active, li.active) {
+    background-color: #2b2b2b;
+    transition: all .2s ease-in;
+  }
+
+  li.active {
+    background-color: #3c3c3c;
   }
 }
