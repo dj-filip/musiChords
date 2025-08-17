@@ -1,5 +1,4 @@
-import { useMediaQuery } from "react-responsive";
-
+import { useMediaQuery } from 'react-responsive';
 
 export function useBreakpoints() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -7,3 +6,4 @@ export function useBreakpoints() {
 
   return { isMobile, isTablet };
 }
+
