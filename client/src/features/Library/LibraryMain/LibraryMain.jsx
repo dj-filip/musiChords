@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import LibrarySong from "../LibrarySong/LibrarySong";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function LibraryMain({
@@ -21,6 +22,8 @@ function LibraryMain({
   const libraryMainRef = useRef();
 
   const [isScroled, setIsScroled] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const libraryMain = libraryMainRef.current;
@@ -56,6 +59,9 @@ function LibraryMain({
         (
           <>
             <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}>
+              <Link to="/">
+                <div className="arrow-left-icon" />
+              </Link>
               <h1>{artistWithSongs.name}</h1>
             </div>
             <div className="library-main__songs-wrap">

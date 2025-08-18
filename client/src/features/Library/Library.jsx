@@ -173,7 +173,7 @@ function Library() {
   return (
 
     <>
-      <div className={`library-static-wrap ${isLibraryMainOpen ? "repertoire-selected" : ""} `}>
+      <div className={`library-static-wrap ${isLibraryMainOpen || artistId ? "repertoire-selected" : ""} `}>
         <LibrarySidebar
           songs={songs}
           selectedSong={selectedSong}
