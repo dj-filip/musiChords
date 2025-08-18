@@ -59,7 +59,7 @@ function LibraryMain({
         (
           <>
             <div className={`library-main-header ${isScroled ? "library-main-header-sticky" : ""}`}>
-              <Link to="/">
+              <Link to="/" className="back-btn-wrap">
                 <div className="arrow-left-icon" />
               </Link>
               <h1>{artistWithSongs.name}</h1>
