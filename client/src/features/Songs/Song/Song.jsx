@@ -210,17 +210,19 @@ function Song({ selectedSong, setSelectedSong, isSongPanel, handleSongPanel }) {
   return (
     processedLyricsChords ? (
       <div
-        className={`song-container ${isSongPanel ? "song-selected" : "" }`}
+        className={`song-container ${isSongPanel ? "song-selected" : ""}`}
         ref={ref}
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
       >
-        <button
-          className="hide-panel-btn"
-          onClick={() => handleSongPanel()}
-        >
-          <HidePanelIcon />
-        </button>
+        <div className="hide-panel-btn-wrap">
+          <button
+            className="hide-panel-btn"
+            onClick={() => handleSongPanel()}
+          >
+            <HidePanelIcon />
+          </button>
+        </div>
         <div className="song-wrap">
           <div className="song-selected-name">
             <h3 className="txt-center light-txt">{song.title}</h3>

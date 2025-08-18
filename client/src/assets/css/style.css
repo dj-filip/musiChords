@@ -193,12 +193,15 @@ MARK: BUTTONS
   pointer-events: visiblePainted;
 }
 
-.hide-panel-btn {
+.hide-panel-btn-wrap {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 0;
+  width: 100%;
+  padding: 20px;
+  z-index: 999;
+  background: linear-gradient(180deg, rgba(10, 57, 85, 1), #191919 180px);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
 }
+
 
 .hide-panel-btn:hover:not(:active) * {
   border-color: #f1f1f1 !important;
@@ -774,7 +777,6 @@ MARK: LIBRARY
   width: 100%;
   border-radius: 5px;
   background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(33, 33, 33, .5) 80%, rgb(0, 0, 0, .7) 100%);
-  overflow: hidden scroll;
 }
 
 .library-main-container h1 {
@@ -795,6 +797,7 @@ MARK: LIBRARY
   transition: none;
 }
 
+
 .library-static-wrap {
   width: 100%;
   display: flex;
@@ -802,7 +805,10 @@ MARK: LIBRARY
 }
 
 .library-main__songs-wrap {
+  width: 100%;
+  height: 100%;
   padding: 0 20px 30px;
+  overflow-y: scroll;
 }
 
 main,
@@ -814,9 +820,8 @@ main,
   height: 100%;
   display: flex;
   justify-content: center;
-  padding-bottom: 50px;
   border-radius: 5px;
-  background: linear-gradient(180deg, rgba(0, 170, 255, 0.332), #191919 180px);
+  background: linear-gradient(180deg, rgba(10, 57, 85, 1), #191919 180px);
   background-attachment: local;
   z-index: 999;
   transform: translateX(100vw);
@@ -829,6 +834,7 @@ main.song-selected,
   position: static;
   max-width: 100%;
   width: 100%;
+  overflow: hidden;
   transform: translateX(10px);
   transition: all 1s ease;
 }
@@ -846,7 +852,7 @@ main.song-selected,
 
 .song-wrap {
   width: 100%;
-  padding-top: 50px;
+  padding-top: 70px;
   overflow: hidden scroll;
 }
 
@@ -944,7 +950,7 @@ div.song div.transposition {
   line-height: 30px;
   color: #21BE57;
   background: #27272778;
-  z-index: 999;
+  z-index: 998;
   transition: all .2s ease-out;
 }
 
@@ -1229,7 +1235,6 @@ MARK: RESPONSIVE
   .song-container {
     position: absolute;
     height: 100%;
-    padding-bottom: 50px;
     border-radius: 15px;
     z-index: 999;
     transform: translateY(1000px);
@@ -1320,7 +1325,6 @@ MARK: RESPONSIVE
 
   .library-container {
     position: relative;
-    overflow-y: scroll;
   }
 
   .library-main-container {
@@ -1344,6 +1348,11 @@ MARK: RESPONSIVE
   .library-main-header>h1 {
     margin: 0 auto;
   }
+
+  .song-container.song-selected {
+    position: absolute;
+  }
+
 }
 
 
@@ -1361,5 +1370,9 @@ MARK: RESPONSIVE
 
   li.active {
     background-color: #3c3c3c;
+  }
+
+  .library-main-header .back-btn-wrap {
+    display: none;
   }
 }
