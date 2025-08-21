@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { BACKEND_URL } from '../../config/serverConfig';
-import LibraryMain from "./LibraryMain/LibraryMain";
+import { BACKEND_URL } from '../../../config/serverConfig';
 import { useLocation } from "react-router-dom";
-import { useBreakpoints } from "../../hooks/useBreakpoints";
-import useAuthContext from "../../hooks/useAuthContext";
-import Song from "../Songs/Song/Song";
-import LibrarySidebar from "./LibrarySidebar/LibrarySidebar";
+import { useBreakpoints } from "@hooks/useBreakpoints";
+import useAuthContext from "@hooks/useAuthContext";
+
+import LibraryMain from "./LibraryMain";
+import LibrarySidebar from "./LibrarySidebar";
+import Song from "@features/Song/Song";
 
 function Library() {
 

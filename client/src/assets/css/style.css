@@ -789,12 +789,12 @@ MARK: LIBRARY
   padding: 10px 20px;
   z-index: 999;
   background-color: transparent;
-  transition: background-color .3s ease-out;
+  transition: box-shadow .3s ease-out;
 }
 
 .library-main-header-sticky {
-  background-color: #040404;
-  transition: none;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  transition: box-shadow .3s ease-in;
 }
 
 
@@ -807,7 +807,7 @@ MARK: LIBRARY
 .library-main__songs-wrap {
   width: 100%;
   height: 100%;
-  padding: 0 20px 30px;
+  padding: 0 20px 100px;
   overflow-y: scroll;
 }
 
@@ -862,6 +862,10 @@ main.song-selected,
   flex-direction: column;
   align-items: center;
   gap: 80px;
+}
+
+.song-lyrics-chords-wrap {
+  padding: 0 10px;
 }
 
 .lyrics {

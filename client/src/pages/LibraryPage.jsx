@@ -1,4 +1,4 @@
-import Library from "../../features/Library/Library";
+import Library from "@features/Library/components/Library";
 
 function LibraryPage() {
 

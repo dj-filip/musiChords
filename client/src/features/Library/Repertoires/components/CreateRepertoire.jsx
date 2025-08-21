@@ -1,6 +1,6 @@
 
-import AddIcon from "../../../../components/icons/AddIcon";
-import { BACKEND_URL } from "../../../../config/serverConfig";
+import AddIcon from "@components/icons/AddIcon";
+import { BACKEND_URL } from "@config/serverConfig";
 
 function CreateRepertoire({ setShowPopupMenu, fetchRepertoires, positionX, positionY, createRepertoireRef }) {
 

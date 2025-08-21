@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { PlayingContext } from '../../../contexts/PlayingContext';
-import LibrarySongContextMenu from './LibrarySongContextMenu/LibrarySongContextMenu';
 import useContextMenu from '../../../hooks/useContextMenu';
+import LibrarySongContextMenu from './LibrarySongContextMenu';
 
 
 function LibrarySong({

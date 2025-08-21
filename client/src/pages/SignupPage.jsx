@@ -1,4 +1,4 @@
-import Signup from "../../../features/Users/Signup/Signup";
+import Signup from "@features/Users/Signup/Signup";
 
 function SignupPage() {
   return (

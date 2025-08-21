@@ -1,9 +1,9 @@
 
 
 import { useEffect, useRef, useState } from "react";
-import { BACKEND_URL } from "../../../../config/serverConfig";
-import PlusIcon from "../../../../components/icons/PlusIcon";
-import RemoveIcon from "../../../../components/icons/RemoveIcon";
+import { BACKEND_URL } from "@config/serverConfig";
+import PlusIcon from "@components/icons/PlusIcon";
+import RemoveIcon from "@components/icons/RemoveIcon";
 
 
 function LibrarySongContextMenu({

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { PlayingContext } from "../../../contexts/PlayingContext";
-import HidePanelIcon from "../../../components/icons/HidePanelIcon";
+import { PlayingContext } from "../../contexts/PlayingContext";
+import HidePanelIcon from "../../components/icons/HidePanelIcon";
 
 
 function Song({ selectedSong, setSelectedSong, isSongPanel, handleSongPanel }) {

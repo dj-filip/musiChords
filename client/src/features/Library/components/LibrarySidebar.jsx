@@ -1,15 +1,15 @@
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import Repertoire from "../Repertoires/Repertoire";
+import useAuthContext from "@hooks/useAuthContext";
+import { useBreakpoints } from "@hooks/useBreakpoints";
 
-import CreateRepertoire from "../Repertoires/CreateRepertoire/CreateRepertoire";
-import CreateRepertoireBtn from "../Repertoires/CreateRepertoire/CreateRepertoireBtn/CreateRepertoireBtn";
+import Repertoire from "../Repertoires/components/Repertoire";
+import BackIcon from "@components/icons/BackIcon";
+import RepertoireIcon from "@components/icons/RepertoireIcon";
+import CreateRepertoire from "../Repertoires/components/CreateRepertoire";
+import CreateRepertoireBtn from "../Repertoires/components/CreateRepertoireBtn";
 
-import useAuthContext from "../../../hooks/useAuthContext";
-import { useBreakpoints } from "../../../hooks/useBreakpoints";
-import BackIcon from "../../../components/icons/BackIcon";
-import RepertoireIcon from "../../../components/icons/RepertoireIcon";
 
 function LibrarySidebar({
   songs,

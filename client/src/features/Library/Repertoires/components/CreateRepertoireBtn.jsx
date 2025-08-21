@@ -1,5 +1,5 @@
+import PlusIcon from "@components/icons/PlusIcon";
 import { useEffect, useRef } from "react";
-import PlusIcon from "../../../../../components/icons/PlusIcon";
 
 function CreateRepertoireBtn({ showPopupMenu, setShowPopupMenu, setCreateRepertoireMenu, createRepertoireMenu, createRepertoireRef }) {
 

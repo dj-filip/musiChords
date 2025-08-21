@@ -1,6 +1,6 @@
-import RepertoireIcon from "../../../components/icons/RepertoireIcon";
-import useContextMenu from "../../../hooks/useContextMenu";
-import RepertoireContextMenu from "./RepertoireContextMenu/RepertoireContextMenu";
+import RepertoireIcon from "../../../../components/icons/RepertoireIcon";
+import useContextMenu from "../../../../hooks/useContextMenu";
+import RepertoireContextMenu from "./RepertoireContextMenu";
 
 const Repertoire = ({
   repertoire,
