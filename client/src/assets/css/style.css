@@ -214,14 +214,16 @@ MARK: SCROLLBAR
 .song-wrap::-webkit-scrollbar,
 .img-boxes-wrap::-webkit-scrollbar,
 .add-page-container::-webkit-scrollbar,
-.library-main-container::-webkit-scrollbar {
+.library-main-container::-webkit-scrollbar,
+.library-main__songs-wrap::-webkit-scrollbar {
   width: 6px;
 }
 
 .song-wrap::-webkit-scrollbar-track,
 .img-boxes-wrap::-webkit-scrollbar-track,
 .add-page-container::-webkit-scrollbar-track,
-.library-main-container::-webkit-scrollbar-track {
+.library-main-container::-webkit-scrollbar-track,
+.library-main__songs-wrap::-webkit-scrollbar-track {
   /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
   background-color: transparent;
   border-radius: 10px;
@@ -234,7 +236,8 @@ MARK: SCROLLBAR
 .song-wrap::-webkit-scrollbar-thumb,
 .img-boxes-wrap::-webkit-scrollbar-thumb,
 .add-page-container::-webkit-scrollbar-thumb,
-.library-main-container::-webkit-scrollbar-thumb {
+.library-main-container::-webkit-scrollbar-thumb,
+.library-main__songs-wrap::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #3e3e3e89;
 }

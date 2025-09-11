@@ -1,32 +1,32 @@
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import useAuthContext from "@hooks/useAuthContext";
+import useAuthContext from "@features/Auth/hooks/useAuthContext";
 import { useBreakpoints } from "@hooks/useBreakpoints";
 
-import Repertoire from "../Repertoires/components/Repertoire";
 import BackIcon from "@components/icons/BackIcon";
+import Repertoire from "./Repertoires/Repertoire";
+import CreateRepertoire from "./Repertoires/CreateRepertoire";
+import CreateRepertoireBtn from "./Repertoires/components/CreateRepertoireBtn";
 import RepertoireIcon from "@components/icons/RepertoireIcon";
-import CreateRepertoire from "../Repertoires/components/CreateRepertoire";
-import CreateRepertoireBtn from "../Repertoires/components/CreateRepertoireBtn";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentRepertoire } from "./Repertoires/repertoireSlice";
+import { setCurrentArtist } from "@features/Artists/artistSlice";
 
 
 function LibrarySidebar({
   songs,
-  selectedSong,
-  setSelectedSong,
   repertoires,
   setRepertoires,
-  repertoireWithSongs,
-  setRepertoireWithSongs,
-  currentRepertoire,
-  setCurrentRepertoire,
   handleLibraryMainPanel,
-  handleSelectRepertoire,
   fetchRepertoires,
   artistWithSongs,
   setArtistWithSongs
 }) {
+
+  const dispatch = useDispatch();
+  const currentRepertoire = useSelector((state) => state.repertoire.currentRepertoire)
+  const currentArtist = useSelector((state) => state.artist.currentArtist);
 
   const [showPopupMenu, setShowPopupMenu] = useState(false);
 
@@ -46,6 +46,11 @@ function LibrarySidebar({
   const { isMobile } = useBreakpoints();
 
 
+  const handleSelectRepertoire = (selectedRepertoire) => {
+    dispatch(setCurrentRepertoire(selectedRepertoire));
+    dispatch(setCurrentArtist(null));
+  }
+
 
   return (
     <>
@@ -56,7 +61,11 @@ function LibrarySidebar({
             backgroundImage: `url(${imageUrl})`
           }}
         >
-          <NavLink to={-1} className="circle-btn-wrap">
+          <NavLink 
+            to={-1} 
+            className="circle-btn-wrap"
+            onClick={() =>  dispatch(setCurrentRepertoire(null))}
+            >
             <BackIcon />
           </NavLink>
           <div className="library-heading-wrap flex just-between">
@@ -89,7 +98,7 @@ function LibrarySidebar({
             <li
               className={`library-item ${!currentRepertoire && !artistWithSongs && !isMobile && "active"}`}
               onClick={() => {
-                setCurrentRepertoire(null)
+                handleSelectRepertoire()
                 setArtistWithSongs(null)
                 handleLibraryMainPanel(true)
               }}
@@ -110,9 +119,8 @@ function LibrarySidebar({
                 onClick={handleSelectRepertoire}
                 repertoires={repertoires}
                 setRepertoires={setRepertoires}
-                currentRepertoire={currentRepertoire}
-                setCurrentRepertoire={setCurrentRepertoire}
                 handleLibraryMainPanel={handleLibraryMainPanel}
+                handleSelectRepertoire={handleSelectRepertoire}
               />
             ))}
           </ul>

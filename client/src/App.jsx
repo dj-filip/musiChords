@@ -7,8 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
 
 import { BACKEND_URL } from './config/serverConfig';
-import { AuthContextProvider } from './contexts/AuthContext';
-import useAuthContext from './hooks/useAuthContext';
+import { AuthContextProvider } from './features/Auth/contexts/AuthContext';
+import useAuthContext from './features/Auth/hooks/useAuthContext';
 
 let currentSongAudio;
 

@@ -1,9 +1,9 @@
-import Signup from "@features/Users/Signup/Signup";
+import SignupForm from "@features/Auth/forms/SignupForm";
 
 function SignupPage() {
   return (
     <div className="form-page-container">
-      <Signup />
+      <SignupForm />
     </div>
   )
 }

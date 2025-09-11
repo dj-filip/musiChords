@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { BACKEND_URL } from "@config/serverConfig";
-import useAuthContext from "@hooks/useAuthContext";
+import useAuthContext from "@features/Auth/hooks/useAuthContext";
 
 
 function AddSong() {

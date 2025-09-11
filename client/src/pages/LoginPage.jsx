@@ -1,10 +1,10 @@
-import Login from "@features/Users/Login/Login";
+import LoginForm from "@features/Auth/forms/LoginForm";
 
 
 function LoginPage() {
   return (
     <div className="form-page-container">
-      <Login />
+      <LoginForm />
     </div>
   )
 }

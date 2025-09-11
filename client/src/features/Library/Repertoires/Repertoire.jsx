@@ -1,16 +1,18 @@
-import RepertoireIcon from "../../../../components/icons/RepertoireIcon";
-import useContextMenu from "../../../../hooks/useContextMenu";
-import RepertoireContextMenu from "./RepertoireContextMenu";
+import RepertoireIcon from "@components/icons/RepertoireIcon";
+import useContextMenu from "@hooks/useContextMenu";
+import RepertoireContextMenu from "./components/RepertoireContextMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentRepertoire } from "./repertoireSlice";
 
 const Repertoire = ({
   repertoire,
-  onClick,
   repertoires,
   setRepertoires,
-  currentRepertoire,
-  setCurrentRepertoire,
-  handleLibraryMainPanel
+  handleLibraryMainPanel,
+  handleSelectRepertoire
 }) => {
+
+  const currentRepertoire = useSelector((state) => state.repertoire.currentRepertoire)
 
   const [contextMenu, setContextMenu, contextMenuRef, handleContextMenu] = useContextMenu();
 
@@ -21,12 +23,13 @@ const Repertoire = ({
     setCurrentContextMenu(songId);
   }
 
+
   return (
     <>
       <li
         className={`library-item ${currentRepertoire?._id === repertoire._id ? "active" : ""}`}
         onClick={() => {
-          onClick(repertoire),
+          handleSelectRepertoire(repertoire),
           handleLibraryMainPanel(true)
         }}
         onContextMenu={(e) => handleContextMenu(e, repertoire._id)}

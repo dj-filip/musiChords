@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { PlayingContext } from '../../../contexts/PlayingContext';
-import useContextMenu from '../../../hooks/useContextMenu';
-import LibrarySongContextMenu from './LibrarySongContextMenu';
+import { PlayingContext } from '@contexts/PlayingContext';
+import useContextMenu from '@hooks/useContextMenu';
+import LibrarySongContextMenu from './components/LibrarySongContextMenu';
 
 
 function LibrarySong({
@@ -9,8 +9,6 @@ function LibrarySong({
   song,
   onClick,
   selectedSong,
-  currentContextMenu,
-  setCurrentContextMenu,
   currentRepertoire,
   setCurrentRepertoire,
   repertoires,

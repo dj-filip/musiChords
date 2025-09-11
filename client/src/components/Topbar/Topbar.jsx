@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
-import FolderIcon from "../icons/FolderIcon";
 import DashboardBtn from "./DashboardBtn/DashboardBtn";
 import ProfileIcon from "../icons/ProfileIcon";
-import useLogout from "../../hooks/useLogout";
-import useAuthContext from "../../hooks/useAuthContext";
+import useLogout from "@features/Auth/hooks/useLogout";
+import useAuthContext from "@features/Auth/hooks/useAuthContext";
 
 
 function Topbar() {

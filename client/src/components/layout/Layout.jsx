@@ -1,4 +1,4 @@
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuthContext from "../../features/Auth/hooks/useAuthContext";
 import BottomBar from "../BottomBar/BottomBar";
 import Topbar from "../Topbar/Topbar";
 

@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PlaylistSong from "../../components/Sidebar/Playlist/PlaylistSong";
 import BackIcon from "../../components/icons/BackIcon";
 
 function Artist({ artist, selectedSong, setSelectedSong }) {
 
   const imageUrl = `${import.meta.env.VITE_IMAGES_URL}${artist.coverImage}`;
-
 
   return (
     <div className="artist-container">
@@ -26,6 +24,7 @@ function Artist({ artist, selectedSong, setSelectedSong }) {
         {artist.songs.map((song) => {
           return (
             <PlaylistSong
+              key={song._id}
               song={song}
               selectedSong={selectedSong}
               onClick={() => setSelectedSong(song)}

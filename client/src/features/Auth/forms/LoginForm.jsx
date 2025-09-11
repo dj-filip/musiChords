@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import useLogin from "../../../hooks/useLogin";
 import { NavLink, useNavigate } from "react-router-dom";
-import useAuthContext from "../../../hooks/useAuthContext";
+import useAuthContext from "../hooks/useAuthContext";
+import useLogin from "../hooks/useLogin";
 
-function Login() {
+function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, error, isLoading } = useLogin();
@@ -63,4 +63,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default LoginForm;

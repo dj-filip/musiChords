@@ -1,4 +1,4 @@
-import AddSong from "@features/Song/AddSong";
+import AddSong from "@features/Songs/AddSong";
 
 function AddSongPage() {
   return (

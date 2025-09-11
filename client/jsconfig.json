@@ -6,7 +6,7 @@
       "@features/*": ["features/*"],
       "@hooks/*": ["hooks/*"],
       "@contexts/*": ["contexts/*"],
-      "@routes/*": ["contexts/*"],
+      "@routes/*": ["routes/*"],
       "@config/*": ["config/*"],
       "@pages/*": ["pages/*"],
     }

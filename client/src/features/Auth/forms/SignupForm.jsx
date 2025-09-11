@@ -1,9 +1,9 @@
 import { useState } from "react";
-import useSignup from "../../../hooks/useSignup";
 import { NavLink } from "react-router-dom";
+import useSignup from "../hooks/useSignup";
 
 
-function Signup() {
+function SignupForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signup, error, isLoading } = useSignup();
@@ -49,4 +49,4 @@ function Signup() {
   )
 }
 
-export default Signup;
+export default SignupForm;
