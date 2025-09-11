@@ -11,8 +11,6 @@ function LibraryMain({
   setSelectedSong,
   repertoires,
   handleSongPanel,
-  repertoireSongs,
-  artistWithSongs,
   isLoading
 }) {
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import useAuthContext from "@features/Auth/hooks/useAuthContext";
@@ -15,18 +15,15 @@ import { setCurrentArtist } from "@features/Artists/artistSlice";
 
 
 function LibrarySidebar({
-  songs,
   repertoires,
-  setRepertoires,
   handleLibraryMainPanel,
   fetchRepertoires,
-  artistWithSongs,
-  setArtistWithSongs
 }) {
 
   const dispatch = useDispatch();
   const currentRepertoire = useSelector((state) => state.repertoire.currentRepertoire)
   const currentArtist = useSelector((state) => state.artist.currentArtist);
+  const [isAllSongs, setIsAllSongs] = useState(false);
 
   const [showPopupMenu, setShowPopupMenu] = useState(false);
 
@@ -51,6 +48,10 @@ function LibrarySidebar({
     dispatch(setCurrentArtist(null));
   }
 
+  useEffect(() => {
+    setIsAllSongs(!currentArtist && !currentRepertoire && !isMobile);
+  },[currentArtist, currentRepertoire, isMobile])
+
 
   return (
     <>
@@ -61,11 +62,14 @@ function LibrarySidebar({
             backgroundImage: `url(${imageUrl})`
           }}
         >
-          <NavLink 
-            to={-1} 
+          <NavLink
+            to={-1}
             className="circle-btn-wrap"
-            onClick={() =>  dispatch(setCurrentRepertoire(null))}
-            >
+            onClick={() => {
+              dispatch(setCurrentRepertoire(null));
+            }
+            }
+          >
             <BackIcon />
           </NavLink>
           <div className="library-heading-wrap flex just-between">
@@ -96,10 +100,9 @@ function LibrarySidebar({
         <div className="repertoire-wrap">
           <ul>
             <li
-              className={`library-item ${!currentRepertoire && !artistWithSongs && !isMobile && "active"}`}
+              className={`library-item ${isAllSongs && "active"}`}
               onClick={() => {
                 handleSelectRepertoire()
-                setArtistWithSongs(null)
                 handleLibraryMainPanel(true)
               }}
               onContextMenu={(e) => e.preventDefault()}
@@ -112,13 +115,12 @@ function LibrarySidebar({
               </div>
             </li>
 
-            {repertoires.map((repertoire) => (
+            {repertoires?.map((repertoire) => (
               <Repertoire
                 key={repertoire.id}
                 repertoire={repertoire}
                 onClick={handleSelectRepertoire}
                 repertoires={repertoires}
-                setRepertoires={setRepertoires}
                 handleLibraryMainPanel={handleLibraryMainPanel}
                 handleSelectRepertoire={handleSelectRepertoire}
               />
