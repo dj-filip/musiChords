@@ -31,7 +31,8 @@ server/node_modules
 server/logs
 server/.env
 server/uploads
-server/config
+server/config/local.config.js
+server/config/server.config.js
 
 # Common ignores
 *.log
