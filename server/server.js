@@ -3,8 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const router = require('./routes/router');
 const mongoose = require('mongoose');
-const cloudinary = require('cloudinary').v2;
-
 
 const app = express();
 
@@ -23,11 +21,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use('/', router);
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-})
 
 const port = process.env.PORT;
 
