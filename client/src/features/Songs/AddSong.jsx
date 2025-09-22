@@ -2,53 +2,34 @@ import { useEffect, useState } from "react";
 
 import { BACKEND_URL } from "@config/serverConfig";
 import useAuthContext from "@features/Auth/hooks/useAuthContext";
+import useDebounce from "@hooks/useDebounce";
 
 
 function AddSong() {
-  const [songInput, setSongInput] = useState(''); // User input (chords and lyrics)
-  const [artistNameInput, setArtistNameInput] = useState(''); // User input (chords and lyrics)
-  const [formattedChords, setFormattedChords] = useState(''); // Processed output
+  const [songInput, setSongInput] = useState('');
+  const [artistNameInput, setArtistNameInput] = useState('');
+  const [formattedChords, setFormattedChords] = useState('');
   const [artists, setArtists] = useState([]);
-  const [artistName, setArtistName] = useState('');
-  const [filteredArtists, setFilteredArtists] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedArtist, setSelectedArtist] = useState({});
-  const [selectedArtistId, setSelectedArtistId] = useState('');
-  const [selectedArtistCoverImage, setSelectedArtistCoverImage] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
 
   const { user } = useAuthContext();
 
+  const debouncedSearchArtist = useDebounce(searchTerm, 200);
 
   // Fetch artist function
-  const fetchArtists = async (setArtists) => {
-    const result = await fetch(`${BACKEND_URL}/artists`, {
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
+  const searchArtists = async (queryName, setArtists) => {
+    // const result = await fetch(`${BACKEND_URL}/artists`, {
+    //   headers: {
+    //     'Authorization': `Bearer ${user.token}`
+    //   }
+    // });
+    const result = await fetch(`${BACKEND_URL}/artists?name=${encodeURIComponent(queryName)}`);
     const data = await result.json();
 
     setArtists(data);
-  }
-
-
-  const filterArtists = (artists, artistName) => {
-    if (!artistName.trim()) return []; // If no search input, return all artists
-
-    const regex = new RegExp(`(^|\\s)${artistName}`, 'i'); // Create a regex for matching
-
-    const filteredArtists = artists.filter(artist => {
-      // Assuming artist is an object with a 'name' field
-      return regex.test(artist.name);
-    });
-
-
-    if (!filteredArtists.length) {
-      return [];
-    } else {
-      return filteredArtists;
-    }
   }
 
 
@@ -94,16 +75,16 @@ function AddSong() {
 
 
   const formSubmitHandler = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     const songData = {
-      title: e.target.title.value, // Assuming you have an input with name="title"
-      artistName: artistName,
-      artistId: selectedArtistId,
-      originalKey: e.target.originalKey.value, // Assuming you have an input with name="originalKey"
-      intro: e.target.intro.value, // Assuming you have an input with name="intro"
-      lyricsChords: e.target.lyricsChords.value, // Assuming you have an input with name="lyricsChords"
-      coverImage: selectedArtistCoverImage, // Assuming this is a string URL
+      title: e.target.title.value,
+      artistName: selectedArtist.name,
+      artistId: selectedArtist.id,
+      originalKey: e.target.originalKey.value,
+      intro: e.target.intro.value,
+      lyricsChords: e.target.lyricsChords.value,
+      coverImage: selectedArtist.coverImage,
     };
 
     try {
@@ -123,33 +104,34 @@ function AddSong() {
     }
   };
 
+
   const handleSelectArtist = (artist) => {
     setSelectedArtist(artist);
-    setSelectedArtistId(artist._id);
-    setSelectedArtistCoverImage(artist.coverImage);
-    setArtistName(artist.name);
     setShowSuggestions(false);
-    setFilteredArtists([]);
+    setSearchTerm(artist.name)
   }
 
 
-  // Update formatted chords live nad fetch artist as user types;
+  // Update formatted chords live and fetch artist as user types;
   useEffect(() => {
-    fetchArtists(setArtists);
-  }, []);
+    if (!debouncedSearchArtist.trim()) {
+      setArtists([]);
+      return
+    }
+    searchArtists(debouncedSearchArtist, setArtists)
+  }, [debouncedSearchArtist]);
 
   useEffect(() => {
     setFormattedChords(processChords(songInput));
   }, [songInput]);
 
-  useEffect(() => {
-    setFilteredArtists(filterArtists(artists, artistName));
-    console.log(filteredArtists)
-  }, [artistName]);
+  // useEffect(() => {
+  //   setFilteredArtists(filterSearchByName(artists, artistName));
+  //   console.log(filteredArtists)
+  // }, [artistName]);
 
-  console.log(selectedArtist);
-  console.log(selectedArtistId);
-  console.log(selectedArtistCoverImage);
+  console.log(debouncedSearchArtist);
+
 
 
 
@@ -157,20 +139,20 @@ function AddSong() {
   return (
     <>
       <form onSubmit={formSubmitHandler} className="flex flex-column add-song-form" autoComplete="off">
-        <input type="text" name="title" placeholder="Song Title" onChange={inputHandler} />
+        <input type="text" name="title" placeholder="Song Title"/>
         <div className="suggestions-input-wrap">
-          <input type="text" name="artist" placeholder="Song Artist" value={artistName} onChange={(e) => {
-            setArtistName(e.target.value);
+          <input type="text" name="artist" placeholder="Song Artist" value={searchTerm} onChange={(e) => {
+            setSearchTerm(e.target.value);
             setShowSuggestions(true);
           }}></input>
-          {showSuggestions && (
-            <div className={`suggestions-menu ${filteredArtists.length ? 'suggestions-menu-active' : ''}`}>
+          {artists && showSuggestions && (
+            <div className={`suggestions-menu ${artists.length ? 'suggestions-menu-active' : ''}`}>
               <ul>
-                {filteredArtists?.map((artist) => {
+                {artists?.map((artist) => {
                   const imageUrl = `${import.meta.env.VITE_IMAGES_URL}${artist.coverImage}`;
 
                   return (
-                    <li onClick={() => { handleSelectArtist(artist) }}>
+                    <li onClick={() => { handleSelectArtist(artist) }} key={artist.id}>
                       <img src={imageUrl} alt={artist.name} />{artist.name}</li>
                   )
                 })}
@@ -180,16 +162,15 @@ function AddSong() {
 
         </div>
         <input type="text" name="originalKey" placeholder="Original Key" onChange={inputHandler} />
-        <textarea rows="2" name="intro" placeholder="Intro" onChange={inputHandler} />
-        <textarea rows="10" name="lyricsChords" placeholder="Lyrics / Chords"
-          onChange={handleInputChange} />
+        <textarea rows="2" name="intro" placeholder="Intro"/>
+        <textarea rows="10" name="lyricsChords" placeholder="Lyrics / Chords"/>
         <input type="submit" value="Add Song" />
       </form>
       <div className="lyrics-preview-wrap">
         <p
           className="lyrics gray-txt"
-          dangerouslySetInnerHTML={{ __html: formattedChords }} // Render HTML
-          style={{ whiteSpace: 'pre-wrap' }} // Preserve line breaks and spacing
+          dangerouslySetInnerHTML={{ __html: formattedChords }}
+          style={{ whiteSpace: 'pre-wrap' }}
         ></p>
       </div>
     </>

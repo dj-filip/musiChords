@@ -30,8 +30,18 @@ const addArtist = async (req, res) => {
 
 const getArtists = async (req, res) => {
   try {
-    data = await Artist.find();
-    res.send(data);
+    const { name } = req.query;
+    if (name) {
+      const artists = await Artist.find(
+        { name: { $regex: `\\b${name}`, $options: "i" } });
+      if (!artists) {
+        return res.status(404).json({ message: 'Artist not found' });
+      }
+      res.status(200).json(artists);
+    } else {
+      const artists = await Artist.find();
+      res.send(artists);
+    }
   } catch (error) {
     console.log('Error fetching artists', error);
     res.status(500).json({ message: 'Error fetching artists' });
@@ -42,13 +52,13 @@ const getArtists = async (req, res) => {
 const getArtist = async (req, res) => {
   try {
     const { id: artistId } = req.params;
-    const artist = await Artist.findById(artistId);
 
+    const artist = await Artist.findById(artistId);
     if (!artist) {
       return res.status(404).json({ message: 'Artist not found' });
     }
-    
     res.status(200).json(artist);
+
   } catch (error) {
     console.log('Error fetching artists from database', error);
     res.status(500).json({ message: 'Error fetching artist' });
@@ -56,17 +66,16 @@ const getArtist = async (req, res) => {
 }
 
 
-const getArtistWithSongs = async (req,res) => {
+const getArtistWithSongs = async (req, res) => {
   try {
-    const artistId = req.params.artistId;
+    const { artistId } = req.params;
 
-    // Populate 'songs' field with songs data
     const artist = await Artist.findById(artistId).populate('songs');
 
     console.log(artist);
     res.status(200).json(artist);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching artist with songs', error});
+    res.status(500).json({ message: 'Error fetching artist with songs', error });
   }
 }
 
