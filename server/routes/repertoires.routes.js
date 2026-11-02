@@ -5,7 +5,7 @@ const {
   createRepertoire,
   addSongToRepertoire,
   getRepertoires,
-  getRepertoire,
+  getRepertoireSongs,
   removeSongFromRepertoire,
   removeRepertoire
 } = require('../controllers/repertoires.controllers');
@@ -13,7 +13,7 @@ const {
 router.get('/', getRepertoires);
 router.post('/', createRepertoire);
 router.delete('/:id', removeRepertoire);
-router.get('/:id/songs', getRepertoire);
+router.get('/:id/songs', getRepertoireSongs);
 router.post('/:id/songs', addSongToRepertoire);
 router.delete('/:repertoireId/songs/:songId', removeSongFromRepertoire);
 

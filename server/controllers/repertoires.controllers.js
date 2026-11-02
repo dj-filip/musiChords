@@ -10,7 +10,7 @@ const getRepertoires = async (req, res) => {
   }
 }
 
-const getRepertoire = async (req, res) => {
+const getRepertoireSongs = async (req, res) => {
   try {
     const { id: repertoireId } = req.params;
     const repertoire = await Repertoire.findById(repertoireId).populate('songs.song');
@@ -129,7 +129,7 @@ const removeSongFromRepertoire = async (req, res) => {
 
 module.exports = {
   getRepertoires,
-  getRepertoire,
+  getRepertoireSongs,
   createRepertoire,
   removeRepertoire,
   addSongToRepertoire,
