@@ -38,7 +38,7 @@ function Song({ selectedSong, setSelectedSong, isSongPanel, handleSongPanel }) {
 
   const transposeChord = (chord, steps, originalSongKey) => {
 
-    const chordRoot = chord.endsWith('m') || chord.endsWith('7') ? chord.replace(/[^A-Hb#]/g, '') : chord; // Extract root chord
+    const chordRoot = chord.endsWith('m') || chord.endsWith('7') || chord.endsWith('6') ? chord.replace(/[^A-Hb#]/g, '') : chord; // Extract root chord
     const index = chordRoot === 'Ab' ? 8 : songChords.indexOf(chordRoot);
 
 
@@ -56,6 +56,7 @@ function Song({ selectedSong, setSelectedSong, isSongPanel, handleSongPanel }) {
 
     transposedChord += chord.endsWith('m') ? 'm' : '';
     transposedChord += chord.endsWith('7') ? '7' : '';
+    transposedChord += chord.endsWith('6') ? '6' : '';
 
 
     return chord.replace(chord, transposedChord);
@@ -82,15 +83,19 @@ function Song({ selectedSong, setSelectedSong, isSongPanel, handleSongPanel }) {
       });
 
       // Process and transpose inline chords `{_Chord}`
-      processedChords = processedChords.replace(/\{_([A-H][#b]?m?)\}/g, (_, chord) => {
-        const transposedChord = transposeChord(chord, transposeStep, originalSongKey);
-        return `<span class='chord-inline light-txt'>${transposedChord}</span>`;
+      processedChords = processedChords.replace(/\{_([A-H][#b]?)([a-zA-Z0-9]*)(?:\/([A-H][#b]?))?\}/g, (_, root, quality, bass) => {
+        const transposedRoot = transposeChord(root, transposeStep, originalSongKey);
+        const transposedBass = bass ? transposeChord(bass, transposeStep, originalSongKey) : '';
+        const bassPart = transposedBass ? `/${transposedBass}` : '';
+        return `<span class='chord-inline light-txt'>${transposedRoot}${quality}${bassPart}</span>`;
       });
 
       // Process and transpose normal chords `{Chord}`
-      processedChords = processedChords.replace(/\{([A-H][#b]?(m7|7|m?)?)\}/g, (_, chord) => {
-        const transposedChord = transposeChord(chord, transposeStep, originalSongKey);
-        return `<span class='chord light-txt'>${transposedChord}</span>`;
+      processedChords = processedChords.replace(/\{([A-H][#b]?)([a-zA-Z0-9]*)(?:\/([A-H][#b]?))?\}/g, (_, root, quality, bass) => {
+        const transposedRoot = transposeChord(root, transposeStep, originalSongKey);
+        const transposedBass = bass ? transposeChord(bass, transposeStep, originalSongKey) : '';
+        const bassPart = transposedBass ? `/${transposedBass}` : '';
+        return `<span class='chord light-txt'>${transposedRoot}${quality}${bassPart}</span>`;
       });
 
       // Process and transpose transitions `[Transition]]`

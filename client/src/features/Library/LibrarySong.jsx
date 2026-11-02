@@ -55,7 +55,7 @@ function LibrarySong({
       >
         <img src={imageUrl} alt="cover-img" className="song-cover-img" />
         <div className="flex-1">
-          <h5 className="light-txt">{song.title}</h5>
+          <h5 className="light-txt txt-overflow">{song.title}</h5>
           <h6>{song.artist}</h6>
         </div>
         <div className="song-key-wrap">

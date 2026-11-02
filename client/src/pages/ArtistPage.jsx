@@ -29,7 +29,7 @@ function ArtistPage() {
       });
       const data = await response.json();
 
-      console.log(data);
+      console.log("ARTIST WITH SONGS: ", data);
       setArtistWithSongs(data);
     }
 

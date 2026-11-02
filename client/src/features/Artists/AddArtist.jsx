@@ -1,9 +1,8 @@
-
-
 import { useRef, useState } from "react";
-import { BACKEND_URL } from "../../../config/serverConfig";
-import UploadBtn from "./UploadBtn";
-import useAuthContext from "../../../hooks/useAuthContext";
+import { BACKEND_URL } from "@config/serverConfig";
+import UploadBtn from "./components/UploadBtn";
+import useAuthContext from "@features/Auth/hooks/useAuthContext";
+
 
 function AddArtist() {
 

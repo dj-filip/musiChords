@@ -42,7 +42,7 @@ function LibraryMain({
 
 
   let librarySongs = [];
-  let headerTitle = "All Songs";
+  let headerTitle = location.state ? location.state.artistName : currentRepertoire?._id ? currentRepertoire.name : 'All Songs';
 
   // if (artistWithSongs) {
   //   librarySongs = artistWithSongs.songs;
@@ -69,6 +69,8 @@ function LibraryMain({
   }
 
   console.log("SONGS DATA", songs)
+  console.log("CURR REP", currentRepertoire)
+  console.log("CURR ARR", currentArtist)
 
   const libraryMainSongs = normalizeSongs(songs);
 

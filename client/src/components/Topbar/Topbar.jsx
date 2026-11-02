@@ -3,6 +3,7 @@ import DashboardBtn from "./DashboardBtn/DashboardBtn";
 import ProfileIcon from "../icons/ProfileIcon";
 import useLogout from "@features/Auth/hooks/useLogout";
 import useAuthContext from "@features/Auth/hooks/useAuthContext";
+import Search from "../../features/Search/Search";
 
 
 function Topbar() {
@@ -21,6 +22,7 @@ function Topbar() {
       <NavLink to="/dashboard">
         <DashboardBtn />
       </NavLink>
+        {/* <Search /> */}
       <div className="top-bar__auth-wrap flex align-center">
         {user ? (
           <>

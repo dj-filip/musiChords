@@ -1,3 +1,4 @@
+import AddArtist from "@features/Artists/AddArtist";
 
 
 function AddArtistPage() {
